@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FlytBase — Emergency Response · Abhimanyu Tiwari</title>
+  <meta name="description" content="UX case study: redesigning FlytBase emergency response so operators can understand, decide, and coordinate within 90 seconds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="flytbase-case" data-page="work" data-base="./">
+
+<main class="cs-main flyt-pres">
+  <div class="container">
+
+    <!-- 1. HERO -->
+    <header class="flyt-block flyt-hero-band">
+      <a href="index.html#work" class="cs-back">← Back to projects</a>
+      <div class="flyt-hero-grid">
+        <div class="flyt-hero-copy">
+          <div class="cs-tags">
+            <span class="tag amber">Emergency Ops</span>
+            <span class="tag">Drones</span>
+            <span class="tag">Real-time</span>
+          </div>
+          <h1 class="flyt-display">Redesigning FlytBase for Emergency Response</h1>
+          <p class="flyt-lede">Helping operators make critical decisions in 90 seconds.</p>
+          <p class="flyt-brief">FlytBase can use autonomous drones and AI to detect emergencies, collect live information, and help response teams act faster.</p>
+          <dl class="flyt-meta">
+            <div><dt>Role</dt><dd>UI/UX Designer · Design exploration</dd></div>
+            <div><dt>Scope</dt><dd>Research · Audit · Personas · Ideation · UI</dd></div>
+            <div><dt>Platform</dt><dd>Desktop EOC · Mobile field</dd></div>
+            <div><dt>Focus</dt><dd>Fire emergency · 90-second decisions</dd></div>
+          </dl>
+          <a href="https://www.figma.com/design/flZCqOAANwf7WRlnc3yGJx/flytbase---ui-ux?node-id=6-205&t=jONlKMaS1p3ZBDbr-1" class="btn flyt-figma-btn" target="_blank" rel="noopener noreferrer">Open Figma file →</a>
+        </div>
+        <figure class="flyt-ui-frame flyt-ui-frame--hero">
+          <img src="assets/home/project-flybase.png" alt="FlytBase main dashboard with live drone feed and incident map" loading="lazy">
+        </figure>
+      </div>
+    </header>
+
+    <!-- 2. THE PROBLEM -->
+    <section class="flyt-block" id="problem">
+      <h2 class="flyt-section-title">The Problem</h2>
+      <div class="flyt-story">
+        <p><strong>Imagine it is 3:47 AM.</strong> A fire starts near homes. A sensor detects heat. Someone now has to figure out: Is it real? How serious is it? Where is it? Should we send help?</p>
+      </div>
+      <div class="flyt-two-paths">
+        <article class="flyt-path-card flyt-path-card--old">
+          <h3>The old response</h3>
+          <p>Detection → operator checks information → decision → ground teams respond.</p>
+          <p class="flyt-callout flyt-callout--warn"><strong>Problem:</strong> This can take too long. In one researched scenario, coordinated response took ~48 minutes.</p>
+        </article>
+        <article class="flyt-path-card flyt-path-card--new">
+          <h3>The new possibility</h3>
+          <p>Thermal detection → AI validates → autonomous drone launches → live visual/thermal confirmation → operator decides → emergency teams receive information.</p>
+          <p class="flyt-callout flyt-callout--ok"><strong>Goal:</strong> Reduce the journey from detection to coordinated response to approximately 90 seconds.</p>
+        </article>
+      </div>
+      <div class="flyt-hmw-inline">
+        <span class="flyt-label">Core challenge</span>
+        <p class="flyt-hmw-text">How might we reduce decision time without creating cognitive overload, false confidence, or loss of human control?</p>
+        <p class="flyt-muted"><em>Cognitive overload</em> means the brain gets too much information at once and slows down.</p>
+      </div>
+    </section>
+
+    <!-- 3. WHAT IS FLYTBASE? -->
+    <section class="flyt-block" id="flytbase">
+      <h2 class="flyt-section-title">What is FlytBase?</h2>
+      <p class="flyt-body">FlytBase is a platform for operating autonomous drones.</p>
+      <p class="flyt-body">For this project, drones can provide:</p>
+      <ul class="flyt-chip-list">
+        <li>Live video</li>
+        <li>Thermal information</li>
+        <li>Drone location</li>
+        <li>Object detection</li>
+        <li>Automated flight</li>
+        <li>Obstacle avoidance</li>
+        <li>Battery &amp; signal information</li>
+        <li>Fail-safe behaviour</li>
+      </ul>
+      <div class="flyt-simple-box">
+        <p><strong>Simple explanation:</strong> AI sees something → drone goes there → drone brings information back → human decides what happens next.</p>
+      </div>
+      <div class="flyt-callout flyt-callout--note">
+        <strong>Important:</strong> AI is not treated as perfect. Network problems, unseen situations, model limitations, and drone regulations can affect reliability.
+      </div>
+    </section>
+
+    <!-- 4. RESEARCH APPROACH -->
+    <section class="flyt-block" id="research">
+      <h2 class="flyt-section-title">Research Approach</h2>
+      <p class="flyt-body">We used the Double Diamond, a UX method to discover widely, define the real problem, develop ideas, and deliver a solution.</p>
+      <div class="flyt-diamond-grid">
+        <div class="flyt-diamond-step"><span>1</span><strong>Discover</strong><p>Understand the emergency world</p></div>
+        <div class="flyt-diamond-step"><span>2</span><strong>Define</strong><p>Find the biggest problems</p></div>
+        <div class="flyt-diamond-step"><span>3</span><strong>Develop</strong><p>Explore solutions</p></div>
+        <div class="flyt-diamond-step"><span>4</span><strong>Deliver</strong><p>Move toward design</p></div>
+      </div>
+      <p class="flyt-muted flyt-research-note">Research combined secondary/industry research, product audit, competitor analysis, and research-backed personas. No primary operator interviews were conducted during the project timeline.</p>
+    </section>
+
+    <!-- 5. UNDERSTANDING EMERGENCY RESPONSE -->
+    <section class="flyt-block" id="emergency">
+      <h2 class="flyt-section-title">Understanding Emergency Response</h2>
+      <p class="flyt-body">Research mapped emergency response domains to find shared pain points across:</p>
+      <ul class="flyt-domain-list">
+        <li>Fire</li>
+        <li>Medical</li>
+        <li>Natural disasters</li>
+        <li>Industrial accidents</li>
+        <li>Transportation</li>
+        <li>Infrastructure</li>
+        <li>Crowd / event</li>
+        <li>Environmental / climate</li>
+        <li>Law enforcement</li>
+        <li>Cyber / digital</li>
+      </ul>
+      <p class="flyt-label">8 major challenges (simplified from research)</p>
+      <div class="flyt-challenge-grid">
+        <span>Uncertainty</span><span>Risk of escalation</span><span>Evacuation routing</span><span>Department coordination</span>
+        <span>Visibility</span><span>Incomplete information</span><span>Early detection</span><span>Long-term mitigation</span>
+      </div>
+      <div class="flyt-insight">
+        <strong>Key insight:</strong> Emergency response is also an information problem. People need the right information at the right time.
+      </div>
+    </section>
+
+    <!-- 6. UX FAILURES -->
+    <section class="flyt-block" id="ux-failures">
+      <h2 class="flyt-section-title">Learning from Emergency UX Failures</h2>
+      <p class="flyt-body">Research reviewed real incidents where interface design made emergencies worse.</p>
+      <div class="flyt-failure-grid">
+        <article class="flyt-failure-card">
+          <h3>HMNZS Manawanui (2024–2025)</h3>
+          <p><strong>Problem:</strong> Autopilot status was hard to see. Crew did not know how to turn it off under pressure.</p>
+          <p><strong>Lesson:</strong> Make system mode/state obvious. Keep human control visible.</p>
+        </article>
+        <article class="flyt-failure-card">
+          <h3>Hawaii false missile alert (2018)</h3>
+          <p><strong>Problem:</strong> Critical action sent without confirmation. Similar options (TEST, DRILL, ALERT) looked alike.</p>
+          <p><strong>Lesson:</strong> Make actions clear. Confirm risky actions before they run.</p>
+        </article>
+        <article class="flyt-failure-card">
+          <h3>London Ambulance Service CAD (1992)</h3>
+          <p><strong>Problem:</strong> No way to mark resolved cases. Multiple ambulances sent to the same person.</p>
+          <p><strong>Lesson:</strong> Track status clearly. Prioritize alerts so important ones are not buried.</p>
+        </article>
+        <article class="flyt-failure-card">
+          <h3>Therac-25 (1980s)</h3>
+          <p><strong>Problem:</strong> Vague errors like “Malfunction 54.” Operators bypassed warnings they did not understand.</p>
+          <p><strong>Lesson:</strong> Match system language to real-world meaning. Do not let people blindly trust automation.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. FLYTBASE AUDIT -->
+    <section class="flyt-block" id="audit">
+      <h2 class="flyt-section-title">FlytBase Audit</h2>
+      <p class="flyt-body">We reviewed the existing FlytBase dashboard and found six problems:</p>
+      <ol class="flyt-audit-list">
+        <li>
+          <strong>Poor information hierarchy</strong>
+          <span>Too much information competes for attention.</span>
+        </li>
+        <li>
+          <strong>Ineffective alert sorting</strong>
+          <span>Critical and less-important alerts are not prioritized clearly.</span>
+        </li>
+        <li>
+          <strong>Interaction friction</strong>
+          <span>Operators spend time finding and clicking controls.</span>
+        </li>
+        <li>
+          <strong>Stress-insensitive design</strong>
+          <span>The interface assumes calm users during emergencies.</span>
+        </li>
+        <li>
+          <strong>Cognitive / motor interference</strong>
+          <span>Operators spend effort navigating instead of deciding.</span>
+        </li>
+        <li>
+          <strong>Low target tolerance</strong>
+          <span>Small targets are harder to use under pressure.</span>
+        </li>
+      </ol>
+      <div class="flyt-insight">
+        <strong>Key insight:</strong> The dashboard was giving operators information, but not always helping them decide.
+      </div>
+    </section>
+
+    <!-- 8. WHO USES THE SYSTEM? -->
+    <section class="flyt-block" id="personas">
+      <h2 class="flyt-section-title">Who Uses the System?</h2>
+      <p class="flyt-body flyt-body--center"><strong>Rahul decides. Priya coordinates. Aniket acts.</strong></p>
+      <div class="flyt-persona-grid">
+        <article class="flyt-persona-card flyt-persona-card--primary">
+          <span class="flyt-persona-tag">Primary</span>
+          <h3>Rahul Sharma</h3>
+          <p class="flyt-persona-role">Single-Incident EOC Director</p>
+          <ul>
+            <li><strong>Job:</strong> Decide</li>
+            <li><strong>Needs:</strong> Severity, AI confidence, evidence, clear recommendation, override</li>
+            <li><strong>Decision window:</strong> ~90 seconds</li>
+          </ul>
+        </article>
+        <article class="flyt-persona-card">
+          <span class="flyt-persona-tag">Secondary</span>
+          <h3>Priya Deshpande</h3>
+          <p class="flyt-persona-role">Multi-Incident Coordinator</p>
+          <ul>
+            <li><strong>Job:</strong> Coordinate</li>
+            <li><strong>Needs:</strong> Incident priority, resources, crews, drone allocation, status across 7–10 incidents</li>
+          </ul>
+        </article>
+        <article class="flyt-persona-card">
+          <span class="flyt-persona-tag">Tertiary</span>
+          <h3>Aniket Sharma</h3>
+          <p class="flyt-persona-role">Field Incident Commander</p>
+          <ul>
+            <li><strong>Job:</strong> Act</li>
+            <li><strong>Needs:</strong> Tactical drone intelligence, crew position, fire/wind information, quick field actions</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9. ONE SYSTEM, THREE EXPERIENCES -->
+    <section class="flyt-block" id="three-experiences">
+      <h2 class="flyt-section-title">One System, Three Experiences</h2>
+      <p class="flyt-body">We did not design three unrelated products. Same underlying data, different information for each operator.</p>
+      <div class="flyt-tier-list">
+        <div><strong>Aniket</strong> = tactical detail</div>
+        <div><strong>Priya</strong> = coordination detail</div>
+        <div><strong>Rahul</strong> = strategic decision detail</div>
+      </div>
+      <div class="flyt-simple-box">
+        <p><strong>Analogy:</strong> Three people are looking at the same emergency, but each person needs a different amount of information.</p>
+      </div>
+    </section>
+
+    <!-- 10. JOBS TO BE DONE -->
+    <section class="flyt-block" id="jtbd">
+      <h2 class="flyt-section-title">Jobs to Be Done</h2>
+      <p class="flyt-body"><em>Jobs to be Done</em> means the real tasks a person needs to finish, not just what the screen shows.</p>
+      <div class="flyt-jtbd-grid">
+        <article class="flyt-jtbd-card">
+          <h3>Alert</h3>
+          <ul>
+            <li>What happened?</li>
+            <li>Is it real?</li>
+            <li>How serious is it?</li>
+            <li>What is AI seeing?</li>
+            <li>What should I do?</li>
+          </ul>
+        </article>
+        <article class="flyt-jtbd-card">
+          <h3>Coordination</h3>
+          <ul>
+            <li>Who is responding?</li>
+            <li>Who is available?</li>
+            <li>What resources are nearby?</li>
+            <li>What does AI recommend?</li>
+            <li>Can I take control?</li>
+          </ul>
+        </article>
+        <article class="flyt-jtbd-card">
+          <h3>Documentation</h3>
+          <ul>
+            <li>What happened?</li>
+            <li>Who made the decision?</li>
+            <li>When?</li>
+            <li>Was anything overridden?</li>
+            <li>What happened afterward?</li>
+          </ul>
+        </article>
+      </div>
+      <p class="flyt-framework-label">ALERT → COORDINATION → DOCUMENTATION</p>
+    </section>
+
+    <!-- 11. IDEATION -->
+    <section class="flyt-block" id="ideation">
+      <h2 class="flyt-section-title">Ideation</h2>
+      <p class="flyt-body">Instead of asking how the dashboard should look, we asked what the operator needs at each moment.</p>
+      <div class="flyt-idea-grid">
+        <article class="flyt-idea-card">
+          <h3>A. First 5 seconds</h3>
+          <p><strong>Question:</strong> What must be visible immediately?</p>
+          <p><strong>Decision:</strong> Severity, confidence, location, live data, recommendation.</p>
+        </article>
+        <article class="flyt-idea-card">
+          <h3>B. When AI is unsure</h3>
+          <p><strong>Question:</strong> What happens when confidence is low?</p>
+          <p><strong>Decision:</strong> Show evidence, request more data, recommend instead of auto-execute, pause risky actions.</p>
+        </article>
+        <article class="flyt-idea-card">
+          <h3>C. Second emergency</h3>
+          <p><strong>Question:</strong> What happens when another emergency appears?</p>
+          <p><strong>Decision:</strong> Prioritize by severity, collapse secondary information, protect attention.</p>
+        </article>
+        <article class="flyt-idea-card">
+          <h3>D. Act now</h3>
+          <p><strong>Question:</strong> How do we tell the operator to act now?</p>
+          <p><strong>Decision:</strong> Strong alert, dominant CTA, countdown/audio/haptic when appropriate.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 12. EFFICACY VS RISK -->
+    <section class="flyt-block" id="efficacy">
+      <h2 class="flyt-section-title">Efficacy vs Risk</h2>
+      <p class="flyt-body">Ideas were evaluated by how much time they can save and what could go wrong.</p>
+      <div class="flyt-tradeoff-grid">
+        <div class="flyt-tradeoff-row">
+          <strong>AI confidence display</strong>
+          <span class="flyt-pro">Helps trust</span>
+          <span class="flyt-con">Can create overconfidence</span>
+        </div>
+        <div class="flyt-tradeoff-row">
+          <strong>Countdown timer</strong>
+          <span class="flyt-pro">Creates urgency</span>
+          <span class="flyt-con">Can create panic</span>
+        </div>
+        <div class="flyt-tradeoff-row">
+          <strong>Large CTA</strong>
+          <span class="flyt-pro">Faster action</span>
+          <span class="flyt-con">Makes wrong actions easier</span>
+        </div>
+        <div class="flyt-tradeoff-row">
+          <strong>Split screen</strong>
+          <span class="flyt-pro">Shows more</span>
+          <span class="flyt-con">Can divide attention</span>
+        </div>
+      </div>
+      <div class="flyt-insight">
+        <strong>Decision:</strong> Choose ideas that improve speed <em>without</em> increasing safety risk.
+      </div>
+    </section>
+
+    <!-- 13. DESIGN PRINCIPLES -->
+    <section class="flyt-block flyt-principles-band" id="principles">
+      <h2 class="flyt-section-title">Design Principles</h2>
+      <ol class="flyt-principles-list">
+        <li>Show what matters first.</li>
+        <li>Make severity obvious.</li>
+        <li>Explain why AI recommends something.</li>
+        <li>Keep human override visible.</li>
+        <li>Design for stressed users.</li>
+        <li>Use large interaction targets.</li>
+        <li>Use high contrast.</li>
+        <li>Hide secondary information until needed.</li>
+        <li>Prioritize critical alerts.</li>
+        <li>Let AI recommend when confidence is low.</li>
+      </ol>
+      <p class="flyt-core-principle">Design for the decision, not the dashboard.</p>
+    </section>
+
+    <!-- 14. USER FLOW -->
+    <section class="flyt-block" id="flow">
+      <h2 class="flyt-section-title">User Flow — Fire Emergency</h2>
+      <ol class="flyt-flow-list">
+        <li>Fire detected</li>
+        <li>Critical alert</li>
+        <li>Drone provides live data</li>
+        <li>Is it real? → If no: close / report</li>
+        <li>If yes: assess situation</li>
+        <li>Already handling another incident? → Check data</li>
+        <li>Check AI confidence → If low: request more data</li>
+        <li>If high: assess people / area risk</li>
+        <li>Contact emergency teams</li>
+        <li>Monitor → Resolve / document</li>
+      </ol>
+    </section>
+
+    <!-- 15. FINAL DESIGN -->
+    <section class="flyt-block" id="final-design">
+      <div class="flyt-final-header">
+        <h2 class="flyt-section-title">Final Design</h2>
+        <a href="https://www.figma.com/design/flZCqOAANwf7WRlnc3yGJx/flytbase---ui-ux?node-id=6-205&t=jONlKMaS1p3ZBDbr-1" class="btn flyt-figma-btn flyt-figma-btn--sm" target="_blank" rel="noopener noreferrer">View in Figma →</a>
+      </div>
+      <p class="flyt-body">Final screens will be added here. Each decision covers the problem, design decision, and why it helps.</p>
+
+      <article class="flyt-screen-block">
+        <figure class="flyt-ui-frame flyt-ui-frame--screen">
+          <img src="assets/case-studies/flytbase/main-dashboard.png" alt="FlytBase main dashboard overview" loading="lazy">
+        </figure>
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Operators lose seconds scanning cluttered screens.</p>
+          <p><strong>Design decision:</strong> Show severity, location, live feed access, and one clear recommendation first.</p>
+          <p><strong>Why it helps:</strong> The operator understands the situation in the first 5 seconds.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <figure class="flyt-ui-frame flyt-ui-frame--screen">
+          <img src="assets/case-studies/flytbase/thermal-signature-detected.png" alt="FlytBase thermal signature detected critical alert" loading="lazy">
+        </figure>
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> All alerts felt the same in the old dashboard.</p>
+          <p><strong>Design decision:</strong> Color-coded severity and urgent alert states at the top.</p>
+          <p><strong>Why it helps:</strong> Serious emergencies stand out immediately.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <figure class="flyt-ui-frame flyt-ui-frame--screen">
+          <img src="assets/case-studies/flytbase/ai-suggests-next-steps.png" alt="FlytBase AI suggests next steps and dispatch recommendation" loading="lazy">
+        </figure>
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Operators did not know why AI flagged an alert.</p>
+          <p><strong>Design decision:</strong> Show what AI thinks, why it thinks it, and how confident it is.</p>
+          <p><strong>Why it helps:</strong> Builds trust without blind faith in automation.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <figure class="flyt-ui-frame flyt-ui-frame--screen">
+          <img src="assets/case-studies/flytbase/drone-airborne.png" alt="FlytBase drone airborne with live forest fire feed" loading="lazy">
+        </figure>
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Sensor data alone is not enough to confirm a real fire.</p>
+          <p><strong>Design decision:</strong> Live visual + thermal feed within reach of the alert.</p>
+          <p><strong>Why it helps:</strong> Visual confirmation reduces false alarms and hesitation.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <figure class="flyt-ui-frame flyt-ui-frame--screen">
+          <img src="assets/case-studies/flytbase/coordinates-received.png" alt="FlytBase coordinates received map and situational awareness" loading="lazy">
+        </figure>
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Location, teams, and risks were spread across panels.</p>
+          <p><strong>Design decision:</strong> One map showing fire, drones, teams, risks, and routes.</p>
+          <p><strong>Why it helps:</strong> Spatial awareness without jumping between screens.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Manual coordination between departments wasted time.</p>
+          <p><strong>Design decision:</strong> Dispatch panel with crew status, recommendations, and acknowledgment tracking.</p>
+          <p><strong>Why it helps:</strong> Operators coordinate teams without leaving the incident view.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Manual takeover was hard to find under stress.</p>
+          <p><strong>Design decision:</strong> Always-visible override and pause controls.</p>
+          <p><strong>Why it helps:</strong> Humans stay in control when automation is wrong or uncertain.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> A second alert could split attention with no priority logic.</p>
+          <p><strong>Design decision:</strong> Severity-based stacking. Secondary panels collapse for the more urgent incident.</p>
+          <p><strong>Why it helps:</strong> Attention stays on what matters most.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> Field commanders need fast tactical intel, not EOC-level detail.</p>
+          <p><strong>Design decision:</strong> Simpler mobile view with drone feed, crew map, wind/fire data, and large actions.</p>
+          <p><strong>Why it helps:</strong> Aniket can act in the field without reading a complex dashboard.</p>
+        </div>
+      </article>
+
+      <article class="flyt-screen-block">
+        <div class="flyt-screen-text">
+          <p><strong>Problem:</strong> One interface cannot serve three different roles.</p>
+          <p><strong>Design decision:</strong> Same system, tailored views for strategic, coordination, and tactical roles.</p>
+          <p><strong>Why it helps:</strong> Each operator gets the right information at the right level.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 16. SUCCESS METRICS -->
+    <section class="flyt-block" id="metrics">
+      <h2 class="flyt-section-title">Success Metrics</h2>
+      <p class="flyt-body">These are the metrics we would use to measure success. Testing results are not yet available, and we do not claim the design improved these numbers.</p>
+      <div class="flyt-metrics-grid">
+        <div>
+          <h3 class="flyt-metrics-heading">Operational</h3>
+          <ul class="flyt-metrics-list">
+            <li>Time to detection</li>
+            <li>Time to decision</li>
+            <li>Time to dispatch</li>
+            <li>Time to arrival / intervention</li>
+            <li>Critical-task error rate</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="flyt-metrics-heading">Human factors</h3>
+          <ul class="flyt-metrics-list">
+            <li>Time spent on task</li>
+            <li>System Usability Scale (SUS)</li>
+            <li>User error rate</li>
+            <li>Task completion / success rate</li>
+          </ul>
+        </div>
+      </div>
+      <p class="flyt-muted"><em>SUS</em> is a standard survey that measures how easy a system feels to use.</p>
+    </section>
+
+    <!-- 17. WHAT I LEARNED -->
+    <section class="flyt-block" id="learnings">
+      <h2 class="flyt-section-title">What I Learned</h2>
+      <ul class="flyt-learn-list">
+        <li>AI makes UX more important, not less.</li>
+        <li>More information is not always better.</li>
+        <li>Stress changes how people use interfaces.</li>
+        <li>Different operators need different information.</li>
+        <li>Automation needs clear boundaries.</li>
+        <li>Human control must remain visible.</li>
+        <li>Emergency UX should optimize decisions, not visual complexity.</li>
+      </ul>
+    </section>
+
+    <!-- 18. FINAL TAKEAWAY -->
+    <section class="flyt-block flyt-takeaway-band" id="takeaway">
+      <p class="flyt-takeaway-lede">FlytBase already has powerful autonomous-drone technology. The design challenge was making that technology understandable and useful when people are under pressure.</p>
+      <div class="flyt-takeaway-pillars">
+        <span>SHOW LESS.</span>
+        <span>EXPLAIN BETTER.</span>
+        <span>ACT FASTER.</span>
+        <span>KEEP HUMANS IN CONTROL.</span>
+      </div>
+      <p class="flyt-core-principle flyt-core-principle--final">Design for the decision, not the dashboard.</p>
+      <div class="flyt-nav-links">
+        <a href="zepto.html" class="btn flyt-nav-btn">← Previous — Zepto</a>
+        <a href="index.html#work" class="btn btn-primary flyt-nav-btn flyt-nav-btn--primary">Back to projects</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="chrome.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "abhimanyu-tiwari-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Abhimanyu Tiwari — Product Designer portfolio",
+  "scripts": {
+    "start": "npx --yes serve . -l 3000",
+    "preview": "npx --yes serve . -l 3000"
+  }
+}
