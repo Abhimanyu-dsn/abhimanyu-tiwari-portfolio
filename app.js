@@ -91,21 +91,54 @@ const EXPERIMENTS = [
 // ---------- Render ----------
 const el = (tag, cls, html)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e;};
 
+function projectLinkAttrs(href){
+  const external = /^https?:\/\//i.test(href);
+  return {
+    href,
+    external,
+    attrs: external ? ' target="_blank" rel="noopener"' : ""
+  };
+}
+
 function renderWork(){
   const list = document.getElementById("workList");
+  if(!list) return;
   list.innerHTML = "";
-  PROJECTS.forEach((p,i)=>{
-    const card = el("article", "work-card" + (i%2?" reverse":""));
-    const href = p.url || "index.html#work";
-    const external = /^https?:\/\//i.test(href);
-    const linkAttrs = external ? " target=\"_blank\" rel=\"noopener\"" : "";
+
+  // Gallery: projects after the featured first item
+  const gallery = PROJECTS.slice(1);
+  gallery.forEach((p,i)=>{
+    const {href, attrs} = projectLinkAttrs(p.url || "index.html#work");
+    const card = el("article", "project-card" + (i === gallery.length - 1 ? " project-card--wide" : ""));
     card.innerHTML = `
-      <div class="work-thumb ${p.thumbClass}" data-id="${p.id}" data-url="${href}" data-external="${external}">
+      <a href="${href}" class="project-thumb ${p.thumbClass}"${attrs}>
         <img src="${p.img}" alt="${p.title} preview" loading="lazy"/>
-      </div>
-      <div class="work-body">
-        <h3 class="work-title"><a href="${href}" class="work-title-link"${linkAttrs}>${p.title} <span class="title-arrow">→</span></a></h3>
-        <p class="work-desc">${p.desc}</p>
+      </a>
+      <div class="project-body">
+        <h3 class="project-title"><a href="${href}" class="work-title-link"${attrs}>${p.title} <span class="title-arrow">→</span></a></h3>
+        <p class="project-desc">${p.desc}</p>
+        <div class="tag-row">
+          ${p.tags.map(t=>`<span class="tag ${t.c||""}">${t.l}</span>`).join("")}
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+function renderFeatured(){
+  const host = document.getElementById("featuredProject");
+  if(!host) return;
+  const p = PROJECTS[0];
+  if(!p) return;
+  const {href, attrs} = projectLinkAttrs(p.url || "index.html#work");
+  host.innerHTML = `
+    <article class="featured-card">
+      <a href="${href}" class="featured-thumb ${p.thumbClass}"${attrs}>
+        <img src="${p.img}" alt="${p.title} preview" loading="lazy"/>
+      </a>
+      <div class="featured-body">
+        <h3 class="featured-title"><a href="${href}" class="work-title-link"${attrs}>${p.title} <span class="title-arrow">→</span></a></h3>
+        <p class="featured-desc">${p.desc}</p>
         <div class="tag-row">
           ${p.tags.map(t=>`<span class="tag ${t.c||""}">${t.l}</span>`).join("")}
         </div>
@@ -113,42 +146,23 @@ function renderWork(){
         <div class="outcomes">
           ${p.outcomes.map(o=>`<div class="outcome"><span class="outcome-val">${o.v}</span><span class="outcome-lbl">${o.l}</span></div>`).join("")}
         </div>
-      </div>`;
-    list.appendChild(card);
-  });
-
-  list.querySelectorAll(".work-thumb[data-id]").forEach(n=>{
-    n.addEventListener("click", ()=> {
-      const url = n.dataset.url;
-      if(!url) return;
-      if(n.dataset.external === "true") window.open(url, "_blank");
-      else window.location.href = url;
-    });
-  });
+      </div>
+    </article>`;
 }
 
 function renderLeaders(){
   const grid = document.getElementById("leaderGrid");
+  if(!grid) return;
   grid.innerHTML = "";
-  const cardStyles = [
-    {card:"border-width:0px;border-radius:16px;padding:8px", ic:"background-color:rgb(255,255,255);padding:0px"},
-    {card:"border-width:0px;border-radius:16px;padding:8px", ic:"background-color:rgb(255,255,255);padding:0px"},
-    {card:"border-width:0px;border-radius:16px;padding:8px", ic:"background-color:rgb(255,255,255);padding:0px"},
-    {card:"border-width:0px;border-radius:1px;padding:8px", ic:"background-color:rgb(255,255,255);padding:0px;border-radius:0px", col:"padding:0px 0px 0px 20px;opacity:1"},
-  ];
-  LEADERS.forEach((l,i)=>{
-    const s = cardStyles[i] || {};
-    const col = el("div","col-md-6");
-    if(s.col) col.setAttribute("style", s.col);
-    col.innerHTML = `
-      <div class="leader-card h-100" style="${s.card||''}">
-        <div class="leader-ic" aria-hidden="true" style="${s.ic||''}"><img src="${l.img}" alt=""/></div>
-        <div class="leader-body">
-          <h3>${l.t}</h3>
-          <p>${l.d}</p>
-        </div>
+  LEADERS.forEach((l)=>{
+    const card = el("article", "leader-card");
+    card.innerHTML = `
+      <div class="leader-ic" aria-hidden="true"><img src="${l.img}" alt=""/></div>
+      <div class="leader-body">
+        <h3>${l.t}</h3>
+        <p>${l.d}</p>
       </div>`;
-    grid.appendChild(col);
+    grid.appendChild(card);
   });
 }
 
@@ -157,37 +171,19 @@ function renderTestimonials(){
   if(!grid) return;
   grid.innerHTML = "";
 
-  const durations = [15, 19, 17];
-  const colSize = Math.ceil(TESTIMONIALS.length / 3);
-  const cols = [
-    TESTIMONIALS.slice(0, colSize),
-    TESTIMONIALS.slice(colSize, colSize * 2),
-    TESTIMONIALS.slice(colSize * 2)
-  ].filter(c => c.length);
-
-  cols.forEach((colTestis, ci) => {
-    const col = el("div", "testi-col");
-    const track = el("div", "testi-track");
-    track.style.setProperty("--dur", durations[ci] + "s");
-
-    [0, 1].forEach(() => {
-      colTestis.forEach((t) => {
-        const card = el("article", "testi");
-        card.innerHTML = `
-          <p class="testi-quote">"${t.q}"</p>
-          <div class="testi-author">
-            <div class="testi-avatar">${t.i}</div>
-            <div>
-              <p class="testi-name">${t.n}</p>
-              <p class="testi-role">${t.r}</p>
-            </div>
-          </div>`;
-        track.appendChild(card);
-      });
-    });
-
-    col.appendChild(track);
-    grid.appendChild(col);
+  TESTIMONIALS.forEach((t) => {
+    const card = el("article", "testi");
+    card.innerHTML = `
+      <span class="testi-mark" aria-hidden="true">“</span>
+      <p class="testi-quote">${t.q}</p>
+      <div class="testi-author">
+        <div class="testi-avatar">${t.i}</div>
+        <div>
+          <p class="testi-name">${t.n}</p>
+          <p class="testi-role">${t.r}</p>
+        </div>
+      </div>`;
+    grid.appendChild(card);
   });
 }
 
@@ -224,14 +220,16 @@ function applyTweaks(){
     const parts = T.heroTitle.trim().split(/\s+/);
     if(parts.length > 1){
       const last = parts.pop();
-      h.innerHTML = parts.join(" ") + ' <span class="accent-underline">' + last + '</span>';
+      h.innerHTML = parts.join(" ") + ' <span class="accent-name">' + last + '</span>';
     } else {
-      h.innerHTML = '<span class="accent-underline">' + T.heroTitle + '</span>';
+      h.innerHTML = '<span class="accent-name">' + T.heroTitle + '</span>';
     }
   }
 }
 function syncTweakUI(){
-  document.getElementById("twAccent").value = T.accent;
+  const accent = document.getElementById("twAccent");
+  if(!accent) return;
+  accent.value = T.accent;
   document.getElementById("twHeadFont").value = T.headFont;
   document.getElementById("twHeroTitle").value = T.heroTitle;
   document.getElementById("twDark").checked = !!T.dark;
@@ -240,6 +238,7 @@ function syncTweakUI(){
 function wireTweaks(){
   const bind = (id, key, attr="value", parse=v=>v)=>{
     const node = document.getElementById(id);
+    if(!node) return;
     const ev = attr === "checked" ? "change" : "input";
     node.addEventListener(ev, ()=>{
       T[key] = parse(node[attr]);
@@ -261,12 +260,14 @@ function persist(edits){
 
 window.addEventListener("message", (e)=>{
   const d = e.data || {};
+  const panel = document.getElementById("tweaks");
+  if(!panel) return;
   if(d.type === "__activate_edit_mode"){
-    document.getElementById("tweaks").classList.add("open");
-    document.getElementById("tweaks").setAttribute("aria-hidden","false");
+    panel.classList.add("open");
+    panel.setAttribute("aria-hidden","false");
   } else if (d.type === "__deactivate_edit_mode"){
-    document.getElementById("tweaks").classList.remove("open");
-    document.getElementById("tweaks").setAttribute("aria-hidden","true");
+    panel.classList.remove("open");
+    panel.setAttribute("aria-hidden","true");
   }
 });
 try{ window.parent.postMessage({type:"__edit_mode_available"}, "*"); }catch(e){}
@@ -274,10 +275,20 @@ try{ window.parent.postMessage({type:"__edit_mode_available"}, "*"); }catch(e){}
 // ---------- Boot ----------
 document.addEventListener("DOMContentLoaded", ()=>{
   if(document.getElementById("workList")) renderWork();
+  if(document.getElementById("featuredProject")) renderFeatured();
   if(document.getElementById("leaderGrid")) renderLeaders();
   if(document.getElementById("testiGrid")) renderTestimonials();
   if(document.getElementById("experimentGrid")) renderExperiments();
   if(document.getElementById("twAccent")){
     applyTweaks(); syncTweakUI(); wireTweaks();
   }
+
+  // Observe dynamically rendered cards (chrome.js runs before render)
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  },{threshold:.12});
+  document.querySelectorAll(".project-card, .featured-card, .leader-card, .testi, .vibe-card")
+    .forEach(n=>{ if(!n.classList.contains("in")){ n.classList.add("reveal"); io.observe(n); } });
 });

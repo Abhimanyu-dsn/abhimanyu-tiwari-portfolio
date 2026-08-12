@@ -19,7 +19,7 @@
   <meta name="twitter:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="home" data-base="./">
@@ -29,10 +29,10 @@
 <!-- ───────── HERO ───────── -->
 <section class="hero" id="home">
   <div class="container">
-    <div class="row align-center">
-      <div class="col-md-7 hero-copy">
+    <div class="hero-grid">
+      <div class="hero-copy">
         <p class="eyebrow">Product Designer at Peak42 · Bangalore</p>
-        <h1 class="hero-title">Hello, I'm <span class="accent-underline">Abhimanyu</span></h1>
+        <h1 class="hero-title">Hello, I'm <span class="accent-name">Abhimanyu</span></h1>
         <p class="hero-lede">Product Designer with <strong>5+ years</strong> of experience designing products for new and emerging markets in India, collaborating closely with developers and learning HTML/CSS along the way.</p>
         <div class="reach-row">
           <span class="muted">Reach out</span>
@@ -42,10 +42,14 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 hero-visual">
+      <div class="hero-visual">
         <div class="photo-card">
-          <div class="photo-bg"></div>
-          <img src="assets/about/me.png" alt="Portrait of Abhimanyu Tiwari" class="photo">
+          <div class="photo-blob" aria-hidden="true"></div>
+          <div class="photo-deco photo-deco--dots" aria-hidden="true"></div>
+          <div class="photo-deco photo-deco--curve" aria-hidden="true"></div>
+          <div class="photo-frame">
+            <img src="assets/about/me.png" alt="Portrait of Abhimanyu Tiwari" class="photo">
+          </div>
           <div class="avail-chip"><span class="dot"></span> Available for work</div>
         </div>
       </div>
@@ -53,12 +57,10 @@
   </div>
 </section>
 
-<!-- ───────── LOGOS (marquee) ───────── -->
+<!-- ───────── LOGOS ───────── -->
 <section class="logos">
-  <div class="container">
+  <div class="container logos-inner">
     <p class="logos-title">Companies I worked on</p>
-  </div>
-  <div class="container">
     <div class="logo-grid">
       <div class="logo-cell logo-cell--peak">
         <img src="assets/home/logos/logo-peak42.png" alt="Peak42" class="logo-img">
@@ -77,62 +79,43 @@
   </div>
 </section>
 
-<!-- ───────── SELECTED WORK ───────── -->
+<!-- ───────── CASE STUDIES GALLERY ───────── -->
 <section class="section work" id="work">
   <div class="container">
-    <header class="section-head reveal">
+    <header class="section-head section-head--left reveal">
       <h2 class="section-title">Case Studies</h2>
       <p class="section-sub">Website redesigns, AI-powered food experiences, intelligent commerce, and emergency response platforms.</p>
     </header>
-    <div class="work-list" id="workList"></div>
+    <div class="work-gallery" id="workList"></div>
+  </div>
+</section>
+
+<!-- ───────── FEATURED PROJECT ───────── -->
+<section class="section featured" id="featured">
+  <div class="container">
+    <div class="featured-project" id="featuredProject"></div>
   </div>
 </section>
 
 <!-- ───────── EXPERIENCE HIGHLIGHTS ───────── -->
 <section class="section leadership" id="leadership">
   <div class="container">
-    <header class="section-head reveal">
+    <header class="section-head section-head--left reveal">
       <h2 class="section-title">Experience &amp; Highlights</h2>
       <p class="section-sub">National-level swimming and regional-level cricket keep me disciplined, bringing teamwork, consistency, and pressure-ready focus to every project.</p>
     </header>
-    <div class="row leader-grid align-items-start" id="leaderGrid"></div>
+    <div class="leader-grid" id="leaderGrid"></div>
   </div>
 </section>
 
 <!-- ───────── TESTIMONIALS ───────── -->
 <section class="section testimonials" id="testimonials">
-  <div class="container">
-    <header class="section-head reveal">
+  <div class="container testi-layout">
+    <header class="section-head section-head--left testi-head reveal">
       <h2 class="section-title">Colleague's Testimonials</h2>
       <p class="section-sub">What teammates say about working with me across teams and projects.</p>
     </header>
     <div class="testi-grid" id="testiGrid"></div>
-  </div>
-</section>
-
-<!-- ───────── MARQUEE (SKILLS) ───────── -->
-<section class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Figma</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Adobe XD</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Problem Solving</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>UI Design</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Prototyping</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Design System</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>User Research</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Wireframing</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Photoshop</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Illustrator</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Figma</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Adobe XD</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Problem Solving</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>UI Design</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Prototyping</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Design System</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>User Research</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Wireframing</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Photoshop</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
-    <span>Illustrator</span><img src="assets/home/gunshot.png" width="56" height="56" alt="star">
   </div>
 </section>
 
@@ -145,7 +128,7 @@
     <label class="tw-row"><span>Accent color</span><input type="color" id="twAccent"></label>
     <label class="tw-row"><span>Heading font</span>
       <select id="twHeadFont">
-        <option value="'Bricolage Grotesque', serif">Bricolage Grotesque</option>
+        <option value="'Manrope', sans-serif">Manrope</option>
         <option value="'Inter', sans-serif">Inter</option>
         <option value="Georgia, serif">Georgia</option>
         <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
@@ -164,11 +147,11 @@
 
 <script>
 window.__TWEAKS__ = {
-  accent: "#FFA861",
-  headFont: "'Bricolage Grotesque', serif",
+  accent: "#8B7CF6",
+  headFont: "'Manrope', sans-serif",
   heroTitle: "Hello, I'm Abhimanyu",
   dark: false,
-  container: 1140
+  container: 1240
 };
 </script>
 <script src="chrome.js"></script>
