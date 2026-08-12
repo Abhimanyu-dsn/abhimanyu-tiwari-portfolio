@@ -485,7 +485,7 @@ body.dark .btn-primary{background:var(--accent);color:#111}
  SECTION BASICS
  ======================================================== */
 .section{padding:88px 0}
-#work,#featured,#testimonials,#leadership{scroll-margin-top:96px}
+#work,#testimonials,#leadership{scroll-margin-top:96px}
 .section-head{
  max-width:720px;
  margin:0 auto 48px;
@@ -528,8 +528,6 @@ body.dark .btn-primary{background:var(--accent);color:#111}
  flex-direction:column;
  gap:18px;
 }
-.project-card--wide{grid-column:1 / -1}
-.project-card--wide .project-thumb{aspect-ratio:16/7}
 .project-thumb{
  position:relative;
  aspect-ratio:4/3;
@@ -689,55 +687,8 @@ body.dark .tag.green, body.dark .tag.purple, body.dark .tag.amber, body.dark .ta
 .work-card.reverse .work-thumb{order:2}
 .work-card.reverse .work-body{order:1}
 
-/* Featured project */
-.featured{padding-top:0;background:var(--bg)}
-.featured-card{
- display:grid;
- grid-template-columns:1.15fr .85fr;
- gap:40px;
- align-items:center;
- padding:28px;
- border:1px solid var(--line);
- border-radius:32px;
- background:linear-gradient(180deg, #fff, var(--bg-soft));
- box-shadow:var(--shadow-sm);
-}
-.featured-thumb{
- position:relative;
- aspect-ratio:16/11;
- border-radius:24px;
- overflow:hidden;
- display:block;
- border:1px solid var(--line);
-}
-.featured-thumb img{
- width:100%;height:100%;
- object-fit:contain;
- transition:transform .55s ease;
-}
-.featured-thumb:hover img{transform:scale(1.035)}
-.featured-body{display:flex;flex-direction:column;gap:16px;padding-right:8px}
-.featured-title{
- margin:0;
- font-family:var(--head-font);
- font-weight:700;
- font-size:clamp(26px,3vw,36px);
- line-height:1.15;
- letter-spacing:-.025em;
- color:var(--ink);
-}
-.featured-desc{
- margin:0;
- font-size:15px;
- line-height:1.6;
- color:var(--ink-2);
-}
-
 @media (max-width:991px){
  .work-gallery{grid-template-columns:1fr}
- .project-card--wide{grid-column:auto}
- .project-card--wide .project-thumb{aspect-ratio:4/3}
- .featured-card{grid-template-columns:1fr;padding:20px;gap:24px}
 }
 @media (max-width:767px){
  .work-card,.work-card.reverse{grid-template-columns:1fr;gap:24px}

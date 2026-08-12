@@ -131,6 +131,6 @@
       if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
     });
   },{threshold:.12});
-  document.querySelectorAll(".reveal-on-scroll, .work-card, .project-card, .featured-card, .leader-card, .testi, .vibe-card, .section-head, .article-card, .exp-card, .image-card")
+  document.querySelectorAll(".reveal-on-scroll, .work-card, .project-card, .leader-card, .testi, .vibe-card, .section-head, .article-card, .exp-card, .image-card")
     .forEach(n=>{ n.classList.add("reveal"); io.observe(n); });
 })();

@@ -105,11 +105,10 @@ function renderWork(){
   if(!list) return;
   list.innerHTML = "";
 
-  // Gallery: projects after the featured first item
-  const gallery = PROJECTS.slice(1);
-  gallery.forEach((p,i)=>{
+  // Uniform 2×2 gallery: all projects as equal cards
+  PROJECTS.forEach((p)=>{
     const {href, attrs} = projectLinkAttrs(p.url || "index.html#work");
-    const card = el("article", "project-card" + (i === gallery.length - 1 ? " project-card--wide" : ""));
+    const card = el("article", "project-card");
     card.innerHTML = `
       <a href="${href}" class="project-thumb ${p.thumbClass}"${attrs}>
         <img src="${p.img}" alt="${p.title} preview" loading="lazy"/>
@@ -123,31 +122,6 @@ function renderWork(){
       </div>`;
     list.appendChild(card);
   });
-}
-
-function renderFeatured(){
-  const host = document.getElementById("featuredProject");
-  if(!host) return;
-  const p = PROJECTS[0];
-  if(!p) return;
-  const {href, attrs} = projectLinkAttrs(p.url || "index.html#work");
-  host.innerHTML = `
-    <article class="featured-card">
-      <a href="${href}" class="featured-thumb ${p.thumbClass}"${attrs}>
-        <img src="${p.img}" alt="${p.title} preview" loading="lazy"/>
-      </a>
-      <div class="featured-body">
-        <h3 class="featured-title"><a href="${href}" class="work-title-link"${attrs}>${p.title} <span class="title-arrow">→</span></a></h3>
-        <p class="featured-desc">${p.desc}</p>
-        <div class="tag-row">
-          ${p.tags.map(t=>`<span class="tag ${t.c||""}">${t.l}</span>`).join("")}
-        </div>
-        <p class="outcomes-label">Key outcomes</p>
-        <div class="outcomes">
-          ${p.outcomes.map(o=>`<div class="outcome"><span class="outcome-val">${o.v}</span><span class="outcome-lbl">${o.l}</span></div>`).join("")}
-        </div>
-      </div>
-    </article>`;
 }
 
 function renderLeaders(){
@@ -275,7 +249,6 @@ try{ window.parent.postMessage({type:"__edit_mode_available"}, "*"); }catch(e){}
 // ---------- Boot ----------
 document.addEventListener("DOMContentLoaded", ()=>{
   if(document.getElementById("workList")) renderWork();
-  if(document.getElementById("featuredProject")) renderFeatured();
   if(document.getElementById("leaderGrid")) renderLeaders();
   if(document.getElementById("testiGrid")) renderTestimonials();
   if(document.getElementById("experimentGrid")) renderExperiments();
@@ -289,6 +262,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
       if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
     });
   },{threshold:.12});
-  document.querySelectorAll(".project-card, .featured-card, .leader-card, .testi, .vibe-card")
+  document.querySelectorAll(".project-card, .leader-card, .testi, .vibe-card")
     .forEach(n=>{ if(!n.classList.contains("in")){ n.classList.add("reveal"); io.observe(n); } });
 });
