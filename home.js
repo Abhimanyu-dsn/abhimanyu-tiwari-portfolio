@@ -82,6 +82,23 @@
     });
   }
 
+  /* Intro video dialog */
+  function introVideo() {
+    var dlg = document.getElementById('intro-dialog');
+    var openBtn = document.querySelector('[data-intro-open]');
+    if (!dlg || !openBtn) return;
+    var video = dlg.querySelector('video');
+    openBtn.addEventListener('click', function () {
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+      try { var p = video.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    });
+    function close() { if (dlg.open) { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); } }
+    dlg.querySelector('[data-intro-close]').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', function () { video.pause(); openBtn.focus(); });
+  }
+
+  introVideo();
   countUp();
   tentacles();
   filters();

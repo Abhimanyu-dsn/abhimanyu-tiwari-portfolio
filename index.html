@@ -113,11 +113,23 @@ section[aria-labelledby="hero-title"]{padding-bottom:32px !important}
 section[aria-labelledby="testi-title"]{gap:24px !important}
 #contact{margin-top:8px !important}
 @media (prefers-reduced-motion: reduce){#highlights-grid>div::before,#work .m3-card::before,section[aria-labelledby="testi-title"] figure::before{animation:none}}
+/* Intro video dialog */
+.intro-dialog{padding:0;border:0;background:transparent;max-width:min(960px,calc(100vw - 32px));width:100%;overflow:visible}
+.intro-dialog::backdrop{background:rgba(20,14,40,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.intro-dialog[open]{animation:intro-in .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes intro-in{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.intro-box{background:#FFFFFF;border-radius:24px;padding:16px;box-shadow:0 30px 80px -20px rgba(20,10,60,.5)}
+.intro-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px 12px 8px}
+.intro-head h2{margin:0;font-size:18px;font-weight:600;color:var(--md-on-surface)}
+.intro-close{width:44px;height:44px;border:0;border-radius:50%;background:var(--md-secondary-container);color:var(--md-on-secondary-container);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.intro-box video{display:block;width:100%;aspect-ratio:16/9;border-radius:14px;background:#000}
+@media (prefers-reduced-motion: reduce){.intro-dialog[open]{animation:none}}
 
 /* ---------- Responsive layer (tablet + mobile) ---------- */
 img{max-width:100%}
 .hide-sm{display:inline}
 .show-sm{display:none}
+.nav-ic{display:none}
 /* Tablet */
 @media (max-width: 1023px){
   header>div{gap:8px !important}
@@ -149,16 +161,24 @@ img{max-width:100%}
 /* Phone */
 @media (max-width: 760px){
   header{padding:10px 12px 0 !important}
-  header .glass-bar[style*="justify-content: space-between"]{border-radius:22px !important;padding:8px !important;gap:6px !important}
-  header .glass-bar>a:first-child>span>span:last-child{display:none}
-  header .glass-bar>a:first-child img{width:36px !important;height:36px !important}
-  header nav{width:100%;flex-wrap:nowrap !important;justify-content:space-between;gap:2px !important}
+  /* Header: photo, icon-only links, résumé, all on one row */
+  header .glass-bar[style*="justify-content: space-between"]{flex-wrap:nowrap !important;padding:6px !important;gap:6px !important}
+  header .glass-bar>a:first-child>span{display:none !important}
+  header .glass-bar>a:first-child img{width:40px !important;height:40px !important}
+  header nav{flex:1 1 auto;min-width:0;flex-wrap:nowrap !important;justify-content:flex-end;gap:4px !important}
   header nav a{white-space:nowrap}
+  header nav a.m3-btn:not(.m3-filled){width:44px;height:44px !important;padding:0 !important;border-radius:50% !important;justify-content:center}
+  header nav .nav-ic{display:inline-block;font-size:22px}
+  header nav .nav-tx{display:none}
+  header nav a.m3-filled{height:44px !important;padding:0 16px 0 12px !important;font-size:14px !important;margin-left:4px}
   .show-sm{display:inline !important}
   section[aria-labelledby="hero-title"]>div>span:first-child{height:auto !important;min-height:32px;padding:6px 12px 6px 8px !important;line-height:1.35}
-  header nav a{height:36px !important;padding:0 10px !important;font-size:13px !important}
-  header nav a.m3-filled{padding:0 14px 0 10px !important}
-  header nav>span[aria-hidden]{display:none !important}
+  /* Hero buttons side by side */
+  .hero-actions{flex-wrap:nowrap !important;gap:8px !important;width:100%}
+  .hero-actions .hero-btn{flex:1 1 0;min-width:0;justify-content:center;height:50px !important;padding:0 10px !important;font-size:15px !important;gap:6px !important;white-space:nowrap}
+  .hero-actions .hero-btn .ms{font-size:20px}
+  .intro-box{padding:10px;border-radius:18px}
+  .intro-head h2{font-size:16px !important;line-height:1.3}
   .hide-sm{display:none}
   .purse-btn{display:none !important}
   main{padding:0 18px !important}
@@ -167,7 +187,6 @@ img{max-width:100%}
   p{overflow-wrap:break-word}
   section[aria-labelledby="hero-title"]{padding-top:28px !important;gap:28px !important}
   section[aria-labelledby="hero-title"] p{font-size:17px !important}
-  section[aria-labelledby="hero-title"] .m3-btn{height:50px !important;font-size:15px !important}
   #contact{padding:36px 22px !important;border-radius:24px !important}
   #contact h2{font-size:30px !important}
   #work a.m3-card>div{padding:22px !important}
@@ -197,8 +216,9 @@ img{max-width:100%}
   footer{flex-direction:column;align-items:flex-start !important}
 }
 @media (max-width: 360px){
-  header nav a{padding:0 7px !important;font-size:12px !important}
-  header nav a.m3-filled{padding:0 10px 0 8px !important;gap:4px !important}
+  header nav a.m3-btn:not(.m3-filled){width:40px;height:40px !important}
+  header nav a.m3-filled{padding:0 12px 0 10px !important;font-size:13px !important}
+  .hero-actions .hero-btn{font-size:14px !important;padding:0 8px !important}
   .hub2{height:32px;font-size:12px;padding:0 10px 0 8px;gap:6px}
   #highlights-grid h3{font-size:14px !important}
 }
@@ -219,9 +239,9 @@ img{max-width:100%}
 </span>
 </a>
 <nav aria-label="Primary" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
-<a href="#work" class="m3-btn" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">Work</a>
-<a href="about.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">About</a>
-<a href="experiments.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Experiments<span class="hide-sm">&nbsp;with AI</span></a>
+<a href="#work" class="m3-btn" aria-label="Work" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">work</span><span class="nav-tx">Work</span></a>
+<a href="about.html" class="m3-btn" aria-label="About" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">person</span><span class="nav-tx">About</span></a>
+<a href="experiments.html" class="m3-btn" aria-label="Experiments with AI" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">auto_awesome</span><span class="nav-tx">Experiments with AI</span></a>
 <span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
 <a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span>Resume</a>
 
@@ -239,9 +259,9 @@ img{max-width:100%}
 <span style="height: 32px; padding: 0 12px 0 8px; border-radius: 8px; border: 1px solid var(--md-outline-variant); display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--md-on-surface-variant); box-sizing: border-box"><span class="ms ms-fill" aria-hidden="true" style="font-size: 16px; color: var(--md-success)">circle</span>Available for senior product design roles</span>
 <h1 id="hero-title" style="margin: 0; font-size: 56px; line-height: 1.08; font-weight: 600; letter-spacing: -0.03em; max-width: 620px">I design everyday products for India's next billion users.</h1>
 <p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--md-on-surface-variant); max-width: 600px">Product designer at Peak42 with 5+ years designing for new and emerging markets. I work closely with developers, and write HTML and CSS along the way.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
-<a href="#work" class="m3-btn m3-filled" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-primary); color: var(--md-on-primary); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">arrow_downward</span>See selected work</a>
-<button type="button" class="m3-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 0; background: var(--md-primary-container); color: var(--md-on-primary-container); font-family: inherit; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms ms-fill" aria-hidden="true">play_circle</span>Watch my intro video</button>
+<div class="hero-actions" style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="#work" class="m3-btn m3-filled hero-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-primary); color: var(--md-on-primary); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">arrow_downward</span><span class="hide-sm">See selected work</span><span class="show-sm">Selected work</span></a>
+<button type="button" class="m3-btn hero-btn" data-intro-open aria-haspopup="dialog" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 0; background: var(--md-primary-container); color: var(--md-on-primary-container); font-family: inherit; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms ms-fill" aria-hidden="true">play_circle</span><span class="hide-sm">Watch my intro video</span><span class="show-sm">Intro video</span></button>
 </div>
 </div>
 <figure aria-label="Tools I use and things I love" style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px">
@@ -529,6 +549,14 @@ img{max-width:100%}
 <span>© 2026 Abhimanyu Tiwari · Designed and built in Bangalore</span>
 <a href="#top" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">arrow_upward</span>Back to top</a>
 </footer>
+
+<!-- Intro video -->
+<dialog id="intro-dialog" class="intro-dialog" aria-labelledby="intro-title">
+<div class="intro-box">
+<div class="intro-head"><h2 id="intro-title">Meet Abhimanyu in 60 seconds</h2><button type="button" class="m3-btn intro-close" data-intro-close aria-label="Close the video"><span class="ms" aria-hidden="true">close</span></button></div>
+<video controls playsinline preload="none" poster="assets/video/intro-poster.jpg"><source src="assets/video/intro.mp4" type="video/mp4">Your browser can't play this video. <a href="assets/video/intro.mp4">Download it</a>.</video>
+</div>
+</dialog>
 </main>
 </div>
 <script src="home.js" defer></script>
