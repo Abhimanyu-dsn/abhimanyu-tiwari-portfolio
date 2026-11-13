@@ -1,139 +1,215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CHOMP — Smart AI App Case Study · Abhimanyu Tiwari</title>
-  <meta name="description" content="CHOMP — Smart AI App Case Study. An AI-powered food bestie for fridge scanning, playful discovery, and guided cooking.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chomp case study — Abhimanyu Tiwari</title>
+<meta name="description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<link rel="canonical" href="https://abhimanyu-tiwari-portfolio.vercel.app/chomp.html">
+<meta property="og:title" content="Chomp case study — Abhimanyu Tiwari">
+<meta property="og:description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhimanyu-tiwari-portfolio.vercel.app/chomp.html">
+<meta property="og:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6C3CF5">
+<link rel="icon" href="assets/v2/abhi-photo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;display=block">
+<style>
+/* Design system: Material 3 roles, Plus Jakarta Sans, Material Symbols Rounded (same as Home v2) */
+:root{
+--md-primary:#6C3CF5;--md-on-primary:#FFFFFF;--md-primary-container:#ECE4FF;--md-on-primary-container:#24005A;
+--md-secondary-container:#F1ECFF;--md-on-secondary-container:#1E1240;--md-accent:#E8368F;
+--md-surface:#FFFFFF;--md-surface-low:#FFFFFF;--md-surface-container:#F6F6F8;--md-surface-high:#EEEEF1;
+--md-on-surface:#1B1B21;--md-on-surface-variant:#45464F;--md-outline:#767680;--md-outline-variant:#C6C5D0;
+--md-inverse-surface:#2F3036;--md-inverse-on-surface:#F2F0F7;--md-inverse-primary:#CDBEFF;--md-success:#2E7D4F;--md-error:#BA1A1A;
+}
+body{margin:0;background:#FFFFFF}
+a{color:#6C3CF5}a:hover{color:#5223D6}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20}
+.ms-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.m3-btn{position:relative;overflow:hidden;cursor:pointer;text-decoration:none;transition:box-shadow .15s ease}
+.m3-btn::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s ease;pointer-events:none}
+.m3-btn:hover::after{opacity:.08}
+.m3-btn:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
+.m3-filled:hover{box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15)}
+a.glow{text-decoration:none;color:inherit;transition:transform .2s ease}
+a.glow:hover{transform:translateY(-2px)}
+/* Glossy cards with a revolving border (same treatment as Home v2) */
+@property --glow-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes glow-spin{to{--glow-a:360deg}}
+.glow{position:relative;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px rgba(63,90,169,.32)}
+.glow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--glow-a),rgba(63,90,169,.14) 0deg,rgba(63,90,169,.14) 240deg,#9DB0F0 290deg,#3F5AA9 325deg,#FFFFFF 342deg,rgba(63,90,169,.14) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glow-spin 5s linear infinite;pointer-events:none;z-index:3}
+.glow::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
+.glow:nth-child(2)::before{animation-delay:-1.7s}.glow:nth-child(3)::before{animation-delay:-3.3s}.glow:nth-child(4)::before{animation-delay:-4.4s}.glow:nth-child(5)::before{animation-delay:-2.5s}.glow:nth-child(6)::before{animation-delay:-0.8s}
+/* v2 shared: floating glass bar, vibrant CTA, crisp gloss, tighter rhythm */
+header .m3-filled{background-image:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
+.glass-bar{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 32px -12px rgba(108,60,245,.35),0 2px 6px rgba(27,27,33,.06)}
+.purse-btn{position:relative;transition:transform .25s ease}
+.purse-btn::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(108,60,245,.45);animation:purse-ping 2.4s ease-out infinite;pointer-events:none}
+.purse-btn:hover{transform:translateY(-2px) scale(1.05)}
+.purse-btn:hover svg{animation:purse-wiggle .6s ease-in-out}
+@keyframes purse-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@keyframes purse-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(8deg)}}
+.glow{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px color-mix(in srgb,var(--md-primary) 38%,transparent)}
+.glow::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg)}
+.glow::after{z-index:-1}
+/* Static hairline by default; animated border only on key cards */
+.glow{box-shadow:0 1px 2px rgba(27,27,33,.05),0 10px 28px -14px rgba(27,27,33,.14)}
+.glow::before{background:rgba(27,27,33,.09);animation:none}
+.glow-key{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 14px 34px -14px color-mix(in srgb,var(--md-primary) 40%,transparent)}
+.glow-key::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);animation:glow-spin 5s linear infinite}
+@media (prefers-reduced-motion: reduce){.glow::before,.glow-key::before{animation:none}.purse-btn::after{animation:none}}
+
+/* Small screens */
+img{max-width:100%}
+@media (max-width: 760px){
+  header{padding:10px 12px 0 !important}
+  header nav{width:100%;justify-content:flex-start}
+  header nav>span[aria-hidden]{display:none !important}
+  .purse-btn{display:none !important}
+  main{padding:0 18px !important}
+  [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr) !important}
+  [style*="flex: 1 1"]{min-width:0 !important}
+  h1{font-size:38px !important}
+  h2{font-size:30px !important}
+  section[aria-labelledby="hero-title"]{padding-top:32px !important;gap:32px !important}
+  #contact{padding:40px 24px !important}
+  #work a.m3-card>div{padding:24px !important}
+  .hub2{height:38px;font-size:14px;padding:0 14px 0 10px}
+  .hub2 .ms{font-size:18px}
+  .node-icon{width:40px;height:40px}
+  .node-icon img{width:22px;height:22px}
+  .node-icon .ms{font-size:22px}
+}
+</style>
 </head>
-<body class="chomp-case" data-page="work" data-base="./">
+<body>
+<div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--md-on-surface); background: var(--md-surface); box-sizing: border-box">
 
-<main class="cs-main chomp-pres">
-  <div class="container">
+<!-- Top app bar -->
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px 0; pointer-events: none">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 12px">
+<div class="glass-bar" style="flex: 1 1 auto; min-width: 0; pointer-events: auto; border-radius: 999px; padding: 8px 8px 8px 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--md-on-surface)">
+<img src="assets/v2/abhi-photo.png" alt="Abhimanyu Tiwari" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #ECE4FF">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 600; line-height: 20px">Abhimanyu Tiwari</span>
+<span style="font-size: 13px; line-height: 16px; color: var(--md-on-surface-variant)">Product designer · Bangalore</span>
+</span>
+</a>
+<nav aria-label="Primary" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
+<a href="/#work" class="m3-btn" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">Work</a>
+<a href="about.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">About</a>
+<a href="experiments.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Experiments with AI</a>
+<span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span>Download résumé</a>
+</nav>
+</div>
+<a href="#wallet" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
+</div>
+</header>
+<main id="top" style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
 
-  <!-- 01 COVER -->
-  <header class="chomp-block chomp-cover">
-    <a href="index.html#work" class="cs-back">← Back to projects</a>
-    <div class="chomp-cover-grid">
-      <div class="chomp-cover-copy">
-        <p class="chomp-eyebrow">01 — Cover</p>
-        <h1 class="chomp-display">CHOMP</h1>
-        <p class="chomp-lede">Smart AI App Case Study</p>
-        <p class="chomp-tools">Tools: Figma</p>
-      </div>
-      <figure class="chomp-visual">
-        <img src="assets/case-studies/chomp/cover.png" alt="CHOMP cover — logo and phone mockup" class="chomp-cover-img">
-      </figure>
-    </div>
-  </header>
+<section style="padding: 40px 0 56px; display: flex; flex-direction: column; gap: 28px">
+<a href="/#work" class="m3-btn" style="align-self: flex-start; height: 40px; padding: 0 16px 0 10px; margin-left: -10px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px"><span class="ms" aria-hidden="true">arrow_back</span>Back to projects</a>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Mobile app</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">UX/UI design</span></div>
+<h1 style="margin: 0; font-size: 60px; line-height: 1.06; font-weight: 600; letter-spacing: -0.03em; max-width: 960px">Chomp: your AI-powered food bestie</h1>
+<p style="margin: 0; font-size: 20px; line-height: 1.6; color: var(--md-on-surface-variant); max-width: 780px">A smart, sassy, and ridiculously helpful app that takes the stress out of cooking.</p>
 
-  <!-- 02 ABOUT -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">02 — About the project</p>
-    <h2 class="chomp-h2">Chomp is your AI-powered food bestie</h2>
-    <p class="chomp-body">Chomp is your AI-powered food bestie, a smart, sassy, and ridiculously helpful app that takes the stress out of cooking.</p>
-    <p class="chomp-label">What it does?</p>
-    <ol class="chomp-caps">
-      <li><span>01</span><div><strong>Turns mealtime into playtime</strong><p>It scans your fridge, whips up tasty recipe ideas, and with one tap, grabs whatever you're missing.</p></div></li>
-      <li><span>02</span><div><strong>Makes food discovery playful</strong><p>Powered by chatty AI with a flair for fun, it transforms food discovery into a playful, game-like adventure you'll actually want to join.</p></div></li>
-      <li><span>03</span><div><strong>Adapts to you</strong><p>It vibes with your tastes, moods, and routines, whether you're craving a speedy snack, something healthy, or a fun kitchen quest!</p></div></li>
-      <li><span>04</span><div><strong>Makes shopping easier</strong><p>Connects with your grocery apps to make shopping super easy while helping you pick healthier foods without any hassle!</p></div></li>
-    </ol>
-  </section>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px"><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Type</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Smart AI app · Concept</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Platform</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Mobile app</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Tools</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Figma</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Focus</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Recipes · Scanning · Guided cooking</span></div></div>
+<img src="assets/v2/chomp_cover.jpg" alt="Chomp cover with logo and phone mockup" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 32px; background: var(--md-surface-container)">
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">01 — About</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">What Chomp does</h2>
 
-  <!-- 03 PROBLEM -->
-  <section class="chomp-block chomp-problem-band">
-    <p class="chomp-eyebrow">03 — The problem</p>
-    <h2 class="chomp-h2">Cooking shouldn't feel like a chore</h2>
-    <p class="chomp-body">People waste time staring into fridges, struggle with meal decisions, and abandon boring cooking apps.</p>
-    <p class="chomp-highlight">Food tech lacks personalization + personality.</p>
-  </section>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Turns mealtime into playtime</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">It scans your fridge, whips up tasty recipe ideas, and with one tap grabs whatever you're missing.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Makes food discovery playful</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Chatty AI with a flair for fun turns food discovery into a game-like adventure.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">03</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Adapts to you</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">It vibes with your tastes, moods and routines, whether it's a speedy snack or something healthy.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">04</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Makes shopping easier</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Connects with grocery apps to make shopping easy and help you pick healthier foods.</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">02 — Problem</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Cooking shouldn't feel like a chore</h2>
 
-  <!-- 04 YUMMLY -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">04 — Competitor analysis</p>
-    <h2 class="chomp-h2">Yummly</h2>
-    <div class="chomp-swot-text">
-      <h3>Strengths</h3>
-      <ul class="chomp-list"><li>Smart recipe recommendations using AI based on dietary preferences, allergies, and past behavior.</li><li>Integrated meal planning and shopping list features.</li><li>Step-by-step guided cooking with timers and video instructions.</li><li>Supports appliance integration (e.g., smart ovens).</li><li>Clean and intuitive UI/UX with a massive recipe database.</li></ul>
-      <h3>Weaknesses</h3>
-      <ul class="chomp-list"><li>Limited engagement features, lacks gamification or community-driven interaction.</li><li>Some premium features are locked behind a subscription (Yummly Pro).</li><li>Grocery list integration can be clunky with certain retailers.</li></ul>
-      <h3>Opportunities</h3>
-      <ul class="chomp-list"><li>Expand social or community features (e.g., shared meal plans, recipe swaps).</li><li>Improve real-time fridge or pantry integration.</li><li>Broaden partnerships with grocery services for seamless ordering.</li></ul>
-      <h3>Threats</h3>
-      <ul class="chomp-list"><li>Competitive pressure from free apps with similar features.</li><li>Risk of users moving to more engaging or culturally localized platforms.</li></ul>
-    </div>
-  </section>
+</div>
+<div class="glow glow-key" style="background: #FFFFFF; color: var(--md-on-surface); border-radius: 24px; padding: 28px 32px; display: flex; gap: 16px; align-items: flex-start"><span class="ms" aria-hidden="true" style="font-size: 28px; color: var(--md-primary)">restaurant</span><p style="margin: 0; font-size: 20px; line-height: 1.5; font-weight: 600; letter-spacing: -0.01em">Food tech lacks personalisation and personality.</p></div><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">People waste time staring into fridges, struggle with meal decisions, and abandon boring cooking apps.</p></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">03 — Competitors</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Competitor analysis</h2>
 
-  <!-- 05 TASTY -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">05 — Competitor analysis</p>
-    <h2 class="chomp-h2">Tasty</h2>
-    <div class="chomp-swot-text">
-      <h3>Strengths</h3>
-      <ul class="chomp-list"><li>Extremely popular with a massive global user base.</li><li>Highly visual and engaging recipe videos, perfect for social media sharing.</li><li>Simple, beginner-friendly recipes aimed at younger audiences.</li><li>Integrates with Walmart for ingredient shopping.</li><li>Fast and easy-to-follow instructions, especially good for quick meals.</li></ul>
-      <h3>Weaknesses</h3>
-      <ul class="chomp-list"><li>Less focus on personalized dietary preferences or allergies.</li><li>Limited advanced features like meal planning or fridge scanning.</li><li>Focused more on Western cuisine, less local relevance in other cultures.</li></ul>
-      <h3>Opportunities</h3>
-      <ul class="chomp-list"><li>Add personalization through AI (diet filters, cuisine preferences).</li><li>Broaden grocery integration beyond Walmart.</li><li>Expand recipe database to include more international/ethnic recipes.</li></ul>
-      <h3>Threats</h3>
-      <ul class="chomp-list"><li>User drop-off from seasoned cooks who want more advanced or diverse recipes.</li><li>Competing platforms offering better utility (like smart meal plans, automation).</li></ul>
-    </div>
-  </section>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Yummly</h3><div style="display: flex; flex-direction: column; gap: 14px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-success)">STRENGTHS</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Smart AI recipe recommendations by diet, allergies and behaviour</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Integrated meal planning and shopping lists</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Step-by-step guided cooking with timers and video</span></li></ul></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-error)">WEAKNESSES</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">remove_circle</span><span>Little gamification or community interaction</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">remove_circle</span><span>Premium features locked behind a subscription</span></li></ul></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-primary)">OPPORTUNITIES</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">trending_up</span><span>Social features like shared meal plans</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">trending_up</span><span>Real-time fridge or pantry integration</span></li></ul></div></div></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Tasty</h3><div style="display: flex; flex-direction: column; gap: 14px"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-success)">STRENGTHS</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Massive global user base</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Highly visual, shareable recipe videos</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">add_circle</span><span>Simple, beginner-friendly recipes</span></li></ul></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-error)">WEAKNESSES</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">remove_circle</span><span>Less focus on dietary preferences or allergies</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">remove_circle</span><span>Mostly Western cuisine, less local relevance</span></li></ul></div><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; color: var(--md-primary)">OPPORTUNITIES</span><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">trending_up</span><span>AI personalisation with diet and cuisine filters</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">trending_up</span><span>More international and regional recipes</span></li></ul></div></div></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">04 — Branding</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Branding</h2>
 
-  <!-- 06 BRANDING -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">06 — Branding</p>
-    <h2 class="chomp-h2">Branding</h2>
-    <p class="chomp-body muted">Fredoka · Rebond Grotesque · Buttons · Navigation · Calendar · Recipe cards · Colors · Food visual elements</p>
-    <figure class="chomp-visual">
-      <img src="assets/case-studies/chomp/style-guide.png" alt="CHOMP branding — logo, character, and visual identity" loading="lazy">
-    </figure>
-  </section>
+</div>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/chomp_style-guide.jpg" alt="Chomp branding: logo, character and visual identity" style="width: 100%; max-width: 560px; margin: 0 auto; height: auto; display: block; border-radius: 16px"></div><figcaption style="font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant); text-align: center">Fredoka and Rebond Grotesque, buttons, navigation, recipe cards, colours and food visuals.</figcaption></figure>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">05 — Wireframes</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Wireframes</h2>
 
-  <!-- 07 WIREFRAMES -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">07 — Wireframes</p>
-    <h2 class="chomp-h2">WireFrame</h2>
-    <figure class="chomp-visual chomp-visual--xl">
-      <img src="assets/case-studies/chomp/wireframes-new.png" alt="CHOMP wireframe sketches" loading="lazy">
-    </figure>
-  </section>
+</div>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/chomp_wireframes-new.jpg" alt="Chomp wireframe sketches" style="width: 100%;  height: auto; display: block; border-radius: 16px"></div></figure>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">06 — Prototype</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Prototype</h2>
 
-  <!-- 08 PROTOTYPE -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">08 — Prototype</p>
-    <h2 class="chomp-h2">Prototype</h2>
-    <figure class="chomp-visual chomp-visual--xl">
-      <img src="assets/case-studies/chomp/prototype-flow.png" alt="CHOMP Figma prototype flow" loading="lazy">
-    </figure>
-  </section>
+</div>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/chomp_prototype-flow.jpg" alt="Chomp Figma prototype flow" style="width: 100%;  height: auto; display: block; border-radius: 16px"></div></figure>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">07 — UI</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Main page</h2>
 
-  <!-- 09 MAIN PAGE -->
-  <section class="chomp-block">
-    <p class="chomp-eyebrow">09 — UI design screens</p>
-    <h2 class="chomp-h2">Main page</h2>
-    <ul class="chomp-chip-list">
-      <li>Ingredient of the Day</li>
-      <li>Ginger</li>
-      <li>Scan Chomp</li>
-      <li>Recipe recommendations</li>
-      <li>Dal Makhani Recipe</li>
-      <li>Recipe details</li>
-      <li>Dinner recipes</li>
-    </ul>
-    <figure class="chomp-visual chomp-visual--main">
-      <img src="assets/case-studies/chomp/main-page-ui.png" alt="CHOMP UI design screens — onboarding and main page" width="375" height="1024" loading="lazy">
-    </figure>
-  </section>
-
-  </div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px"><div style="flex: 1 1 420px; min-width: 0"><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">The main page brings the core loop together: an ingredient of the day, Scan Chomp, recipe recommendations, recipe details and dinner ideas.</p></div><div style="margin-top: 16px"><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Ingredient of the Day</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Scan Chomp</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Recipe recommendations</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Recipe details</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Dinner recipes</span></div></div></div><div style="flex: 1 1 420px; min-width: 0"><figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/chomp_main-page-ui.jpg" alt="Chomp onboarding and main page screens" style="width: 100%; max-width: 340px; margin: 0 auto; height: auto; display: block; border-radius: 16px"></div></figure></div></div>
+</section>
+<section style="padding: 48px 0 16px; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 20px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">Next project</span>
+<a href="battlexo.html" class="glow glow-key" style="background: var(--md-surface-low); border-radius: 28px; overflow: hidden; display: flex; flex-wrap: wrap; align-items: stretch">
+<img src="assets/v2/real-battlexo.jpg" alt="BattleXO website and app redesign" style="flex: 1 1 420px; min-width: 0; aspect-ratio: 16 / 9; object-fit: cover; display: block">
+<div style="flex: 1 1 340px; min-width: 0; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; box-sizing: border-box">
+<h3 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em">Redesigning BattleXO's website and app</h3>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+</section>
+<!-- Contact -->
+<section aria-labelledby="contact-title" style="margin: 16px 0 32px; background: var(--md-inverse-surface); color: var(--md-inverse-on-surface); border-radius: 32px; padding: 56px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 id="contact-title" style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em">Let's build something people love to use.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C6C5D0">Hiring, collaborating, or just want to talk design? My inbox is open.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="mailto:bangaloredesigner2020@gmail.com" class="m3-btn m3-filled" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-inverse-primary); color: #002A78; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">mail</span>Email me</a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 1px solid #8F909A; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-sizing: border-box"><span class="ms" aria-hidden="true">download</span>Download résumé</a>
+</div>
+</div>
+<nav aria-label="Elsewhere" style="display: flex; flex-direction: column; gap: 4px; min-width: 220px">
+<a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://www.instagram.com/abhimanyu.ux/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Instagram<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://medium.com/@bangaloredesigner2020" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Medium<span class="ms" aria-hidden="true">arrow_outward</span></a>
+</nav>
+</section>
+<footer style="padding: 8px 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--md-on-surface-variant)">
+<span>© 2026 Abhimanyu Tiwari · Designed and built in Bangalore</span>
+<a href="#top" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">arrow_upward</span>Back to top</a>
+</footer>
 </main>
-
-<script src="chrome.js"></script>
+</div>
 </body>
 </html>

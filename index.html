@@ -1,166 +1,469 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Abhimanyu Tiwari — Product Designer</title>
-  <meta name="description" content="Product designer focused on creating thoughtful digital experiences for emerging markets.">
-  <link rel="canonical" href="https://abhimanyu-tiwari-portfolio.vercel.app/">
-  <meta property="og:title" content="Abhimanyu Tiwari — Product Designer">
-  <meta property="og:description" content="Product designer focused on creating thoughtful digital experiences for emerging markets.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://abhimanyu-tiwari-portfolio.vercel.app/">
-  <meta property="og:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Abhimanyu Tiwari — Product Designer">
-  <meta name="twitter:description" content="Product designer focused on creating thoughtful digital experiences for emerging markets.">
-  <meta name="twitter:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abhimanyu Tiwari — Product Designer</title>
+<meta name="description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<link rel="canonical" href="https://abhimanyu-tiwari-portfolio.vercel.app/">
+<meta property="og:title" content="Abhimanyu Tiwari — Product Designer">
+<meta property="og:description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhimanyu-tiwari-portfolio.vercel.app/">
+<meta property="og:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6C3CF5">
+<link rel="icon" href="assets/v2/abhi-photo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;display=block">
+<style>
+/* Design system: Material 3 roles, Plus Jakarta Sans, Material Symbols Rounded */
+:root{
+--md-primary:#6C3CF5;--md-on-primary:#FFFFFF;--md-primary-container:#ECE4FF;--md-on-primary-container:#24005A;
+--md-secondary-container:#F1ECFF;--md-on-secondary-container:#1E1240;--md-accent:#E8368F;
+--md-surface:#FBF8FF;--md-surface-low:#F5F2FA;--md-surface-container:#EFEDF4;--md-surface-high:#E9E7EF;
+--md-on-surface:#1B1B21;--md-on-surface-variant:#45464F;--md-outline:#767680;--md-outline-variant:#C6C5D0;
+--md-inverse-surface:#2F3036;--md-inverse-on-surface:#F2F0F7;--md-inverse-primary:#CDBEFF;--md-success:#2E7D4F;
+}
+body{margin:0; background-color: #FFFFFF; }
+a{color:#6C3CF5}a:hover{color:#5223D6}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20}
+.ms-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.m3-btn{position:relative;overflow:hidden;cursor:pointer;text-decoration:none;transition:box-shadow .15s ease}
+.m3-btn::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s ease;pointer-events:none}
+.m3-btn:hover::after{opacity:.08}
+.m3-btn:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
+.m3-filled:hover{box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15)}
+.m3-card{transition:box-shadow .2s ease,transform .2s ease;text-decoration:none;color:inherit}
+.m3-card:hover{box-shadow:0 2px 6px 2px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);transform:translateY(-2px)}
+/* Glossy cards with a revolving border: highlights, selected work, testimonials */
+@property --glow-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes glow-spin{to{--glow-a:360deg}}
+#highlights-grid>div,#work .m3-card,section[aria-labelledby="testi-title"] figure{position:relative;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px color-mix(in srgb,var(--md-primary) 38%,transparent)}
+#work .m3-card:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 6px rgba(27,27,33,.10),0 22px 44px -16px color-mix(in srgb,var(--md-primary) 50%,transparent)}
+#highlights-grid>div::before,#work .m3-card::before,section[aria-labelledby="testi-title"] figure::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#9DB0F0) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glow-spin 5s linear infinite;pointer-events:none;z-index:3}
+#highlights-grid>div::after,#work .m3-card::after,section[aria-labelledby="testi-title"] figure::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
+#highlights-grid>div:nth-child(2)::before,#work .m3-card:nth-of-type(2)::before,section[aria-labelledby="testi-title"] figure:nth-child(2)::before{animation-delay:-1.7s}
+#highlights-grid>div:nth-child(3)::before,#work .m3-card:nth-of-type(3)::before,section[aria-labelledby="testi-title"] figure:nth-child(3)::before{animation-delay:-3.3s}
+#highlights-grid>div:nth-child(4)::before{animation-delay:-4.4s}
+/* Testimonials */
+section[aria-labelledby="testi-title"]{position:relative;isolation:isolate}
+section[aria-labelledby="testi-title"] figure{background:rgba(255,255,255,.34) !important;border-color:rgba(255,255,255,.7) !important;-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
+section[aria-labelledby="testi-title"] figure::after{background:linear-gradient(155deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.18) 30%,rgba(255,255,255,0) 50%)}
+/* White cards everywhere. Animated border kept only on Selected work (the cards an interviewer must open) */
+#work .m3-card{background:#FFFFFF !important}
+#highlights-grid>div,section[aria-labelledby="testi-title"] figure{background:#FFFFFF !important;border-color:transparent !important;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 1px 2px rgba(27,27,33,.05),0 10px 28px -14px rgba(27,27,33,.14) !important}
+#highlights-grid>div::before,section[aria-labelledby="testi-title"] figure::before{background:rgba(27,27,33,.09) !important;animation:none !important}
+#highlights-grid>div::after,#work .m3-card::after,section[aria-labelledby="testi-title"] figure::after{z-index:-1}
+/* Vibrant primary actions */
+header .m3-filled,section[aria-labelledby="hero-title"] .m3-filled{background-image:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+header .m3-filled:hover,section[aria-labelledby="hero-title"] .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
+/* Floating glass top bar */
+.glass-bar{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 32px -12px rgba(108,60,245,.35),0 2px 6px rgba(27,27,33,.06)}
+.purse-btn{position:relative;transition:transform .25s ease}
+.purse-btn::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(108,60,245,.45);animation:purse-ping 2.4s ease-out infinite;pointer-events:none}
+.purse-btn:hover{transform:translateY(-2px) scale(1.05)}
+.purse-btn:hover svg{animation:purse-wiggle .6s ease-in-out}
+@keyframes purse-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@keyframes purse-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(8deg)}}
+@media (prefers-reduced-motion: reduce){.purse-btn::after{animation:none}}
+/* Tools & loves circuit (static layout, animated current) */
+.circuit-wrap{position:relative;width:min(600px,100%);aspect-ratio:1/1}
+.circuit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.circuit use{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.circuit .tools{stroke:#7B4DFF;color:#7B4DFF}
+.circuit .love{stroke:#F0388F;color:#F0388F}
+.circuit .halo{stroke-width:18;opacity:.15;filter:blur(5px)}
+.circuit .wire{stroke-width:5;opacity:.9}
+.circuit .spark{stroke:#FFFFFF;stroke-opacity:.9;stroke-width:2.4;stroke-dasharray:4 26;animation:circ-zap 1.1s linear infinite}
+.circuit .bolt{stroke:#FFFFFF;stroke-width:5;stroke-dasharray:34 1000;animation:circ-bolt 2.8s linear infinite;filter:drop-shadow(0 0 4px currentColor) drop-shadow(0 0 10px currentColor)}
+.circuit circle{fill:#FFFFFF;stroke-width:4}
+@keyframes circ-zap{to{stroke-dashoffset:-30}}
+@keyframes circ-bolt{from{stroke-dashoffset:1034}to{stroke-dashoffset:0}}
+.node{position:absolute;z-index:2;display:flex;align-items:center;transform:translate(-50%,-50%);margin:0;will-change:transform}
+.node-icon{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 4px rgba(255,255,255,.95),0 0 22px 3px var(--glow),0 4px 10px rgba(27,27,33,.14)}
+.node-icon img{width:28px;height:28px;object-fit:contain;border-radius:6px;display:block}
+.node-icon .ms{font-size:28px}
+.node-label{margin-left:-14px;height:34px;padding:0 14px 0 22px;border-radius:0 17px 17px 0;display:flex;align-items:center;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:14px;font-weight:600;color:#1B1B21;white-space:nowrap;box-shadow:0 2px 10px var(--glow)}
+.node-tool{--glow:rgba(123,77,255,.32)}
+.node-love{--glow:rgba(240,56,143,.30)}
+.hub2{position:absolute;z-index:3;height:50px;padding:0 22px 0 16px;border-radius:25px;display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:#FFFFFF;white-space:nowrap;transform:translateY(-50%)}
+.hub2 .ms{font-size:24px}
+.hub2-tools{background:linear-gradient(120deg,#6C3CF5,#9B5CFF);box-shadow:0 0 0 5px rgba(123,77,255,.16),0 0 30px 4px rgba(123,77,255,.45)}
+.hub2-love{background:linear-gradient(120deg,#E8368F,#FF5A7A);box-shadow:0 0 0 5px rgba(240,56,143,.16),0 0 30px 4px rgba(240,56,143,.45)}
+/* Names hidden visually, kept for screen readers */
+.node .node-label{position:absolute !important;width:1px;height:1px;margin:-1px;padding:0 !important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;box-shadow:none;background:none}
+@media (prefers-reduced-motion: reduce){.circuit .spark,.circuit .bolt{animation:none}.circuit .bolt{display:none}}
+/* Testimonials: landscape cards in a seamless linear marquee */
+.testi-card{width:560px;flex:none;box-sizing:border-box}
+.testi-track{animation:testi-scroll 55s linear infinite}
+.testi-marquee:hover .testi-track,.testi-marquee:focus-within .testi-track{animation-play-state:paused}
+@keyframes testi-scroll{to{transform:translateX(calc(-50% - 12px))}}
+@media (max-width: 640px){.testi-card{width:300px}}
+@media (prefers-reduced-motion: reduce){.testi-track{animation:none}.testi-marquee{overflow-x:auto}}
+/* Keep the gloss behind the content so text stays crisp */
+#highlights-grid>div::after,#work .m3-card::after,section[aria-labelledby="testi-title"] figure::after{z-index:-1}
+section[aria-labelledby="testi-title"] figure{background:rgba(255,255,255,.72) !important}
+section[aria-labelledby="testi-title"] blockquote{color:#1B1B21}
+/* Tighter vertical rhythm between homepage sections */
+section[aria-labelledby="hero-title"]{padding-bottom:32px !important}
+#about,#work,section[aria-labelledby="testi-title"]{padding-top:48px !important;padding-bottom:48px !important}
+#about,#work{gap:24px !important}
+section[aria-labelledby="testi-title"]{gap:24px !important}
+#contact{margin-top:8px !important}
+@media (prefers-reduced-motion: reduce){#highlights-grid>div::before,#work .m3-card::before,section[aria-labelledby="testi-title"] figure::before{animation:none}}
+
+/* Small screens */
+img{max-width:100%}
+@media (max-width: 760px){
+  header{padding:10px 12px 0 !important}
+  header nav{width:100%;justify-content:flex-start}
+  header nav>span[aria-hidden]{display:none !important}
+  .purse-btn{display:none !important}
+  main{padding:0 18px !important}
+  [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr) !important}
+  [style*="flex: 1 1"]{min-width:0 !important}
+  h1{font-size:38px !important}
+  h2{font-size:30px !important}
+  section[aria-labelledby="hero-title"]{padding-top:32px !important;gap:32px !important}
+  #contact{padding:40px 24px !important}
+  #work a.m3-card>div{padding:24px !important}
+  .hub2{height:38px;font-size:14px;padding:0 14px 0 10px}
+  .hub2 .ms{font-size:18px}
+  .node-icon{width:40px;height:40px}
+  .node-icon img{width:22px;height:22px}
+  .node-icon .ms{font-size:22px}
+}
+</style>
 </head>
-<body data-page="home" data-base="./">
+<body>
+<div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--md-on-surface); box-sizing: border-box; background-color: #ffffff; position: relative">
 
-<main>
+<!-- Top app bar -->
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px 0; pointer-events: none">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 12px">
+<div class="glass-bar" style="flex: 1 1 auto; min-width: 0; pointer-events: auto; border-radius: 999px; padding: 8px 8px 8px 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--md-on-surface)">
+<img src="assets/v2/abhi-photo.png" alt="Abhimanyu Tiwari" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; box-shadow: 0 0 0 2px #FBF8FF, 0 0 0 4px #DBE1FF">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 600; line-height: 20px">Abhimanyu Tiwari</span>
+<span style="font-size: 13px; line-height: 16px; color: var(--md-on-surface-variant)">AI Product designer · Bangalore</span>
+</span>
+</a>
+<nav aria-label="Primary" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
+<a href="#work" class="m3-btn" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">Work</a>
+<a href="about.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">About</a>
+<a href="experiments.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Experiments with AI</a>
+<span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span>Resume</a>
 
-<!-- ───────── HERO ───────── -->
-<section class="hero" id="home">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Product Designer at Peak42 · Bangalore</p>
-        <h1 class="hero-title">Hello, I'm <span class="accent-name">Abhimanyu</span></h1>
-        <p class="hero-lede">Product Designer with <strong>5+ years</strong> of experience designing products for new and emerging markets in India, collaborating closely with developers and learning HTML/CSS along the way.</p>
-        <div class="reach-row">
-          <span class="muted">Reach out</span>
-          <div class="socials">
-            <a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.266 2.37 4.266 5.455v6.288zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="https://www.instagram.com/abhimanyu.ux/" target="_blank" rel="noopener" aria-label="Instagram" class="social-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="photo-card">
-          <div class="photo-blob" aria-hidden="true"></div>
-          <div class="photo-deco photo-deco--dots" aria-hidden="true"></div>
-          <div class="photo-deco photo-deco--curve" aria-hidden="true"></div>
-          <div class="photo-frame">
-            <img src="assets/about/me.png" alt="Portrait of Abhimanyu Tiwari" class="photo">
-          </div>
-          <div class="avail-chip"><span class="dot"></span> Available for work</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</nav>
+</div>
+<a href="#wallet" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
+</div>
+</header>
 
-<!-- ───────── LOGOS ───────── -->
-<section class="logos">
-  <div class="container logos-inner">
-    <p class="logos-title">Companies I worked on</p>
-    <div class="logo-grid">
-      <div class="logo-cell logo-cell--peak">
-        <img src="assets/home/logos/logo-peak42.png" alt="Peak42" class="logo-img">
-        <span class="logo-current">Currently</span>
-      </div>
-      <div class="logo-cell">
-        <img src="assets/home/logos/logo-kastech.png" alt="Kastech" class="logo-img">
-      </div>
-      <div class="logo-cell">
-        <img src="assets/home/logos/logo-elmeasure.png" alt="ELMEASURE" class="logo-img">
-      </div>
-      <div class="logo-cell logo-cell--battlexo">
-        <img src="assets/home/logos/logo-battlexo.png" alt="BattleXO" class="logo-img">
-      </div>
-    </div>
-  </div>
-</section>
+<main id="top" style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
 
-<!-- ───────── CASE STUDIES GALLERY ───────── -->
-<section class="section work" id="work">
-  <div class="container">
-    <header class="section-head section-head--left reveal">
-      <h2 class="section-title">Case Studies</h2>
-      <p class="section-sub">Website redesigns, AI-powered food experiences, intelligent commerce, and emergency response platforms.</p>
-    </header>
-    <div class="work-gallery" id="workList"></div>
-  </div>
-</section>
-
-<!-- ───────── EXPERIENCE HIGHLIGHTS ───────── -->
-<section class="section leadership" id="leadership">
-  <div class="container">
-    <header class="section-head section-head--left reveal">
-      <h2 class="section-title">Experience &amp; Highlights</h2>
-      <p class="section-sub">National-level swimming and regional-level cricket keep me disciplined, bringing teamwork, consistency, and pressure-ready focus to every project.</p>
-    </header>
-    <div class="leader-grid" id="leaderGrid"></div>
-  </div>
-</section>
-
-<!-- ───────── TESTIMONIALS ───────── -->
-<section class="section testimonials" id="testimonials">
-  <div class="container testi-layout">
-    <header class="section-head section-head--left testi-head reveal">
-      <h2 class="section-title">Colleague's Testimonials</h2>
-      <p class="section-sub">What teammates say about working with me across teams and projects.</p>
-    </header>
-    <div class="testi-grid" id="testiGrid"></div>
-  </div>
-</section>
-
-</main>
-
-<!-- ───────── TWEAKS PANEL ───────── -->
-<div class="tweaks" id="tweaks" aria-hidden="true">
-  <div class="tweaks-head"><strong>Tweaks</strong><span class="muted" style="font-size:12px">Toggle in toolbar</span></div>
-  <div class="tweaks-body">
-    <label class="tw-row"><span>Accent color</span><input type="color" id="twAccent"></label>
-    <label class="tw-row"><span>Heading font</span>
-      <select id="twHeadFont">
-        <option value="'Manrope', sans-serif">Manrope</option>
-        <option value="'Inter', sans-serif">Inter</option>
-        <option value="Georgia, serif">Georgia</option>
-        <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
-      </select>
-    </label>
-    <label class="tw-row"><span>Hero headline</span><input type="text" id="twHeroTitle"></label>
-    <label class="tw-row"><span>Dark mode</span><input type="checkbox" id="twDark"></label>
-    <label class="tw-row"><span>Container width</span><input type="range" min="960" max="1320" step="20" id="twContainer"></label>
-  </div>
+<!-- Hero -->
+<section aria-labelledby="hero-title" style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px; padding: 56px 0 48px">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 24px">
+<span style="height: 32px; padding: 0 12px 0 8px; border-radius: 8px; border: 1px solid var(--md-outline-variant); display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--md-on-surface-variant); box-sizing: border-box"><span class="ms ms-fill" aria-hidden="true" style="font-size: 16px; color: var(--md-success)">circle</span>Available for senior product design roles</span>
+<h1 id="hero-title" style="margin: 0; font-size: 56px; line-height: 1.08; font-weight: 600; letter-spacing: -0.03em; max-width: 620px">I design everyday products for India's next billion users.</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--md-on-surface-variant); max-width: 600px">Product designer at Peak42 with 5+ years designing for new and emerging markets. I work closely with developers, and write HTML and CSS along the way.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="#work" class="m3-btn m3-filled" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-primary); color: var(--md-on-primary); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">arrow_downward</span>See selected work</a>
+<button type="button" class="m3-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 0; background: var(--md-primary-container); color: var(--md-on-primary-container); font-family: inherit; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms ms-fill" aria-hidden="true">play_circle</span>Watch my intro video</button>
+</div>
+</div>
+<figure aria-label="Tools I use and things I love" style="flex: 1 1 520px; min-width: 0; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px">
+<div class="circuit-wrap">
+<svg class="circuit" viewBox="0 0 1000 1000" aria-hidden="true">
+<defs>
+<path id="ct1" d="M300 112 C350 150 380 138 427 135"></path>
+<path id="ct2" d="M275 118 C340 205 450 207 547 205"></path>
+<path id="ct3" d="M250 120 C300 232 440 215 490 338"></path>
+<path id="ct4" d="M190 120 C192 150 180 175 175 197"></path>
+<path id="ct5" d="M140 116 C55 185 35 335 117 430"></path>
+<path id="ct6" d="M132 240 C100 270 92 310 107 335"></path>
+<path id="ct7" d="M107 335 C88 372 92 410 117 430"></path>
+<path id="ct8" d="M160 473 C172 562 300 592 392 580"></path>
+<path id="ct9" d="M590 248 C598 268 612 282 637 285"></path>
+<path id="ct10" d="M680 328 C688 344 706 334 725 332"></path>
+<path id="ct11" d="M712 414 C706 428 698 420 690 417"></path>
+<path id="ct12" d="M647 460 C641 468 636 474 628 480"></path>
+<path id="cl1" d="M495 620 C560 662 640 642 680 602 C700 584 715 575 737 575"></path>
+<path id="cl2" d="M500 622 C560 672 630 662 692 655"></path>
+<path id="cl3" d="M497 624 C510 680 540 716 572 725"></path>
+<path id="cl4" d="M485 622 C440 702 300 640 280 700 C274 722 278 740 287 750"></path>
+<path id="cl5" d="M480 622 C400 690 296 690 330 772 C350 815 390 822 427 820"></path>
+<path id="cl6" d="M790 728 C842 744 852 790 846 820"></path>
+<path id="cl7" d="M652 822 C668 832 676 842 690 848"></path>
+</defs>
+<g class="tools">
+<use href="#ct1" class="halo"></use><use href="#ct2" class="halo"></use><use href="#ct3" class="halo"></use><use href="#ct4" class="halo"></use><use href="#ct5" class="halo"></use><use href="#ct6" class="halo"></use><use href="#ct7" class="halo"></use><use href="#ct8" class="halo"></use><use href="#ct9" class="halo"></use><use href="#ct10" class="halo"></use><use href="#ct11" class="halo"></use><use href="#ct12" class="halo"></use>
+<use href="#ct1" class="wire"></use><use href="#ct2" class="wire"></use><use href="#ct3" class="wire"></use><use href="#ct4" class="wire"></use><use href="#ct5" class="wire"></use><use href="#ct6" class="wire"></use><use href="#ct7" class="wire"></use><use href="#ct8" class="wire"></use><use href="#ct9" class="wire"></use><use href="#ct10" class="wire"></use><use href="#ct11" class="wire"></use><use href="#ct12" class="wire"></use>
+<use href="#ct1" class="spark"></use><use href="#ct2" class="spark" style="animation-delay: -0.4s"></use><use href="#ct3" class="spark" style="animation-delay: -0.7s"></use><use href="#ct4" class="spark" style="animation-delay: -0.2s"></use><use href="#ct5" class="spark" style="animation-delay: -0.9s"></use><use href="#ct6" class="spark" style="animation-delay: -0.5s"></use><use href="#ct7" class="spark" style="animation-delay: -0.3s"></use><use href="#ct8" class="spark" style="animation-delay: -0.6s"></use><use href="#ct9" class="spark" style="animation-delay: -0.1s"></use><use href="#ct10" class="spark" style="animation-delay: -0.8s"></use><use href="#ct11" class="spark" style="animation-delay: -0.4s"></use><use href="#ct12" class="spark" style="animation-delay: -0.2s"></use>
+<use href="#ct1" class="bolt"></use><use href="#ct2" class="bolt" style="animation-delay: -1.2s"></use><use href="#ct3" class="bolt" style="animation-delay: -0.5s"></use><use href="#ct5" class="bolt" style="animation-delay: -1.9s"></use><use href="#ct8" class="bolt" style="animation-delay: -0.9s"></use><use href="#ct4" class="bolt" style="animation-delay: -2.3s"></use>
+<circle cx="490" cy="345" r="8"></circle><circle cx="380" cy="575" r="8"></circle><circle cx="625" cy="480" r="8"></circle>
+</g>
+<g class="love">
+<use href="#cl1" class="halo"></use><use href="#cl2" class="halo"></use><use href="#cl3" class="halo"></use><use href="#cl4" class="halo"></use><use href="#cl5" class="halo"></use><use href="#cl6" class="halo"></use><use href="#cl7" class="halo"></use>
+<use href="#cl1" class="wire"></use><use href="#cl2" class="wire"></use><use href="#cl3" class="wire"></use><use href="#cl4" class="wire"></use><use href="#cl5" class="wire"></use><use href="#cl6" class="wire"></use><use href="#cl7" class="wire"></use>
+<use href="#cl1" class="spark" style="animation-delay: -0.3s"></use><use href="#cl2" class="spark" style="animation-delay: -0.6s"></use><use href="#cl3" class="spark"></use><use href="#cl4" class="spark" style="animation-delay: -0.8s"></use><use href="#cl5" class="spark" style="animation-delay: -0.2s"></use><use href="#cl6" class="spark" style="animation-delay: -0.5s"></use><use href="#cl7" class="spark" style="animation-delay: -0.7s"></use>
+<use href="#cl1" class="bolt" style="animation-delay: -0.6s"></use><use href="#cl2" class="bolt" style="animation-delay: -1.8s"></use><use href="#cl4" class="bolt" style="animation-delay: -1.1s"></use><use href="#cl5" class="bolt" style="animation-delay: -2.2s"></use><use href="#cl3" class="bolt" style="animation-delay: -0.2s"></use>
+<circle cx="490" cy="615" r="8"></circle>
+</g>
+</svg>
+<span aria-hidden="true" style="position: absolute; left: 49%; top: 48%; width: 30%; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(155,92,255,.35), rgba(240,56,143,.18) 60%, transparent 72%); filter: blur(14px)"></span>
+<img src="assets/v2/abhi-photo.png" alt="Portrait of Abhimanyu Tiwari" style="position: absolute; z-index: 1; left: 49%; top: 48%; transform: translate(-50%, -50%); width: 27%; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; object-position: center 20%; box-shadow: 0 0 0 6px #FFFFFF, 0 0 0 10px rgba(155,92,255,.30), 0 0 36px 10px rgba(155,92,255,.40), 0 10px 24px rgba(27,27,33,.18)">
+<span class="hub2 hub2-tools" style="left: 3%; top: 9%"><span class="ms" aria-hidden="true">construction</span>The tools I use</span>
+<span class="hub2 hub2-love" style="right: 1%; top: 85%"><span class="ms ms-fill" aria-hidden="true">favorite</span>Things I love</span>
+<ul aria-label="The tools I use" style="position: absolute; inset: 0; margin: 0; padding: 0; list-style: none">
+<li class="node node-tool" style="left: 47%; top: 13.5%"><span class="node-icon"><img src="assets/v2/logos-figma.png" alt=""></span><span class="node-label">Figma</span></li>
+<li class="node node-tool" style="left: 59%; top: 20.5%"><span class="node-icon"><img src="assets/v2/logos-photoshop.png" alt=""></span><span class="node-label">Photoshop</span></li>
+<li class="node node-tool" style="left: 68%; top: 28.5%"><span class="node-icon"><img src="assets/v2/logos-illustrator.png" alt=""></span><span class="node-label">Illustrator</span></li>
+<li class="node node-tool" style="left: 72.5%; top: 37.5%"><span class="node-icon"><img src="assets/v2/logos-html.png" alt=""></span><span class="node-label">HTML</span></li>
+<li class="node node-tool" style="left: 69%; top: 46%"><span class="node-icon"><img src="assets/v2/logos-css.png" alt=""></span><span class="node-label">CSS</span></li>
+<li class="node node-tool" style="left: 17.5%; top: 24%"><span class="node-icon"><img src="assets/v2/logos-chatgpt.png" alt=""></span><span class="node-label">ChatGPT</span></li>
+<li class="node node-tool" style="left: 15%; top: 33.5%"><span class="node-icon"><img src="assets/v2/logos-claude.png" alt=""></span><span class="node-label">Claude</span></li>
+<li class="node node-tool" style="left: 16%; top: 43%"><span class="node-icon"><img src="assets/v2/logos-cursor.png" alt=""></span><span class="node-label">Cursor</span></li>
+</ul>
+<ul aria-label="Things I love" style="position: absolute; inset: 0; margin: 0; padding: 0; list-style: none">
+<li class="node node-love" style="left: 78%; top: 57.5%"><span class="node-icon" style="color: #6C3CF5"><span class="ms ms-fill" aria-hidden="true">sports_esports</span></span><span class="node-label">Gaming</span></li>
+<li class="node node-love" style="left: 73.5%; top: 65.5%"><span class="node-icon" style="color: #1E88E5"><span class="ms" aria-hidden="true">pool</span></span><span class="node-label">Swimming</span></li>
+<li class="node node-love" style="left: 61.5%; top: 72.5%"><span class="node-icon" style="color: #B5651D"><span class="ms" aria-hidden="true">sports_cricket</span></span><span class="node-label">Cricket</span></li>
+<li class="node node-love" style="left: 33%; top: 75%"><span class="node-icon"><img src="assets/v2/logos-youtube.png" alt=""></span><span class="node-label">YouTube</span></li>
+<li class="node node-love" style="left: 47%; top: 82%"><span class="node-icon" style="color: #C2187A"><span class="ms" aria-hidden="true">directions_run</span></span><span class="node-label">Sports</span></li>
+</ul>
 </div>
 
-<!-- ───────── BACK TO TOP (floating) ───────── -->
-<button class="back-top-float" id="backTopFloat" aria-label="Back to top" title="Back to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
+</figure>
+</section>
 
-<script>
-window.__TWEAKS__ = {
-  accent: "#8B7CF6",
-  headFont: "'Manrope', sans-serif",
-  heroTitle: "Hello, I'm Abhimanyu",
-  dark: false,
-  container: 1240
-};
-</script>
-<script src="chrome.js"></script>
-<script src="app.js"></script>
-<script>
-(function(){
-  var btn = document.getElementById('backTopFloat');
-  if(!btn) return;
-  window.addEventListener('scroll', function(){
-    btn.classList.toggle('visible', window.scrollY > 300);
-  }, {passive:true});
-  btn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-})();
-</script>
+<!-- Experience strip -->
+<section aria-label="Experience" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px; padding: 24px 0; border-top: 1px solid #E3E1EC; border-bottom: 1px solid #E3E1EC">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Experience at</span>
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px 48px">
+<span style="display: inline-flex; align-items: center; gap: 12px"><img src="assets/v2/co-peak42.png" alt="Peak42" style="height: 40px; width: auto; display: block"><span style="height: 24px; padding: 0 8px; border-radius: 8px; color: #2e7d4f; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; background-color: #D3FFE6">Current</span></span>
+<img src="assets/v2/co-kastech.png" alt="Kastech" style="height: 32px; width: auto; display: block">
+<img src="assets/v2/co-elmeasure.png" alt="Elmeasure" style="height: 26px; width: auto; display: block">
+<img src="assets/v2/co-battlexo.png" alt="BattleXO by EsportsXO" style="height: 20px; width: auto; display: block">
+</span>
+</section>
 
+<!-- Experience & highlights -->
+<section id="about" aria-labelledby="hl-title" style="padding: 72px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 720px">
+<h2 id="hl-title" style="margin: 0; font-size: 40px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em">Experience &amp; highlights</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--md-on-surface-variant)">National-level swimming and regional-level cricket keep me disciplined, bringing teamwork, consistency, and pressure-ready focus to every project.</p>
+</div>
+<div id="highlights-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+<div style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; background-color: #ffffff">
+<span style="display: flex; align-items: baseline; gap: 2px; font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary); font-variant-numeric: tabular-nums"><span data-count="5">5</span><span style="font-size: 40px">+</span></span>
+<h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Years of experience</h3>
+
+</div>
+<div style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; background-color: #ffffff">
+<span style="display: flex; align-items: baseline; gap: 2px; font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary); font-variant-numeric: tabular-nums"><span data-count="3">3</span><span style="font-size: 40px"></span></span>
+<h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600; max-width: 246px">Competitions participated</h3>
+
+</div>
+<div style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; background-color: #ffffff">
+<span style="display: flex; align-items: baseline; gap: 2px; font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary); font-variant-numeric: tabular-nums"><span data-count="3">3</span><span style="font-size: 40px">+</span></span>
+<h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Projects I've worked on</h3>
+
+</div>
+<div style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; background-color: #ffffff">
+
+<span style="display: flex; align-items: baseline; gap: 2px; font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary); font-variant-numeric: tabular-nums">2+</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Live Projects</h3>
+
+</div>
+</div>
+</section><section id="work" aria-labelledby="work-title" style="padding: 72px 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="work-title" style="margin: 0; font-size: 40px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em">Selected work</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--md-on-surface-variant)">AI-powered commerce, a design system, emergency response, food and gaming.</p>
+</div>
+<div role="group" aria-label="Filter projects" style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" aria-pressed="true" class="m3-btn" style="height: 32px; padding: 0 16px 0 8px; border: 0; border-radius: 8px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-family: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="font-size: 18px">check</span>All</button>
+<button type="button" aria-pressed="false" class="m3-btn" style="height: 32px; padding: 0 16px; border: 1px solid var(--md-outline); border-radius: 8px; background: transparent; color: var(--md-on-surface-variant); font-family: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Mobile</button>
+<button type="button" aria-pressed="false" class="m3-btn" style="height: 32px; padding: 0 16px; border: 1px solid var(--md-outline); border-radius: 8px; background: transparent; color: var(--md-on-surface-variant); font-family: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Web</button>
+<button type="button" aria-pressed="false" class="m3-btn" style="height: 32px; padding: 0 16px; border: 1px solid var(--md-outline); border-radius: 8px; background: transparent; color: var(--md-on-surface-variant); font-family: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">AI</button>
+<button type="button" aria-pressed="false" class="m3-btn" style="height: 32px; padding: 0 16px; border: 1px solid var(--md-outline); border-radius: 8px; background: transparent; color: var(--md-on-surface-variant); font-family: inherit; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Design systems</button>
+</div>
+</div>
+
+<!-- Recent project: CREDex -->
+<a href="cred.html" class="m3-card" data-tags="Mobile" style="--md-primary: #8A6A1F; --glow-light: #F0CF85; --md-primary-container: #F5E9CC; --md-on-primary-container: #3D2E07; --md-surface-low: #FBF7EE; --md-outline-variant: #E3D6B8; background: var(--md-surface-low); border-radius: 28px; overflow: hidden; display: flex; flex-wrap: wrap">
+<img src="assets/v2/cred-cred-banner.jpg" alt="CREDex banner with the CRED logo and three app screens" style="flex: 999 1 560px; min-width: 0; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="flex: 1 1 340px; min-width: 0; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 16px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: #111111; color: #F5E9CC; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px"><span class="ms ms-fill" aria-hidden="true" style="font-size: 16px; color: #F0CF85">new_releases</span>Recent · Concept</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Mobile · Fintech · Research</span>
+</div>
+<span style="font-size: 14px; font-weight: 600; color: var(--md-on-surface-variant)">CRED</span>
+<h3 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em">CREDex: putting idle savings to work</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--md-on-surface-variant)">Shows people how much money sits idle in savings, and lets them park some of it without locking it away.</p>
+<p style="margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; font-weight: 500">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">savings</span>₹50k–2L idle</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">forum</span>5 insights</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">smartphone</span>8-screen flow</span>
+</p>
+<span style="padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+
+<!-- Featured project -->
+<a href="zepto.html" class="m3-card" data-tags="Mobile AI" style="--md-primary: #5C31B2; --glow-light: #C3ADF7; --md-primary-container: #E8DDFB; --md-on-primary-container: #2A0E66; --md-surface-low: #F5F0FD; --md-outline-variant: #D3C6EE; background: var(--md-surface-low); border-radius: 28px; overflow: hidden; display: flex; flex-wrap: wrap">
+<img src="assets/v2/real-zepto.jpg" alt="Zepto AI shopping app screens" style="flex: 999 1 560px; min-width: 0; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="flex: 1 1 340px; min-width: 0; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 16px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px"><span class="ms" aria-hidden="true" style="font-size: 16px">star</span>Featured · Concept</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Mobile · AI · E-commerce</span>
+</div>
+<span style="font-size: 14px; font-weight: 600; color: var(--md-on-surface-variant)">Zepto</span>
+<h3 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em">Making Zepto shopping smarter with AI</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--md-on-surface-variant)">Smart recommendations and an assistant that plans your order, for a 10-minute delivery app.</p>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500"><span class="ms" aria-hidden="true" style="color: var(--md-success)">task_alt</span>[Validation result from usability testing]</p>
+<span style="padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+
+<!-- Featured design system -->
+<a href="https://www.figma.com/design/QB1kPQx3Y7GVZwS5rzLKMK/Harmony-Design-System?node-id=0-1" class="m3-card" data-tags="Design systems" style="--md-primary: #1E8A54; --glow-light: #94E3B8; --md-primary-container: #D3F0DF; --md-on-primary-container: #0B3D23; --md-surface-low: #EFF8F3; --md-outline-variant: #BFDDCB; background: var(--md-surface-low); border-radius: 28px; overflow: hidden; display: flex; flex-wrap: wrap-reverse">
+<div style="flex: 1 1 340px; min-width: 0; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 16px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px"><span class="ms" aria-hidden="true" style="font-size: 16px">widgets</span>Design system</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Figma · Tokens · Components</span>
+</div>
+<span style="font-size: 14px; font-weight: 600; color: var(--md-on-surface-variant)">Harmony</span>
+<h3 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em">Building a design system as design infrastructure</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--md-on-surface-variant)">Foundations for colour, type, spacing and elevation, a three-tier token architecture, and a library of 10 core components.</p>
+<p style="margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; font-weight: 500">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">palette</span>4 foundations</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">layers</span>3 token tiers</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true" style="color: var(--md-primary)">widgets</span>10 components</span>
+</p>
+<span style="padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--md-primary)">View the system in Figma<span class="ms" aria-hidden="true">arrow_outward</span></span>
+</div>
+<img src="assets/v2/harmony-cover.jpg" alt="Harmony Design System cover" style="flex: 999 1 560px; min-width: 0; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+</a>
+
+<!-- Project grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+
+<a href="flytbase.html" class="m3-card" data-tags="Web AI" style="--md-primary: #2B47B0; --glow-light: #A8B9F4; --md-primary-container: #DCE3FA; --md-on-primary-container: #0E1E5C; --md-surface-low: #F0F3FC; --md-outline-variant: #C5CEEC; background: var(--md-surface-low); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="assets/v2/real-flytbase.jpg" alt="FlytBase emergency response dashboard" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center">Concept</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Web · Emergency ops</span>
+</div>
+<span style="font-size: 13px; font-weight: 600; color: var(--md-on-surface-variant)">FlytBase</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Sending help to a disaster zone in seconds</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--md-on-surface-variant)">Dispatches the nearest police, medical and fire teams, with drones for a live aerial view.</p>
+<span style="margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+
+<a href="chomp.html" class="m3-card" data-tags="Mobile AI" style="--md-primary: #C9471F; --glow-light: #F8BDA6; --md-primary-container: #FBDDD1; --md-on-primary-container: #5E1D0A; --md-surface-low: #FDF3EF; --md-outline-variant: #EDCBBE; background: var(--md-surface-low); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="assets/v2/real-chomp.jpg" alt="Chomp cooking app screens" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center">Concept</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Mobile · AI</span>
+</div>
+<span style="font-size: 13px; font-weight: 600; color: var(--md-on-surface-variant)">Chomp</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Making home cooking simpler with an AI food buddy</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--md-on-surface-variant)">Recipe discovery, ingredient scanning and guided cooking in one app.</p>
+<span style="margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+
+<a href="battlexo.html" class="m3-card" data-tags="Web" style="--md-primary: #C21F5B; --glow-light: #F6A6C5; --md-primary-container: #F9D6E3; --md-secondary-container: #F9D6E3; --md-on-secondary-container: #57092A; --md-on-primary-container: #57092A; --md-surface-low: #FCEFF4; --md-outline-variant: #EBC4D3; background: var(--md-surface-low); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column">
+<img src="assets/v2/real-battlexo.jpg" alt="BattleXO website and app redesign" style="width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block">
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center">Client work</span>
+<span style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; box-sizing: border-box">Web · Gaming</span>
+</div>
+<span style="font-size: 13px; font-weight: 600; color: var(--md-on-surface-variant)">BattleXO</span>
+<h3 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em">Redesigning BattleXO's website and app</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--md-on-surface-variant)">Worked with the management team to turn business needs into a clearer gaming experience.</p>
+<span style="margin-top: auto; padding-top: 8px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+
+</div>
+</section>
+
+<!-- Testimonials -->
+<section aria-labelledby="testi-title" style="padding: 72px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="testi-title" style="margin: 0; font-size: 40px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em">What teammates say</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--md-on-surface-variant)">From designers I've worked with across teams and projects.</p>
+</div>
+<div class="testi-marquee" style="position: relative; overflow: hidden; padding: 6px 0 10px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)">
+<div class="testi-track" style="display: flex; gap: 24px; width: max-content">
+<div class="testi-set" style="display: flex; gap: 24px">
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">C</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Chelsi Khatod</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">Visual Designer</span></span><a href="#linkedin-chelsi" class="m3-btn" aria-label="Chelsi Khatod on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">I had the chance to work with Abhi on a UI/UX project and it was honestly a great experience. I really like how he thinks through problems his approach is creative, practical, and very user-focused. He's super disciplined and always makes sure to meet deadlines without compromising on quality. Also, he's quite particular about the details, which really shows in his work. Overall, Abhi is someone who brings both creativity and reliability to the table.</blockquote>
+</figure>
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">I</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Ishy Srivastava</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">Product Designer</span></span><a href="#linkedin-ishy" class="m3-btn" aria-label="Ishy Srivastava on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">Abhimanyu is a highly skilled UI/UX designer with an exceptional eye for visual detail. His designs are clean, modern, and not just visually appealing but also deeply intuitive. He has a strong ability to translate ideas into seamless user experiences, ensuring that every interface feels effortless to use. His balance of aesthetics and usability makes his work stand out.</blockquote>
+</figure>
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">M</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Mohini Bhowmick</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">UI/UX Designer</span></span><a href="#linkedin-mohini" class="m3-btn" aria-label="Mohini Bhowmick on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">Working with Abhimanyu was such a smooth ride. They have this amazing ability to turn rough ideas into clean, beautiful designs that just click. Super creative, easy to work with, and always bringing something extra to the table. Honestly, any project feels lighter (and better) with them on board.</blockquote>
+</figure>
+</div>
+<div class="testi-set" aria-hidden="true" style="display: flex; gap: 24px">
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">C</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Chelsi Khatod</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">Visual Designer</span></span><a href="#linkedin-chelsi" class="m3-btn" tabindex="-1" aria-label="Chelsi Khatod on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">I had the chance to work with Abhi on a UI/UX project and it was honestly a great experience. I really like how he thinks through problems his approach is creative, practical, and very user-focused. He's super disciplined and always makes sure to meet deadlines without compromising on quality. Also, he's quite particular about the details, which really shows in his work. Overall, Abhi is someone who brings both creativity and reliability to the table.</blockquote>
+</figure>
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">I</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Ishy Srivastava</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">Product Designer</span></span><a href="#linkedin-ishy" class="m3-btn" tabindex="-1" aria-label="Ishy Srivastava on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">Abhimanyu is a highly skilled UI/UX designer with an exceptional eye for visual detail. His designs are clean, modern, and not just visually appealing but also deeply intuitive. He has a strong ability to translate ideas into seamless user experiences, ensuring that every interface feels effortless to use. His balance of aesthetics and usability makes his work stand out.</blockquote>
+</figure>
+<figure class="testi-card" style="margin: 0; background: var(--md-surface-low); border: 1px solid #E3E1EC; border-radius: 24px; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px">
+<figcaption style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex: none">M</span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><span style="font-size: 16px; font-weight: 600">Mohini Bhowmick</span><span style="font-size: 13px; color: var(--md-on-surface-variant)">UI/UX Designer</span></span><a href="#linkedin-mohini" class="m3-btn" tabindex="-1" aria-label="Mohini Bhowmick on LinkedIn" style="height: 36px; padding: 0 12px 0 14px; border-radius: 18px; border: 1px solid var(--md-outline-variant); color: var(--md-primary); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-sizing: border-box; flex: none">LinkedIn<span class="ms" aria-hidden="true" style="font-size: 18px">arrow_outward</span></a><span class="ms ms-fill" aria-hidden="true" style="font-size: 32px; color: var(--md-primary); flex: none">format_quote</span></figcaption>
+<blockquote style="margin: 0; font-size: 16px; line-height: 1.65">Working with Abhimanyu was such a smooth ride. They have this amazing ability to turn rough ideas into clean, beautiful designs that just click. Super creative, easy to work with, and always bringing something extra to the table. Honestly, any project feels lighter (and better) with them on board.</blockquote>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact -->
+<section id="contact" aria-labelledby="contact-title" style="margin: 24px 0 32px; background: var(--md-inverse-surface); color: var(--md-inverse-on-surface); border-radius: 32px; padding: 64px 56px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 id="contact-title" style="margin: 0; font-size: 44px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em">Let's build something people love to use.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C6C5D0">Hiring, collaborating, or just want to talk design? My inbox is open.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="mailto:bangaloredesigner2020@gmail.com" class="m3-btn m3-filled" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-inverse-primary); color: #002A78; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">mail</span>Email me</a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 1px solid #8F909A; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-sizing: border-box"><span class="ms" aria-hidden="true">download</span>Download résumé</a>
+</div>
+</div>
+<nav aria-label="Elsewhere" style="display: flex; flex-direction: column; gap: 4px; min-width: 220px">
+<a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://www.instagram.com/abhimanyu.ux/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Instagram<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://medium.com/@bangaloredesigner2020" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Medium<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://designsystem-rho.vercel.app/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">My design system<span class="ms" aria-hidden="true">arrow_outward</span></a>
+</nav>
+</section>
+
+<footer style="padding: 8px 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--md-on-surface-variant)">
+<span>© 2026 Abhimanyu Tiwari · Designed and built in Bangalore</span>
+<a href="#top" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">arrow_upward</span>Back to top</a>
+</footer>
+</main>
+</div>
+<script src="home.js" defer></script>
 </body>
 </html>

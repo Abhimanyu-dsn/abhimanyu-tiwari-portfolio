@@ -1,392 +1,239 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Zepto — Enhancing Search with AI · Abhimanyu Tiwari</title>
-  <meta name="description" content="Product design exploration — making Zepto search smarter with predictive reorder, smart packs, and mood-based AI suggestions.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zepto case study — Abhimanyu Tiwari</title>
+<meta name="description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<link rel="canonical" href="https://abhimanyu-tiwari-portfolio.vercel.app/zepto.html">
+<meta property="og:title" content="Zepto case study — Abhimanyu Tiwari">
+<meta property="og:description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhimanyu-tiwari-portfolio.vercel.app/zepto.html">
+<meta property="og:image" content="https://abhimanyu-tiwari-portfolio.vercel.app/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6C3CF5">
+<link rel="icon" href="assets/v2/abhi-photo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;display=block">
+<style>
+/* Design system: Material 3 roles, Plus Jakarta Sans, Material Symbols Rounded (same as Home v2) */
+:root{
+--md-primary:#6C3CF5;--md-on-primary:#FFFFFF;--md-primary-container:#ECE4FF;--md-on-primary-container:#24005A;
+--md-secondary-container:#F1ECFF;--md-on-secondary-container:#1E1240;--md-accent:#E8368F;
+--md-surface:#FFFFFF;--md-surface-low:#FFFFFF;--md-surface-container:#F6F6F8;--md-surface-high:#EEEEF1;
+--md-on-surface:#1B1B21;--md-on-surface-variant:#45464F;--md-outline:#767680;--md-outline-variant:#C6C5D0;
+--md-inverse-surface:#2F3036;--md-inverse-on-surface:#F2F0F7;--md-inverse-primary:#CDBEFF;--md-success:#2E7D4F;--md-error:#BA1A1A;
+}
+body{margin:0;background:#FFFFFF}
+a{color:#6C3CF5}a:hover{color:#5223D6}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20}
+.ms-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.m3-btn{position:relative;overflow:hidden;cursor:pointer;text-decoration:none;transition:box-shadow .15s ease}
+.m3-btn::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .15s ease;pointer-events:none}
+.m3-btn:hover::after{opacity:.08}
+.m3-btn:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
+.m3-filled:hover{box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15)}
+a.glow{text-decoration:none;color:inherit;transition:transform .2s ease}
+a.glow:hover{transform:translateY(-2px)}
+/* Glossy cards with a revolving border (same treatment as Home v2) */
+@property --glow-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes glow-spin{to{--glow-a:360deg}}
+.glow{position:relative;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px rgba(63,90,169,.32)}
+.glow::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--glow-a),rgba(63,90,169,.14) 0deg,rgba(63,90,169,.14) 240deg,#9DB0F0 290deg,#3F5AA9 325deg,#FFFFFF 342deg,rgba(63,90,169,.14) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glow-spin 5s linear infinite;pointer-events:none;z-index:3}
+.glow::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
+.glow:nth-child(2)::before{animation-delay:-1.7s}.glow:nth-child(3)::before{animation-delay:-3.3s}.glow:nth-child(4)::before{animation-delay:-4.4s}.glow:nth-child(5)::before{animation-delay:-2.5s}.glow:nth-child(6)::before{animation-delay:-0.8s}
+/* v2 shared: floating glass bar, vibrant CTA, crisp gloss, tighter rhythm */
+header .m3-filled{background-image:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
+.glass-bar{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 32px -12px rgba(108,60,245,.35),0 2px 6px rgba(27,27,33,.06)}
+.purse-btn{position:relative;transition:transform .25s ease}
+.purse-btn::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(108,60,245,.45);animation:purse-ping 2.4s ease-out infinite;pointer-events:none}
+.purse-btn:hover{transform:translateY(-2px) scale(1.05)}
+.purse-btn:hover svg{animation:purse-wiggle .6s ease-in-out}
+@keyframes purse-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@keyframes purse-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(8deg)}}
+.glow{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px color-mix(in srgb,var(--md-primary) 38%,transparent)}
+.glow::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg)}
+.glow::after{z-index:-1}
+/* Static hairline by default; animated border only on key cards */
+.glow{box-shadow:0 1px 2px rgba(27,27,33,.05),0 10px 28px -14px rgba(27,27,33,.14)}
+.glow::before{background:rgba(27,27,33,.09);animation:none}
+.glow-key{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 14px 34px -14px color-mix(in srgb,var(--md-primary) 40%,transparent)}
+.glow-key::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);animation:glow-spin 5s linear infinite}
+@media (prefers-reduced-motion: reduce){.glow::before,.glow-key::before{animation:none}.purse-btn::after{animation:none}}
+
+/* Small screens */
+img{max-width:100%}
+@media (max-width: 760px){
+  header{padding:10px 12px 0 !important}
+  header nav{width:100%;justify-content:flex-start}
+  header nav>span[aria-hidden]{display:none !important}
+  .purse-btn{display:none !important}
+  main{padding:0 18px !important}
+  [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr) !important}
+  [style*="flex: 1 1"]{min-width:0 !important}
+  h1{font-size:38px !important}
+  h2{font-size:30px !important}
+  section[aria-labelledby="hero-title"]{padding-top:32px !important;gap:32px !important}
+  #contact{padding:40px 24px !important}
+  #work a.m3-card>div{padding:24px !important}
+  .hub2{height:38px;font-size:14px;padding:0 14px 0 10px}
+  .hub2 .ms{font-size:18px}
+  .node-icon{width:40px;height:40px}
+  .node-icon img{width:22px;height:22px}
+  .node-icon .ms{font-size:22px}
+}
+</style>
 </head>
-<body class="zepto-case" data-page="work" data-base="./">
+<body>
+<div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--md-on-surface); background: var(--md-surface); box-sizing: border-box">
 
-<main class="cs-main zepto-pres">
-  <div class="container">
+<!-- Top app bar -->
+<header style="position: sticky; top: 0; z-index: 20; padding: 16px 24px 0; pointer-events: none">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 12px">
+<div class="glass-bar" style="flex: 1 1 auto; min-width: 0; pointer-events: auto; border-radius: 999px; padding: 8px 8px 8px 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--md-on-surface)">
+<img src="assets/v2/abhi-photo.png" alt="Abhimanyu Tiwari" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #ECE4FF">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 600; line-height: 20px">Abhimanyu Tiwari</span>
+<span style="font-size: 13px; line-height: 16px; color: var(--md-on-surface-variant)">Product designer · Bangalore</span>
+</span>
+</a>
+<nav aria-label="Primary" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
+<a href="/#work" class="m3-btn" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">Work</a>
+<a href="about.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">About</a>
+<a href="experiments.html" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center">Experiments with AI</a>
+<span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span>Download résumé</a>
+</nav>
+</div>
+<a href="#wallet" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
+</div>
+</header>
+<main id="top" style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
 
-    <header class="zepto-hero-band">
-      <a href="index.html#work" class="cs-back">← Back to projects</a>
-      <div class="zepto-hero-grid">
-        <div class="zepto-hero-copy">
-          <div class="cs-tags">
-            <span class="tag blue">AI</span>
-            <span class="tag">E-commerce</span>
-            <span class="tag">Search</span>
-          </div>
-          <h1 class="zepto-display">Zepto — Enhancing Search with AI</h1>
-          <p class="zepto-lede">A product design exploration to make Zepto search smarter, more contextual and more useful.</p>
-          <dl class="zepto-meta">
-            <div><dt>Role</dt><dd>UI/UX Designer · Participant</dd></div>
-            <div><dt>Timeline</dt><dd>Case study exploration</dd></div>
-            <div><dt>Type</dt><dd>Concept · Search + AI</dd></div>
-            <div><dt>Tools</dt><dd>Wireframes · Hi-fi UI</dd></div>
-          </dl>
-        </div>
-        <div class="zepto-hero-visual">
-          <img src="assets/case-studies/zepto/hero.png" alt="Zepto mobile app — search and AI-assisted grocery UI" class="zepto-ui-hero">
-        </div>
-      </div>
-    </header>
+<section style="padding: 40px 0 56px; display: flex; flex-direction: column; gap: 28px">
+<a href="/#work" class="m3-btn" style="align-self: flex-start; height: 40px; padding: 0 16px 0 10px; margin-left: -10px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px"><span class="ms" aria-hidden="true">arrow_back</span>Back to projects</a>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">E-commerce</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Search</span></div>
+<h1 style="margin: 0; font-size: 60px; line-height: 1.06; font-weight: 600; letter-spacing: -0.03em; max-width: 960px">Zepto: enhancing search with AI</h1>
+<p style="margin: 0; font-size: 20px; line-height: 1.6; color: var(--md-on-surface-variant); max-width: 780px">A product design exploration to make Zepto search smarter, more contextual and more useful.</p>
 
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">The Objective</h2>
-      <div class="zepto-selected-grid">
-        <article class="zepto-selected-card">
-          <span class="zepto-num">01</span>
-          <h3>Improve Search Experience</h3>
-          <p>Help users find relevant products faster and more accurately while reducing friction during discovery.</p>
-        </article>
-        <article class="zepto-selected-card">
-          <span class="zepto-num">02</span>
-          <h3>Drive Business Growth</h3>
-          <p>Use better recommendations and contextual discovery to increase engagement, repeat purchases and AOV.</p>
-        </article>
-      </div>
-    </section>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px"><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Role</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">UI/UX Designer · Participant</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Timeline</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Case study exploration</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Type</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Concept · Search + AI</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Tools</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Wireframes · Hi-fi UI</span></div></div>
+<img src="assets/v2/real-zepto.jpg" alt="Zepto mobile app with AI-assisted grocery search" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 32px; background: var(--md-surface-container)">
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">01 — Objective</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">The objective</h2>
 
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">The Challenge</h2>
-      <p class="zepto-body">Zepto users often rely heavily on search, but traditional search can struggle when users have broad or unclear intent.</p>
-      <div class="zepto-challenge-grid">
-        <article class="zepto-challenge-card">
-          <span class="zepto-num">01</span>
-          <h3>Search accuracy &amp; personalization</h3>
-          <p>Users frequently complain about search accuracy and personalization.</p>
-        </article>
-        <article class="zepto-challenge-card">
-          <span class="zepto-num">02</span>
-          <h3>Heavy reliance on search</h3>
-          <p>60–70% of grocery app sessions begin with search rather than navigation.</p>
-        </article>
-        <article class="zepto-challenge-card">
-          <span class="zepto-num">03</span>
-          <h3>Broad searches create decision fatigue</h3>
-          <p>Users don't know which variant, size, or brand to choose.</p>
-        </article>
-        <article class="zepto-challenge-card">
-          <span class="zepto-num">04</span>
-          <h3>Limited contextual recommendations</h3>
-          <p>Users add only the item they came for, no upsell, cross-sell, or contextual AI nudges.</p>
-        </article>
-      </div>
-    </section>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Improve search experience</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Help users find relevant products faster and more accurately while reducing friction during discovery.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Drive business growth</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Use better recommendations and contextual discovery to increase engagement, repeat purchases and AOV.</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">02 — Challenge</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">The challenge</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--md-on-surface-variant); max-width: 760px">Zepto users often rely heavily on search, but traditional search can struggle when users have broad or unclear intent.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Search accuracy &amp; personalisation</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Users frequently complain about search accuracy and personalisation.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Heavy reliance on search</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">60–70% of grocery app sessions begin with search rather than navigation.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">03</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Broad searches create decision fatigue</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Users don't know which variant, size, or brand to choose.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">04</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Limited contextual recommendations</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Users add only the item they came for: no upsell, cross-sell, or contextual nudges.</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">03 — Data</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">What the data told us</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--md-on-surface-variant); max-width: 760px">Search directly affects discovery, engagement and purchase behaviour, so it is a high-impact part of the grocery experience.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px"><div class="glow glow-key" style="background: var(--md-surface-low); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary)">52%</span><h3 style="margin: 0; font-size: 18px; font-weight: 600">Very broad searches</h3><p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant)">e.g. Aashirwad atta, Govardhan rice</p></div><div class="glow glow-key" style="background: var(--md-surface-low); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary)">34%</span><h3 style="margin: 0; font-size: 18px; font-weight: 600">Narrow searches</h3><p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant)">e.g. Amul 500ml milk, Modern sandwich bread</p></div><div class="glow glow-key" style="background: var(--md-surface-low); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 56px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--md-primary)">14%</span><h3 style="margin: 0; font-size: 18px; font-weight: 600">Broad searches</h3><p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant)">e.g. rice, ice cream</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">04 — Opportunity</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Design opportunity</h2>
 
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">What the Data Told Us</h2>
-      <p class="zepto-body zepto-body--center">Search is a high-impact part of the grocery experience because it directly affects discovery, engagement and purchase behaviour.</p>
-      <div class="zepto-stats">
-        <div class="zepto-stat">
-          <span class="zepto-stat-val">52%</span>
-          <span class="zepto-stat-label">Very broad searches</span>
-          <span class="zepto-stat-ex">e.g. Aashirwad atta, Govardhan rice</span>
-        </div>
-        <div class="zepto-stat">
-          <span class="zepto-stat-val">34%</span>
-          <span class="zepto-stat-label">Narrow searches</span>
-          <span class="zepto-stat-ex">e.g. amul 500ml milk, modern sandwich bread</span>
-        </div>
-        <div class="zepto-stat">
-          <span class="zepto-stat-val">14%</span>
-          <span class="zepto-stat-label">Broad searches</span>
-          <span class="zepto-stat-ex">e.g. rice, ice cream</span>
-        </div>
-      </div>
-    </section>
+</div>
+<div class="glow glow-key" style="background: #FFFFFF; color: var(--md-on-surface); border-radius: 24px; padding: 28px 32px; display: flex; gap: 16px; align-items: flex-start"><span class="ms" aria-hidden="true" style="font-size: 28px; color: var(--md-primary)">search</span><p style="margin: 0; font-size: 20px; line-height: 1.5; font-weight: 600; letter-spacing: -0.01em">How might we make Zepto search feel effortlessly smart, personalised, and context-aware?</p></div><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Move beyond helping users find what they searched for, toward helping them understand what they may need next.</p></div><div style="display: flex; flex-direction: column; gap: 12px"><span style="font-size: 15px; font-weight: 600">Concepts explored</span><div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Predictive Reorder</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Predictive Bulk Order</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Search Intent Expander</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Visual Search</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Voice Search</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Recipe-first Search</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--md-outline-variant); color: var(--md-on-surface-variant); font-weight: 500; box-sizing: border-box; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">AI Mood / Situation-based Suggestions</span></div></div><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">I focused on three concepts because they could improve discovery while also creating opportunities for repeat purchases, larger baskets and contextual recommendations.</p></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">Idea 01</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Predictive reorder</h2>
 
-    <section class="zepto-block zepto-hmw-band">
-      <h2 class="zepto-section-title zepto-section-title--light">Design Opportunity</h2>
-      <p class="zepto-hmw">How might we make Zepto search feel effortlessly smart, personalized, and context-aware?</p>
-      <p class="zepto-hmw-sub">Move beyond helping users <em>find</em> what they searched for, toward helping them understand what they may need next.</p>
-    </section>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px"><div style="flex: 1 1 420px; min-width: 0"><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Zepto predicts when frequently purchased essentials may run out and surfaces a timely reorder prompt.</p></div></div><div style="flex: 1 1 420px; min-width: 0"><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>One-tap reorder</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Less need to remember what is running low</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Reduced friction</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Stronger repeat-purchase habit</span></li></ul></div></div><figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/zepto_ui-reorder.jpg" alt="Zepto predictive reorder screens" style="width: 100%;  height: auto; display: block; border-radius: 16px"></div><figcaption style="font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant); text-align: center">Train AI personalisation, running-low prompts, multi-item reorder, and variant selection.</figcaption></figure><h3 style="margin: 8px 0 0; font-size: 22px; font-weight: 600">Designing for edge cases</h3><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">One-time purchase</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">AI should not repeatedly suggest an item bought only once.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Different variant</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Users may want another size or variant from the same brand.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">03</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Already in cart</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Avoid recommending something already added.</p></div></div><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">The final UI lets users train frequency, swap variants, see multiple items together, and dismiss irrelevant prompts, keeping predictions helpful without feeling pushy.</p></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">Idea 02</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Predictive bulk / Smart Packs</h2>
 
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Exploring AI</h2>
-      <p class="zepto-label">Explored concepts</p>
-      <ul class="zepto-tag-list">
-        <li>AI Predictive Reorder</li>
-        <li>AI Predictive Bulk Order</li>
-        <li>AI Search Intent Expander</li>
-        <li>AI Visual Search</li>
-        <li>AI Voice Search</li>
-        <li>AI Recipe-first Search</li>
-        <li>AI Mood/Situation-based Suggestions</li>
-      </ul>
-      <p class="zepto-label">What I chose to explore</p>
-      <div class="zepto-selected-grid">
-        <article class="zepto-selected-card">
-          <span class="zepto-num">01</span>
-          <h3>Predictive Reorder</h3>
-        </article>
-        <article class="zepto-selected-card">
-          <span class="zepto-num">02</span>
-          <h3>Predictive Bulk / Smart Packs</h3>
-        </article>
-        <article class="zepto-selected-card">
-          <span class="zepto-num">03</span>
-          <h3>Mood-based Suggestions + Time-based Notifications</h3>
-        </article>
-      </div>
-      <p class="zepto-body">I focused on these three concepts because they could improve discovery while also creating opportunities for repeat purchases, larger baskets and contextual recommendations.</p>
-      <p class="zepto-label">Selected directions</p>
-      <div class="zepto-selected-grid">
-        <article class="zepto-selected-card">
-          <span class="zepto-num">01</span>
-          <h3>Predictive Reorder</h3>
-        </article>
-        <article class="zepto-selected-card">
-          <span class="zepto-num">02</span>
-          <h3>Predictive Bulk / Smart Packs</h3>
-        </article>
-        <article class="zepto-selected-card">
-          <span class="zepto-num">03</span>
-          <h3>Mood-based Suggestions + Time-based Notifications</h3>
-        </article>
-      </div>
-    </section>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px"><div style="flex: 1 1 420px; min-width: 0"><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Smart Packs create ready-to-add bundles based on purchase habits, seasons and household needs.</p></div></div><div style="flex: 1 1 420px; min-width: 0"><ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Faster repeat purchases</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Ready-made bundles</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Larger, more relevant carts</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Customisable packs</span></li><li style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.55"><span class="ms" aria-hidden="true" style="font-size: 20px; color: var(--md-primary); margin-top: 1px">check_circle</span><span>Smart substitutions when items are unavailable</span></li></ul></div></div><figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/zepto_ui-bulk.jpg" alt="Zepto Smart Packs screens" style="width: 100%;  height: auto; display: block; border-radius: 16px"></div><figcaption style="font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant); text-align: center">Smart Pack discovery, bundle add-to-cart, customisation, personalisation feedback, and out-of-stock substitutions.</figcaption></figure><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Irrelevant predicted items</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Some predicted items may not be relevant today.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Item unavailable</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Some items may be out of stock.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">03</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Outside the suggested list</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">User wants an item that isn't in the AI list.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">04</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Prediction drift</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Replacing an item can confuse future predictions.</p></div></div><div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Checkboxes, “don’t recommend again” feedback, and similar-product rails address irrelevant items, stock gaps, and model learning without blocking the user.</p></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">Idea 03</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Mood and time-based suggestions</h2>
 
-    <section class="zepto-block zepto-idea-section">
-      <div class="zepto-idea-head">
-        <span class="zepto-idea-label">Idea 01</span>
-        <h2 class="zepto-section-title">Predictive Reorder</h2>
-        <p class="zepto-body">Zepto predicts when frequently purchased essentials may run out and surfaces a timely reorder prompt.</p>
-      </div>
-      <ul class="zepto-value-list">
-        <li>One-tap reorder</li>
-        <li>Less need to remember what is running low</li>
-        <li>Reduced friction</li>
-        <li>Stronger repeat-purchase habit</li>
-      </ul>
-      <p class="zepto-label">From idea to interface</p>
-      <p class="zepto-body">I explored the interaction through early wireframes to understand how the AI recommendations could appear without interrupting the shopping flow.</p>
-      <figure class="zepto-ui-frame">
-        <img src="assets/case-studies/zepto/ui-reorder.png" alt="Zepto predictive reorder UI — train AI, warning popup, multi-item reorder and variants" loading="lazy">
-        <figcaption>Train AI personalization, running-low prompts, multi-item reorder, and variant selection.</figcaption>
-      </figure>
-    </section>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Use context such as time, behaviour and inferred mood to make discovery more personal and timely.</p></div><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">notifications</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Craving-based tease</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">“Your fridge called… it’s empty and judging you”</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">coffee</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Essentials drama</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">“Your coffee powder is screaming ‘Refill me before Monday!’”</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">mood</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Today's mood = today's food</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">“The last pack is staring at you. Blink and it’s gone.”</p></div></div><figure style="margin: 0; display: flex; flex-direction: column; gap: 12px"><div style="background: var(--md-surface-container); border-radius: 28px; padding: 20px; overflow: hidden"><img src="assets/v2/zepto_ui-mood.jpg" alt="Zepto mood-based suggestion screens and notifications" style="width: 100%;  height: auto; display: block; border-radius: 16px"></div><figcaption style="font-size: 14px; line-height: 1.5; color: var(--md-on-surface-variant); text-align: center">Late Night Bites discovery rail and playful push-notification concepts.</figcaption></figure><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">01</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Wrong mood prediction</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">AI thinks the user is craving, but they want healthy eating today.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">02</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Repetitive suggestions</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Users get bored when recommendations feel repetitive.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="font-size: 14px; font-weight: 700; color: var(--md-primary); letter-spacing: 0.04em">03</span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Shared household accounts</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Kids ordering snacks at night and parents ordering groceries in the morning create mixed signals.</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">05 — Impact</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Business impact</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--md-on-surface-variant); max-width: 760px">Secondary objective: increase Zepto's average order value through smarter, more contextual discovery.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Predictive reorder</h3><div style="display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>User · </strong><span style="color: var(--md-on-surface-variant)">Convenient, timely reorders.</span></p><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>Business · </strong><span style="color: var(--md-on-surface-variant)">More frequent repeat purchases and contextual cross-sells.</span></p></div></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Smart Packs</h3><div style="display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>User · </strong><span style="color: var(--md-on-surface-variant)">Convenient bundles and less item-by-item searching.</span></p><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>Business · </strong><span style="color: var(--md-on-surface-variant)">Larger baskets, bulk purchases and increased order volume.</span></p></div></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Mood-based suggestions</h3><div style="display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>User · </strong><span style="color: var(--md-on-surface-variant)">More personalised discovery.</span></p><p style="margin: 0; font-size: 15px; line-height: 1.5"><strong>Business · </strong><span style="color: var(--md-on-surface-variant)">Impulse purchases, add-ons and cross-sells.</span></p></div></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">06 — Next</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Quick suggestions</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: var(--md-on-surface-variant); max-width: 760px">Future opportunities beyond the three selected directions.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px"><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">group</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Multiple profiles</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Let households create profiles so AI learns individual preferences.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">sell</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Helpful product tags</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">“Previously bought”, “Top rated” and “Frequently purchased” reduce effort and build trust.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">inventory_2</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Customisable bulk packs</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Let users build packs like Breakfast or Weekly Essentials.</p></div><div class="glow" style="background: var(--md-surface-low); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: var(--md-primary-container); color: var(--md-on-primary-container); display: flex; align-items: center; justify-content: center"><span class="ms" aria-hidden="true" style="font-size: 22px">photo_camera</span></span><h3 style="margin: 0; font-size: 19px; line-height: 1.3; font-weight: 600">Image search</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--md-on-surface-variant)">Upload a photo when you don't know the product name.</p></div></div>
+</section>
+<section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">07 — Reflection</span>
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 820px">Reflection</h2>
 
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Designing for Edge Cases</h2>
-      <p class="zepto-label">Reorder</p>
-      <div class="zepto-edge-grid">
-        <article class="zepto-edge-card">
-          <span class="zepto-num">01</span>
-          <h3>One-time purchase</h3>
-          <p>AI should not repeatedly suggest an item bought only once.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <span class="zepto-num">02</span>
-          <h3>Different variant</h3>
-          <p>Users may want another size or variant from the same brand.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <span class="zepto-num">03</span>
-          <h3>Already in cart</h3>
-          <p>Avoid recommending something already added.</p>
-        </article>
-      </div>
-      <p class="zepto-body">The final UI lets users train frequency, swap variants, see multiple items together, and dismiss irrelevant prompts, keeping predictions helpful without feeling pushy.</p>
-    </section>
-
-    <section class="zepto-block zepto-idea-section">
-      <div class="zepto-idea-head">
-        <span class="zepto-idea-label">Idea 02</span>
-        <h2 class="zepto-section-title">Predictive Bulk / Smart Packs</h2>
-        <p class="zepto-body">Smart Packs create ready-to-add bundles based on purchase habits, seasons and household needs.</p>
-      </div>
-      <ul class="zepto-value-list">
-        <li>Faster repeat purchases</li>
-        <li>Ready-made bundles</li>
-        <li>Larger, more relevant carts</li>
-        <li>Customizable packs</li>
-        <li>Smart substitutions when items are unavailable</li>
-      </ul>
-      <p class="zepto-label">From idea to interface</p>
-      <p class="zepto-body">I used wireframes to see how Smart Pack bundles could surface without interrupting the shopping flow.</p>
-      <figure class="zepto-ui-frame">
-        <img src="assets/case-studies/zepto/ui-bulk.png" alt="Zepto Smart Packs UI — overview, add to cart, customization, personalization and substitutions" loading="lazy">
-        <figcaption>Smart pack discovery, bundle add-to-cart, customization, personalization feedback, and out-of-stock substitutions.</figcaption>
-      </figure>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Smart Pack Edge Cases</h2>
-      <div class="zepto-edge-grid zepto-edge-grid--2">
-        <article class="zepto-edge-card">
-          <h3>Irrelevant predicted items</h3>
-          <p>Some predicted items may not be relevant today.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Item unavailable</h3>
-          <p>Some items may be out of stock.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Outside the suggested list</h3>
-          <p>User wants an item that isn't in the AI list.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Prediction drift</h3>
-          <p>Replacing an item can confuse future predictions.</p>
-        </article>
-      </div>
-      <p class="zepto-body">Checkboxes, “don't recommend again” feedback, and similar-product rails address irrelevant items, stock gaps, and model learning without blocking the user.</p>
-    </section>
-
-    <section class="zepto-block zepto-idea-section">
-      <div class="zepto-idea-head">
-        <span class="zepto-idea-label">Idea 03</span>
-        <h2 class="zepto-section-title">Mood + Time-based Suggestions</h2>
-        <p class="zepto-body">Use context such as time, behaviour and inferred mood to make discovery more personal and timely.</p>
-      </div>
-      <div class="zepto-mood-examples">
-        <div><strong>Craving-Based Tease</strong><span>“Your fridge called… it's empty and judging you”</span></div>
-        <div><strong>Essentials Drama</strong><span>“Your coffee powder is screaming ‘Refill me before Monday!’”</span></div>
-        <div><strong>Today's Mood = Today's Food</strong><span>“The last pack is staring at you. Blink and it's gone.”</span></div>
-      </div>
-      <p class="zepto-label">From idea to interface</p>
-      <p class="zepto-body">I used wireframes to see how mood rails and notifications could appear without interrupting the shopping flow.</p>
-      <figure class="zepto-ui-frame">
-        <img src="assets/case-studies/zepto/ui-mood.png" alt="Zepto mood-based suggestions UI and time-based notification designs" loading="lazy">
-        <figcaption>Late Night Bites discovery rail and playful push-notification concepts.</figcaption>
-      </figure>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Designing for Edge Cases</h2>
-      <p class="zepto-label">Mood &amp; notifications</p>
-      <div class="zepto-edge-grid zepto-edge-grid--2">
-        <article class="zepto-edge-card">
-          <h3>Wrong mood prediction</h3>
-          <p>AI thinks user is “craving” but user wants healthy eating today.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Repetitive suggestions</h3>
-          <p>Users get bored when recommendations feel repetitive.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Prediction drift</h3>
-          <p>Replacing an item confuses the AI model and future predictions.</p>
-        </article>
-        <article class="zepto-edge-card">
-          <h3>Shared household accounts</h3>
-          <p>Kids ordering snacks at night and parents ordering groceries in the morning create mixed signals.</p>
-        </article>
-      </div>
-      <p class="zepto-body">Playful copy and mood rails need easy dismissals, feedback loops, and profile-aware logic so context feels fun, not wrong.</p>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Business Impact</h2>
-      <p class="zepto-body">Secondary objective: increase Zepto's average order value (AOV) through smarter, more contextual discovery.</p>
-      <div class="zepto-impact-grid">
-        <article class="zepto-impact-col">
-          <h3>Predictive Reorder</h3>
-          <p class="zepto-impact-role">User</p>
-          <p>Convenient timely reorders.</p>
-          <p class="zepto-impact-role">Business</p>
-          <p>More frequent repeat purchases and contextual cross-sells.</p>
-        </article>
-        <article class="zepto-impact-col">
-          <h3>Smart Packs</h3>
-          <p class="zepto-impact-role">User</p>
-          <p>Convenient bundles and less item-by-item searching.</p>
-          <p class="zepto-impact-role">Business</p>
-          <p>Larger baskets, bulk purchases and increased order volume.</p>
-        </article>
-        <article class="zepto-impact-col">
-          <h3>Mood-based Suggestions</h3>
-          <p class="zepto-impact-role">User</p>
-          <p>More personalized discovery.</p>
-          <p class="zepto-impact-role">Business</p>
-          <p>Impulse purchases, add-ons and cross-sells.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Quick Suggestions</h2>
-      <p class="zepto-body muted">Documented future opportunities beyond the three selected directions.</p>
-      <ol class="zepto-quick-list">
-        <li><strong>Multiple Profiles.</strong> Let households create profiles so AI learns individual preferences instead of blending everyone into one account.</li>
-        <li><strong>Helpful Product Tags.</strong> Tags like “Previously Bought,” “Top Rated,” and “Frequently Purchased” reduce effort and build trust.</li>
-        <li><strong>Customizable Bulk Packs.</strong> Let users build personalized packs (Breakfast Pack, Weekly Essentials) to boost convenience and AOV.</li>
-        <li><strong>Predictive Item Suggestions.</strong> With good training data, AI can offer timely suggestions that feel intuitive and reduce effort.</li>
-        <li><strong>Image Search.</strong> Upload a photo when users don't know the product name. The app identifies similar or exact items.</li>
-        <li><strong>Social Inspiration.</strong> Show what friends or family recently bought in food-related categories to aid recall, with strict privacy limits.</li>
-      </ol>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Final Design</h2>
-      <div class="zepto-final-group">
-        <h3 class="zepto-final-label">Predictive Reorder</h3>
-        <figure class="zepto-ui-frame">
-          <img src="assets/case-studies/zepto/ui-reorder.png" alt="Final predictive reorder screens" loading="lazy">
-          <figcaption>From AI training to one-tap multi-item reorder with variant swaps.</figcaption>
-        </figure>
-      </div>
-      <div class="zepto-final-group">
-        <h3 class="zepto-final-label">Smart Packs</h3>
-        <figure class="zepto-ui-frame">
-          <img src="assets/case-studies/zepto/ui-bulk.png" alt="Final Smart Pack screens" loading="lazy">
-          <figcaption>Curated bundles users can customize, personalize, and substitute on the fly.</figcaption>
-        </figure>
-      </div>
-      <div class="zepto-final-group">
-        <h3 class="zepto-final-label">Mood-based Suggestions</h3>
-        <figure class="zepto-ui-frame">
-          <img src="assets/case-studies/zepto/ui-mood.png" alt="Final mood-based suggestion screens" loading="lazy">
-          <figcaption>Context-aware discovery and notification concepts tied to time and mood.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="zepto-block">
-      <h2 class="zepto-section-title">Reflection</h2>
-      <p class="zepto-body">This project taught me to design AI around real grocery behaviour. Search isn't a single query, it's a habit loop shaped by household context, timing, and intent breadth.</p>
-      <p class="zepto-body">Mapping edge cases early (one-time purchases, variant swaps, cart conflicts, shared accounts) made the UI more honest about what AI can suggest and when to stay quiet.</p>
-      <p class="zepto-body muted">The balance is user value and business value. Recommendations should feel useful and timely, not intrusive. Without live metrics, the outcome is a clearer framework for smarter search, not a claim of measured lift.</p>
-    </section>
-
-    <section class="zepto-thanks">
-      <h2 class="zepto-thanks-title">Thank You</h2>
-      <a href="index.html#work" class="btn btn-primary zepto-thanks-btn">Explore the next project →</a>
-    </section>
-
-    <nav class="case-nav">
-      <a href="chomp.html" class="case-nav-link">← Chomp</a>
-      <a href="index.html#work" class="case-nav-link">All projects →</a>
-    </nav>
-
-  </div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px"><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">This project taught me to design AI around real grocery behaviour. Search isn't a single query, it's a habit loop shaped by household context, timing, and intent breadth.</p><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">Mapping edge cases early (one-time purchases, variant swaps, cart conflicts, shared accounts) made the UI more honest about what AI can suggest and when to stay quiet.</p><p style="margin: 0; font-size: 17px; line-height: 1.7; color: var(--md-on-surface-variant)">The balance is user value and business value. Without live metrics, the outcome is a clearer framework for smarter search, not a claim of measured lift.</p></div>
+</section>
+<section style="padding: 48px 0 16px; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 20px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">Next project</span>
+<a href="flytbase.html" class="glow glow-key" style="background: var(--md-surface-low); border-radius: 28px; overflow: hidden; display: flex; flex-wrap: wrap; align-items: stretch">
+<img src="assets/v2/real-flytbase.jpg" alt="FlytBase emergency response dashboard" style="flex: 1 1 420px; min-width: 0; aspect-ratio: 16 / 9; object-fit: cover; display: block">
+<div style="flex: 1 1 340px; min-width: 0; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; box-sizing: border-box">
+<h3 style="margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em">Sending help to a disaster zone in seconds: FlytBase</h3>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--md-primary)">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></span>
+</div>
+</a>
+</section>
+<!-- Contact -->
+<section aria-labelledby="contact-title" style="margin: 16px 0 32px; background: var(--md-inverse-surface); color: var(--md-inverse-on-surface); border-radius: 32px; padding: 56px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 id="contact-title" style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em">Let's build something people love to use.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C6C5D0">Hiring, collaborating, or just want to talk design? My inbox is open.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="mailto:bangaloredesigner2020@gmail.com" class="m3-btn m3-filled" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; background: var(--md-inverse-primary); color: #002A78; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="ms" aria-hidden="true">mail</span>Email me</a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn" style="height: 56px; padding: 0 28px 0 24px; border-radius: 28px; border: 1px solid #8F909A; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; box-sizing: border-box"><span class="ms" aria-hidden="true">download</span>Download résumé</a>
+</div>
+</div>
+<nav aria-label="Elsewhere" style="display: flex; flex-direction: column; gap: 4px; min-width: 220px">
+<a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">LinkedIn<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://www.instagram.com/abhimanyu.ux/" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Instagram<span class="ms" aria-hidden="true">arrow_outward</span></a>
+<a href="https://medium.com/@bangaloredesigner2020" class="m3-btn" style="height: 48px; padding: 0 16px; border-radius: 24px; color: var(--md-inverse-on-surface); font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 16px">Medium<span class="ms" aria-hidden="true">arrow_outward</span></a>
+</nav>
+</section>
+<footer style="padding: 8px 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--md-on-surface-variant)">
+<span>© 2026 Abhimanyu Tiwari · Designed and built in Bangalore</span>
+<a href="#top" class="m3-btn" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">arrow_upward</span>Back to top</a>
+</footer>
 </main>
-
-<button class="back-top-float" id="backTopFloat" aria-label="Back to top" title="Back to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-
-<script src="chrome.js"></script>
-<script>
-(function(){
-  var btn = document.getElementById('backTopFloat');
-  if(!btn) return;
-  window.addEventListener('scroll', function(){
-    btn.classList.toggle('visible', window.scrollY > 300);
-  }, {passive:true});
-  btn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-})();
-</script>
+</div>
 </body>
 </html>
