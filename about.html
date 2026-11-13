@@ -69,6 +69,17 @@ img{max-width:100%}
 .hide-sm{display:inline}
 .show-sm{display:none}
 .nav-ic{display:none}
+/* 3D wallet overlay */
+html.wallet-open{overflow:hidden}
+.wallet-dialog{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#E4DFD7;overflow:hidden}
+.wallet-dialog[open]{animation:wallet-in .35s ease both}
+.wallet-dialog::backdrop{background:rgba(20,14,40,.5)}
+@keyframes wallet-in{from{opacity:0}}
+.wallet-dialog iframe{display:block;width:100%;height:100%;border:0}
+.wallet-close{position:absolute;top:18px;left:24px;z-index:2;height:44px;padding:0 16px 0 12px;border-radius:999px;border:1px solid rgba(29,26,22,.22);background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#1D1A16;font:600 14px/1 'Plus Jakarta Sans',system-ui,sans-serif;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.wallet-close:hover{background:rgba(255,255,255,.9)}
+.wallet-close:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.wallet-dialog[open]{animation:none}}
 /* Tablet */
 @media (max-width: 1023px){
   header>div{gap:8px !important}
@@ -119,7 +130,10 @@ img{max-width:100%}
   .intro-box{padding:10px;border-radius:18px}
   .intro-head h2{font-size:16px !important;line-height:1.3}
   .hide-sm{display:none}
-  .purse-btn{display:none !important}
+  .purse-btn{width:52px !important;height:52px !important}
+  .purse-btn svg{width:32px;height:32px}
+  header>div{gap:8px !important}
+  .wallet-close{top:14px;left:14px}
   main{padding:0 18px !important}
   h1{font-size:clamp(32px,9vw,40px) !important;line-height:1.1 !important}
   h2{font-size:clamp(26px,7.4vw,30px) !important}
@@ -154,6 +168,12 @@ img{max-width:100%}
   .node-icon .ms{font-size:22px}
   footer{flex-direction:column;align-items:flex-start !important}
 }
+@media (max-width: 440px){
+  header .rs-tx{display:none}
+  header nav a.m3-filled{width:44px;padding:0 !important;justify-content:center;border-radius:50% !important;gap:0 !important}
+  .wallet-close-tx{display:none}
+  .wallet-close{width:44px;padding:0;justify-content:center}
+}
 @media (max-width: 360px){
   header nav a.m3-btn:not(.m3-filled){width:40px;height:40px !important}
   header nav a.m3-filled{padding:0 12px 0 10px !important;font-size:13px !important}
@@ -182,10 +202,10 @@ img{max-width:100%}
 <a href="about.html" class="m3-btn" aria-label="About" aria-current="page" style="height: 40px; padding: 0 16px; border-radius: 20px; background: var(--md-secondary-container); color: var(--md-on-secondary-container); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">person</span><span class="nav-tx">About</span></a>
 <a href="experiments.html" class="m3-btn" aria-label="Experiments with AI" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">auto_awesome</span><span class="nav-tx">Experiments with AI</span></a>
 <span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
-<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="hide-sm">Download résumé</span><span class="show-sm">Résumé</span></a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="rs-tx">Download résumé</span></a>
 </nav>
 </div>
-<a href="#wallet" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
+<a href="wallet/" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
 </div>
 </header>
 <main id="top" style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
@@ -249,5 +269,6 @@ img{max-width:100%}
 </footer>
 </main>
 </div>
+<script src="wallet.js" defer></script>
 </body>
 </html>
