@@ -189,6 +189,13 @@ section[aria-labelledby="testi-title"]{gap:24px !important}
   .hero2-skills .ms{font-size:18px}
   .badge-scene{font-size:clamp(10px,3.4vw,13px)}
 }
+/* 3D badge (replaces the CSS badge once WebGL is ready) */
+.badge-scene{position:relative}
+.badge3d{position:absolute;left:-80px;top:-240px;width:calc(100% + 160px);height:calc(100% + 280px);pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 140px);mask-image:linear-gradient(to bottom,transparent 0,#000 140px)}
+.has-3d .badge-swing{visibility:hidden;animation:none}
+.badge-scene.has-3d{cursor:grab;touch-action:pan-y}
+.badge-scene.has-3d:active{cursor:grabbing}
+@media (max-width: 1023px){.badge3d{top:0;height:calc(100% + 40px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 70px);mask-image:linear-gradient(to bottom,transparent 0,#000 70px)}}
 
 /* ---------- Responsive layer (tablet + mobile) ---------- */
 img{max-width:100%}
@@ -609,6 +616,8 @@ html.wallet-open{overflow:hidden}
 </main>
 </div>
 <script src="home.js" defer></script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js","three/addons/":"./assets/vendor/three/addons/"}}</script>
+<script type="module" src="badge3d.js"></script>
 <script src="wallet.js" defer></script>
 </body>
 </html>
