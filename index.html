@@ -363,6 +363,13 @@ html.wallet-open{overflow:hidden}
 /* Hero: start the copy near the top bar instead of centring it against the tall badge */
 @media (min-width: 1024px){.hero2{align-items:flex-start;padding-top:24px}.hero2-copy{padding-top:40px}}
 @media (max-width: 1023px){.badge-shot{left:50%;top:-40px;width:min(72vw,300px);transform:translateX(-50%)}}
+/* Experience logos live in the hero now, under the buttons */
+.hero-xp{width:100%;display:flex;flex-direction:column;gap:14px;margin-top:20px;padding-top:24px;border-top:1px solid #E3E1EC}
+.hero-xp-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--md-on-surface-variant)}
+.hero-xp-logos{display:flex;flex-wrap:wrap;align-items:center;gap:18px 40px}
+@media (max-width: 760px){.hero-xp{margin-top:8px}.hero-xp-logos{gap:16px 28px}}
+/* Hero ID card: sized so the whole card sits inside the first screen on desktop */
+@media (min-width: 1024px){.badge-scene{font-size:clamp(10px,min(1.05vw,1.62vh),15px);min-height:34em}.badge-swing{padding-top:12em}}
 </style>
 </head>
 <body>
@@ -415,6 +422,15 @@ html.wallet-open{overflow:hidden}
 <a href="#work" class="m3-btn m3-filled hero-btn" style="height: 56px; padding: 0 22px 0 28px; border-radius: 28px; background: var(--md-primary); color: var(--md-on-primary); font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px"><span class="hide-sm">See selected work</span><span class="show-sm">Selected work</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M6 13l6 6 6-6"></path></svg></a>
 <button type="button" class="m3-btn hero-btn" data-intro-open aria-haspopup="dialog" style="height: 56px; padding: 0 14px 0 28px; border-radius: 28px; border: 0; background: var(--md-primary-container); color: var(--md-on-primary-container); font-family: inherit; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 12px"><span class="hide-sm">Watch my intro video</span><span class="show-sm">Intro video</span><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#6C3CF5"></circle><path d="M13 10.5v11l9-5.5z" fill="#FFFFFF"></path></svg></button>
 </div>
+<div class="hero-xp" role="group" aria-label="Experience">
+<span class="hero-xp-label">Experience at</span>
+<span class="hero-xp-logos">
+<img src="assets/v2/co-peak42.png" alt="Peak42" style="height: 40px; width: auto; display: block">
+<img src="assets/v2/co-kastech.png" alt="Kastech" style="height: 32px; width: auto; display: block">
+<img src="assets/v2/co-elmeasure.png" alt="Elmeasure" style="height: 26px; width: auto; display: block">
+<img src="assets/v2/co-battlexo.png" alt="BattleXO by EsportsXO" style="height: 20px; width: auto; display: block">
+</span>
+</div>
 </div>
 <figure class="badge-scene" aria-label="ID badge: Abhimanyu Tiwari, Product Designer, 5+ years experience, Bangalore, India">
 <canvas class="badge3d" aria-hidden="true"></canvas>
@@ -441,16 +457,6 @@ html.wallet-open{overflow:hidden}
 </figure>
 </section>
 
-<!-- Experience strip -->
-<section aria-label="Experience" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px; padding: 24px 0; border-top: 1px solid #E3E1EC; border-bottom: 1px solid #E3E1EC">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Experience at</span>
-<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px 48px">
-<span style="display: inline-flex; align-items: center; gap: 12px"><img src="assets/v2/co-peak42.png" alt="Peak42" style="height: 40px; width: auto; display: block"><span style="height: 24px; padding: 0 8px; border-radius: 8px; color: #2e7d4f; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; background-color: #D3FFE6">Current</span></span>
-<img src="assets/v2/co-kastech.png" alt="Kastech" style="height: 32px; width: auto; display: block">
-<img src="assets/v2/co-elmeasure.png" alt="Elmeasure" style="height: 26px; width: auto; display: block">
-<img src="assets/v2/co-battlexo.png" alt="BattleXO by EsportsXO" style="height: 20px; width: auto; display: block">
-</span>
-</section>
 
 <!-- Experience & highlights -->
 <section id="about" aria-labelledby="hl-title" style="padding: 72px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 32px">
