@@ -16,7 +16,7 @@
 <link rel="icon" href="assets/v2/abhi-photo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;icon_names=account_balance_wallet,add_circle,ambulance,arrow_back,arrow_forward,arrow_outward,arrow_upward,article,auto_awesome,autorenew,balance,bolt,calendar_month,check,check_circle,close,code,coffee,crisis_alert,design_services,devices,directions_boat,download,edit,emergency,emoji_events,error,explore,fact_check,flag,format_quote,forum,group,help,hourglass_bottom,hourglass_top,image,image_search,info,insights,inventory_2,kitchen,layers,leaderboard,local_fire_department,location_on,lock_clock,mail,mood,my_location,new_releases,notifications,notifications_active,palette,payments,percent,person,person_check,person_off,person_search,phonelink_erase,photo_camera,psychology,remove_circle,restaurant,rocket_launch,rule,savings,school,science,search,sell,shopping_cart,smart_display,smartphone,speed,sports_esports,stacks,star,target,task_alt,timer,toll,travel_explore,trending_up,tune,warning,widgets,work,workspace_premium&amp;display=block">
 <style>
 /* Design system: Material 3 roles, Plus Jakarta Sans, Material Symbols Rounded */
 :root{
@@ -42,14 +42,15 @@ a{color:#6C3CF5}a:hover{color:#5223D6}
 @keyframes glow-spin{to{--glow-a:360deg}}
 #highlights-grid>div,#work .m3-card,section[aria-labelledby="testi-title"] figure{position:relative;isolation:isolate;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 12px 32px -14px color-mix(in srgb,var(--md-primary) 38%,transparent)}
 #work .m3-card:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 6px rgba(27,27,33,.10),0 22px 44px -16px color-mix(in srgb,var(--md-primary) 50%,transparent)}
-#highlights-grid>div::before,#work .m3-card::before,section[aria-labelledby="testi-title"] figure::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#9DB0F0) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glow-spin 5s linear infinite;pointer-events:none;z-index:3}
+#highlights-grid>div::before,#work .m3-card::before,section[aria-labelledby="testi-title"] figure::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#9DB0F0) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glow-spin 5s linear infinite paused;pointer-events:none;z-index:3}
+#highlights-grid>div:hover::before,#work .m3-card:hover::before,section[aria-labelledby="testi-title"] figure:hover::before{animation-play-state:running}
 #highlights-grid>div::after,#work .m3-card::after,section[aria-labelledby="testi-title"] figure::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
 #highlights-grid>div:nth-child(2)::before,#work .m3-card:nth-of-type(2)::before,section[aria-labelledby="testi-title"] figure:nth-child(2)::before{animation-delay:-1.7s}
 #highlights-grid>div:nth-child(3)::before,#work .m3-card:nth-of-type(3)::before,section[aria-labelledby="testi-title"] figure:nth-child(3)::before{animation-delay:-3.3s}
 #highlights-grid>div:nth-child(4)::before{animation-delay:-4.4s}
 /* Testimonials */
 section[aria-labelledby="testi-title"]{position:relative;isolation:isolate}
-section[aria-labelledby="testi-title"] figure{background:rgba(255,255,255,.34) !important;border-color:rgba(255,255,255,.7) !important;-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
+section[aria-labelledby="testi-title"] figure{background:rgba(255,255,255,.78) !important;border-color:rgba(255,255,255,.7) !important}
 section[aria-labelledby="testi-title"] figure::after{background:linear-gradient(155deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.18) 30%,rgba(255,255,255,0) 50%)}
 /* White cards everywhere. Animated border kept only on Selected work (the cards an interviewer must open) */
 #work .m3-card{background:#FFFFFF !important}
@@ -68,33 +69,6 @@ header .m3-filled:hover,section[aria-labelledby="hero-title"] .m3-filled:hover{b
 @keyframes purse-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.35);opacity:0}}
 @keyframes purse-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(8deg)}}
 @media (prefers-reduced-motion: reduce){.purse-btn::after{animation:none}}
-/* Tools & loves circuit (static layout, animated current) */
-.circuit-wrap{position:relative;width:min(600px,100%);aspect-ratio:1/1}
-.circuit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.circuit use{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.circuit .tools{stroke:#7B4DFF;color:#7B4DFF}
-.circuit .love{stroke:#F0388F;color:#F0388F}
-.circuit .halo{stroke-width:18;opacity:.15;filter:blur(5px)}
-.circuit .wire{stroke-width:5;opacity:.9}
-.circuit .spark{stroke:#FFFFFF;stroke-opacity:.9;stroke-width:2.4;stroke-dasharray:4 26;animation:circ-zap 1.1s linear infinite}
-.circuit .bolt{stroke:#FFFFFF;stroke-width:5;stroke-dasharray:34 1000;animation:circ-bolt 2.8s linear infinite;filter:drop-shadow(0 0 4px currentColor) drop-shadow(0 0 10px currentColor)}
-.circuit circle{fill:#FFFFFF;stroke-width:4}
-@keyframes circ-zap{to{stroke-dashoffset:-30}}
-@keyframes circ-bolt{from{stroke-dashoffset:1034}to{stroke-dashoffset:0}}
-.node{position:absolute;z-index:2;display:flex;align-items:center;transform:translate(-50%,-50%);margin:0;will-change:transform}
-.node-icon{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 4px rgba(255,255,255,.95),0 0 22px 3px var(--glow),0 4px 10px rgba(27,27,33,.14)}
-.node-icon img{width:28px;height:28px;object-fit:contain;border-radius:6px;display:block}
-.node-icon .ms{font-size:28px}
-.node-label{margin-left:-14px;height:34px;padding:0 14px 0 22px;border-radius:0 17px 17px 0;display:flex;align-items:center;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:14px;font-weight:600;color:#1B1B21;white-space:nowrap;box-shadow:0 2px 10px var(--glow)}
-.node-tool{--glow:rgba(123,77,255,.32)}
-.node-love{--glow:rgba(240,56,143,.30)}
-.hub2{position:absolute;z-index:3;height:50px;padding:0 22px 0 16px;border-radius:25px;display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:#FFFFFF;white-space:nowrap;transform:translateY(-50%)}
-.hub2 .ms{font-size:24px}
-.hub2-tools{background:linear-gradient(120deg,#6C3CF5,#9B5CFF);box-shadow:0 0 0 5px rgba(123,77,255,.16),0 0 30px 4px rgba(123,77,255,.45)}
-.hub2-love{background:linear-gradient(120deg,#E8368F,#FF5A7A);box-shadow:0 0 0 5px rgba(240,56,143,.16),0 0 30px 4px rgba(240,56,143,.45)}
-/* Names hidden visually, kept for screen readers */
-.node .node-label{position:absolute !important;width:1px;height:1px;margin:-1px;padding:0 !important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;box-shadow:none;background:none}
-@media (prefers-reduced-motion: reduce){.circuit .spark,.circuit .bolt{animation:none}.circuit .bolt{display:none}}
 /* Testimonials: landscape cards in a seamless linear marquee */
 .testi-card{width:560px;flex:none;box-sizing:border-box}
 .testi-track{animation:testi-scroll 55s linear infinite}
@@ -297,11 +271,6 @@ html.wallet-open{overflow:hidden}
   .testi-card figcaption{flex-wrap:wrap}
   .testi-card figcaption>.ms{display:none}
   .testi-card blockquote{font-size:15px !important}
-  .hub2{height:38px;font-size:14px;padding:0 14px 0 10px}
-  .hub2 .ms{font-size:18px}
-  .node-icon{width:40px;height:40px}
-  .node-icon img{width:22px;height:22px}
-  .node-icon .ms{font-size:22px}
   footer{flex-direction:column;align-items:flex-start !important}
 }
 @media (max-width: 440px){
@@ -314,7 +283,6 @@ html.wallet-open{overflow:hidden}
   header nav a.m3-btn:not(.m3-filled){width:40px;height:40px !important}
   header nav a.m3-filled{padding:0 12px 0 10px !important;font-size:13px !important}
   .hero-actions .hero-btn{font-size:14px !important;padding:0 8px !important}
-  .hub2{height:32px;font-size:12px;padding:0 10px 0 8px;gap:6px}
   #highlights-grid h3{font-size:14px !important}
 }
 /* Selected work: six medium cards in a grid, so a full row of projects fits on screen */
