@@ -63,6 +63,160 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .glow-key{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 14px 34px -14px color-mix(in srgb,var(--md-primary) 40%,transparent)}
 .glow-key::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);animation:glow-spin 5s linear infinite}
 @media (prefers-reduced-motion: reduce){.glow::before,.glow-key::before{animation:none}.purse-btn::after{animation:none}}
+/* FlytBase v3 — two-column story, pinned scroll (sections fade in, hold, fall back) */
+.fx-sec{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;padding:96px 0;border-top:1px solid #E3E1EC}
+.fx-l{display:flex;flex-direction:column;gap:18px;align-self:center}
+.fx-r{min-width:0}
+.fx-num{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--md-primary)}
+.fx-l h2{margin:0;font-size:46px;line-height:1.06;font-weight:600;letter-spacing:-.03em;text-wrap:balance}
+.fx-d{margin:0;font-size:18px;line-height:1.6;color:var(--md-on-surface-variant)}
+.fx-k{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--md-on-surface-variant)}
+.fx-key{margin:6px 0 0;padding:2px 0 2px 18px;border-left:3px solid var(--md-primary);font-size:20px;line-height:1.45;font-weight:600;letter-spacing:-.01em;color:var(--md-on-surface)}
+.fx-key .fx-k{color:var(--md-primary);margin-bottom:6px}
+.fx-note{margin:0;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-note .ms{font-size:18px;color:var(--md-outline);margin-top:1px}
+.fx-quote{margin:0;font-size:24px;line-height:1.45;font-weight:500;letter-spacing:-.015em;color:var(--md-on-surface)}
+.fx-quote strong{color:var(--md-primary);font-weight:700}
+.fx-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fx-checks li{display:flex;gap:10px;align-items:center;font-size:16px;font-weight:500}
+.fx-checks .ms{color:var(--md-primary);font-size:20px}
+/* 02 problem: timelines */
+.fx-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:32px;align-items:center;padding:28px 0;border-top:1px solid #E3E1EC}
+.fx-row:first-child{border-top:0;padding-top:0}
+.fx-big{display:block;font-size:84px;line-height:.9;font-weight:700;letter-spacing:-.05em;margin-top:10px}
+.fx-big small{display:block;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-top:12px}
+.fx-old .fx-big{color:#A8A6B4}
+.fx-new .fx-big{background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-new .fx-big small{color:var(--md-primary)}
+.fx-steps{list-style:none;margin:0;padding:0;display:flex;position:relative}
+.fx-steps::before{content:"";position:absolute;left:7px;right:7px;top:6px;height:2px;background:#DAD7E5}
+.fx-new .fx-steps::before{background:linear-gradient(90deg,#6C3CF5,#D9328A)}
+.fx-steps li{flex:1 1 0;position:relative;padding:26px 10px 0 0;font-size:13px;line-height:1.35;font-weight:600;color:var(--md-on-surface-variant)}
+.fx-steps li::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:#FFFFFF;border:2px solid #B9B6C6;box-sizing:border-box}
+.fx-new .fx-steps li{color:var(--md-on-surface)}
+.fx-new .fx-steps li::before{background:var(--md-primary);border-color:#FFFFFF;box-shadow:0 0 0 2px var(--md-primary)}
+.fx-hmw{margin:8px 0 0;padding:22px 26px;border-radius:16px;background:#F4F0FF;font-size:19px;line-height:1.45;font-weight:600;letter-spacing:-.01em}
+.fx-hmw .fx-k{color:var(--md-primary);margin-bottom:6px}
+/* 03 research: double diamond */
+.fx-dd svg{display:block;width:100%;height:auto}
+.fx-dd-cap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.fx-dd-cap p{margin:0;text-align:center;font-size:14px;line-height:1.45;color:var(--md-on-surface-variant)}
+.fx-dd + .fx-key{margin-top:36px}
+/* 04 failures */
+.fx-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 48px}
+.fx-case{border-top:2px solid var(--md-on-surface);padding-top:20px;display:flex;flex-direction:column;gap:8px}
+.fx-case>.ms{font-size:32px;color:var(--md-primary);margin-bottom:4px}
+.fx-case h3{margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.01em}
+.fx-case p{margin:0;font-size:15px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-case p.fx-lesson{color:var(--md-on-surface);font-weight:600}
+.fx-lesson b{color:var(--md-primary)}
+/* 05 audit */
+.fx-ph{position:relative;aspect-ratio:2/1;border-radius:18px;border:1.5px dashed #BDB9CC;background:repeating-linear-gradient(135deg,#FAF9FC 0 14px,#F3F1F8 14px 28px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--md-on-surface-variant);font-size:14px;font-weight:600;text-align:center;padding:24px;box-sizing:border-box}
+.fx-ph-hint{font-weight:500;font-size:12px;color:var(--md-outline)}
+.fx-ph>.ms{font-size:34px;color:var(--md-outline)}
+.fx-pin{position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;background:var(--md-primary);color:#FFFFFF;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(108,60,245,.18),0 6px 14px -4px rgba(108,60,245,.6)}
+.fx-find{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 28px}
+.fx-find li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;font-size:13px;line-height:1.45;color:var(--md-on-surface-variant)}
+.fx-find li>span{width:26px;height:26px;border-radius:50%;background:var(--md-primary-container);color:var(--md-primary);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.fx-find b{display:block;font-size:15px;line-height:1.3;color:var(--md-on-surface);margin-bottom:2px}
+/* 06 personas */
+.fx-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.fx-p{border-top:2px solid var(--md-on-surface);padding-top:22px;display:flex;flex-direction:column;gap:6px}
+.fx-av{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:19px;font-weight:700;margin-bottom:10px;background:linear-gradient(135deg,var(--pc1),var(--pc2))}
+.fx-p h3{margin:0;font-size:19px;line-height:1.3;font-weight:600}
+.fx-role{margin:0;font-size:14px;color:var(--md-on-surface-variant)}
+.fx-verb{margin:14px 0 6px;font-size:44px;line-height:1;font-weight:700;letter-spacing:-.04em;color:var(--pc1)}
+.fx-verb small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--md-on-surface-variant);margin-bottom:8px;font-weight:700}
+.fx-needs{margin:0;font-size:14px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-tier{align-self:flex-start;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pc1);padding:5px 10px;border-radius:6px;background:color-mix(in srgb,var(--pc1) 12%,transparent)}
+/* 07 moments */
+.fx-journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.fx-journey::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:2px;background:linear-gradient(90deg,#CDBEFF,#6C3CF5 60%,#D9328A)}
+.fx-journey li{position:relative;display:flex;flex-direction:column;gap:8px}
+.fx-node{width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:2px solid var(--md-primary);color:var(--md-primary);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;margin-bottom:10px}
+.fx-node .ms{font-size:26px}
+.fx-journey li:last-child .fx-node{background:linear-gradient(135deg,#6C3CF5,#D9328A);border-color:transparent;color:#FFFFFF}
+.fx-journey .fx-k{color:var(--md-primary)}
+.fx-journey h3{margin:0;font-size:18px;line-height:1.3;font-weight:600}
+.fx-journey p{margin:0;font-size:14px;line-height:1.5;color:var(--md-on-surface-variant)}
+.fx-prin{margin-top:40px;padding-top:22px;border-top:1px solid #E3E1EC}
+.fx-prin ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.fx-prin li{font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;background:var(--md-surface-container);color:var(--md-on-surface)}
+/* 08 final design */
+.fx-prog{display:flex;gap:6px}
+.fx-prog i{flex:0 0 28px;height:4px;border-radius:2px;background:#E3E1EC}
+.fx-prog i.on{background:var(--md-primary)}
+.fx-story{margin:0;font-size:34px;line-height:1.12;font-weight:600;letter-spacing:-.025em}
+.fx-pdw{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.fx-pdw p{margin:0;font-size:16px;line-height:1.5;color:var(--md-on-surface)}
+.fx-pdw .fx-k{margin-bottom:3px}
+.fx-pdw .p .fx-k{color:var(--md-error)}
+.fx-pdw .d .fx-k{color:var(--md-primary)}
+.fx-pdw .w .fx-k{color:var(--md-success)}
+.fx-shot{margin:0;border-radius:20px;overflow:hidden;background:var(--md-surface-container);box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.45)}
+.fx-shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+/* 09 metrics */
+.fx-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.fx-mg-h{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--md-on-surface)}
+.fx-mg-h .ms{width:44px;height:44px;border-radius:12px;background:var(--md-primary-container);color:var(--md-primary);display:flex;align-items:center;justify-content:center;font-size:24px}
+.fx-mg-h b{font-size:15px;letter-spacing:.1em;text-transform:uppercase}
+.fx-mg ul{list-style:none;margin:0;padding:0}
+.fx-mg li{display:flex;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #E3E1EC;font-size:17px;font-weight:500}
+.fx-mg li .ms{font-size:20px;color:var(--md-primary)}
+/* 10 learned */
+.fx-learn{list-style:none;margin:0;padding:0;counter-reset:fxl}
+.fx-learn li{counter-increment:fxl;display:grid;grid-template-columns:56px minmax(0,1fr);align-items:baseline;padding:20px 0;border-bottom:1px solid #E3E1EC;font-size:24px;line-height:1.3;font-weight:600;letter-spacing:-.015em}
+.fx-learn li:first-child{padding-top:0}
+.fx-learn li::before{content:counter(fxl,decimal-leading-zero);font-size:14px;font-weight:700;color:var(--md-primary);letter-spacing:.06em}
+.fx-close{margin:8px 0 0;font-size:36px;line-height:1.12;font-weight:700;letter-spacing:-.035em}
+.fx-close span{display:block;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-close span:first-child{color:var(--md-on-surface);background:none}
+/* 11 next */
+.fx-next{border-top:1px solid #E3E1EC;padding:96px 0 48px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;background:var(--md-surface)}
+.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 26px;border-radius:26px;background:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%);color:#FFFFFF !important;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+.fx-next-img{display:block;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.4);transition:transform .3s ease}
+.fx-next-img:hover{transform:translateY(-4px)}
+.fx-next-img img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+/* Pinned scroll motion (large screens, modern browsers). Elsewhere: stacked sections. */
+@supports (animation-timeline: view()){
+@media (min-width:1024px) and (min-height:700px) and (max-height:1300px) and (prefers-reduced-motion:no-preference){
+.fx-step{height:250vh;view-timeline:--fx block}
+.fx-step+.fx-step{margin-top:-100vh}
+.fx-step>.fx-sec{position:sticky;top:0;height:100vh;box-sizing:border-box;padding:104px 0 32px;border-top:0}
+.fx-step .fx-l{animation:fx-l linear both;animation-timeline:--fx;animation-range:cover 0% cover 100%}
+.fx-step .fx-r{animation:fx-r linear both;animation-timeline:--fx;animation-range:cover 0% cover 100%}
+.fx-tail{margin-top:-100vh;position:relative;z-index:1}
+.fx-tail .fx-next{border-top:0}
+}
+}
+@keyframes fx-l{0%,12%{opacity:0;transform:translateY(70px)}26.5%,43%{opacity:1;transform:none}57%,100%{opacity:0;transform:translateY(-40px) scale(.94)}}
+@keyframes fx-r{0%,14%{opacity:0;transform:translateY(120px) scale(.97)}27.5%,43%{opacity:1;transform:none}56%,100%{opacity:0;transform:translateY(-24px) scale(.9);filter:blur(2px)}}
+@media (max-width:1023px){
+.fx-sec,.fx-next{grid-template-columns:minmax(0,1fr);gap:32px;padding:64px 0}
+.fx-l h2{font-size:36px}
+}
+@media (max-width:700px){
+.fx-sec,.fx-next{padding:48px 0}
+.fx-l h2{font-size:30px}
+.fx-quote{font-size:20px}
+.fx-row{grid-template-columns:minmax(0,1fr);gap:18px}
+.fx-big{font-size:64px}
+.fx-steps{flex-direction:column;gap:14px}
+.fx-steps::before{left:6px;right:auto;top:7px;bottom:7px;width:2px;height:auto}
+.fx-new .fx-steps::before{background:linear-gradient(180deg,#6C3CF5,#D9328A)}
+.fx-steps li{padding:0 0 0 28px}
+.fx-cases,.fx-people,.fx-metrics{grid-template-columns:minmax(0,1fr);gap:32px}
+.fx-find{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fx-journey{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+.fx-journey::before{display:none}
+.fx-dd-cap p{font-size:12px}
+.fx-story{font-size:28px}
+.fx-learn li{font-size:19px;grid-template-columns:44px minmax(0,1fr)}
+.fx-close{font-size:30px}
+.fx-pin{width:26px;height:26px;margin:-13px 0 0 -13px;font-size:12px}
+.fx-ph{aspect-ratio:4/3;padding:24px 56px}
+.fx-ph-hint{display:none}
+}
 
 /* ---------- Responsive layer (tablet + mobile) ---------- */
 img{max-width:100%}
@@ -197,7 +351,7 @@ html.wallet-open{overflow:hidden}
 <a href="about.html" class="m3-btn" aria-label="About" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">person</span><span class="nav-tx">About</span></a>
 <a href="experiments.html" class="m3-btn" aria-label="Experiments with AI" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">auto_awesome</span><span class="nav-tx">Experiments with AI</span></a>
 <span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
-<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="rs-tx">Download résumé</span></a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="rs-tx">Resume</span></a>
 </nav>
 </div>
 <a href="wallet/" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
@@ -208,12 +362,30 @@ html.wallet-open{overflow:hidden}
 <section style="padding: 40px 0 56px; display: flex; flex-direction: column; gap: 28px">
 <a href="/#work" class="m3-btn" style="align-self: flex-start; height: 40px; padding: 0 16px 0 10px; margin-left: -10px; border-radius: 20px; color: var(--md-primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px"><span class="ms" aria-hidden="true">arrow_back</span>Back to projects</a>
 <div style="display: flex; flex-wrap: wrap; gap: 8px"><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Emergency ops</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Drones</span><span style="height: 32px; padding: 0 12px; border-radius: 8px; background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px">Real-time</span></div>
-<h1 style="margin: 0; font-size: 60px; line-height: 1.06; font-weight: 600; letter-spacing: -0.03em; max-width: 960px">Redesigning FlytBase for emergency response</h1>
+<h1 style="margin: 0; font-size: 60px; line-height: 1.06; font-weight: 600; letter-spacing: -0.03em; max-width: 960px; width: 1442px">Redesigning FlytBase for emergency response</h1>
 <p style="margin: 0; font-size: 20px; line-height: 1.6; color: var(--md-on-surface-variant); max-width: 780px">Helping operators make critical decisions in 90 seconds. FlytBase uses autonomous drones and AI to detect emergencies, collect live information, and help response teams act faster.</p>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px"><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Role</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">UI/UX Designer · Design exploration</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Scope</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Research · Audit · Personas · Ideation · UI</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Platform</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Desktop EOC · Mobile field</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Focus</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Fire emergency · 90-second decisions</span></div></div>
 <img src="assets/v2/real-flytbase.jpg" alt="FlytBase main dashboard with live drone feed and incident map" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 32px; background: var(--md-surface-container)">
 </section>
+<!-- FlytBase v3: two-column pinned story (old sections kept hidden below) -->
+<div class="fx">
+<div class="fx-step" id="problem"><section class="fx-sec"><div class="fx-l"><span class="fx-num">02 — Problem</span><h2>The problem</h2><p class="fx-quote">&ldquo;It&rsquo;s <strong>3:47 AM</strong>. A fire starts near homes. A sensor detects heat. Is it real? How serious is it? Where is it? Should we send help?&rdquo;</p></div><div class="fx-r"><div class="fx-tl"><div class="fx-row fx-old"><div><span class="fx-k">The old response</span><span class="fx-big">~48<small>minutes</small></span></div><ol class="fx-steps"><li>Detection</li><li>Operator checks information</li><li>Decision</li><li>Ground teams respond</li></ol></div><div class="fx-row fx-new"><div><span class="fx-k">The new possibility</span><span class="fx-big">~90<small>seconds</small></span></div><ol class="fx-steps"><li>Thermal detection</li><li>AI validates</li><li>Drone launches</li><li>Live confirmation</li><li>Operator decides</li><li>Teams receive information</li></ol></div></div><p class="fx-hmw"><span class="fx-k">Core challenge</span>How might we reduce decision time without creating cognitive overload, false confidence, or loss of human control?</p></div></section></div>
+<div class="fx-step" id="research"><section class="fx-sec"><div class="fx-l"><span class="fx-num">03 — Research approach</span><h2>Understanding the emergency response ecosystem.</h2><span class="fx-k">Research methods</span><ul class="fx-checks"><li><span class="ms" aria-hidden="true">check_circle</span>Secondary and industry research</li><li><span class="ms" aria-hidden="true">check_circle</span>Product audit</li><li><span class="ms" aria-hidden="true">check_circle</span>Competitor analysis</li><li><span class="ms" aria-hidden="true">check_circle</span>Research-backed personas</li></ul><p class="fx-note"><span class="ms" aria-hidden="true">info</span>No primary operator interviews were conducted during the project timeline.</p></div><div class="fx-r"><div class="fx-dd"><svg viewBox="0 0 720 250" role="img" aria-label="Double Diamond: Discover, Define, Develop, Deliver"><defs><linearGradient id="fxdd" x1="0" x2="1"><stop offset="0" stop-color="#6C3CF5"/><stop offset="1" stop-color="#D9328A"/></linearGradient></defs><polygon points="10,125 182,12 182,238" fill="#F1ECFF"/><polygon points="182,12 360,125 182,238" fill="#E2D7FF"/><polygon points="360,125 538,12 538,238" fill="#F1ECFF"/><polygon points="538,12 710,125 538,238" fill="#E2D7FF"/><polygon points="10,125 182,12 360,125 538,12 710,125 538,238 360,125 182,238" fill="none" stroke="url(#fxdd)" stroke-width="2.5" stroke-linejoin="round"/><line x1="182" y1="12" x2="182" y2="238" stroke="#CDBEFF" stroke-dasharray="4 5"/><line x1="538" y1="12" x2="538" y2="238" stroke="#CDBEFF" stroke-dasharray="4 5"/><g font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="700" text-anchor="middle"><text x="118" y="118" font-size="12" fill="#6C3CF5" letter-spacing="1.5">01</text><text x="118" y="142" font-size="18" fill="#1B1B21">Discover</text><text x="246" y="118" font-size="12" fill="#6C3CF5" letter-spacing="1.5">02</text><text x="246" y="142" font-size="18" fill="#1B1B21">Define</text><text x="474" y="118" font-size="12" fill="#6C3CF5" letter-spacing="1.5">03</text><text x="474" y="142" font-size="18" fill="#1B1B21">Develop</text><text x="602" y="118" font-size="12" fill="#6C3CF5" letter-spacing="1.5">04</text><text x="602" y="142" font-size="18" fill="#1B1B21">Deliver</text></g><circle cx="360" cy="125" r="6" fill="#6C3CF5" stroke="#FFFFFF" stroke-width="3"/></svg><div class="fx-dd-cap"><p>Understand the emergency world.</p><p>Find the biggest problems.</p><p>Explore solutions.</p><p>Move toward design.</p></div></div><p class="fx-key"><span class="fx-k">Key insight</span>Emergency response is also an information problem. People need the right information at the right time.</p></div></section></div>
+<div class="fx-step" id="failures"><section class="fx-sec"><div class="fx-l"><span class="fx-num">04 — Learning from emergency UX failures</span><h2>When interfaces fail, consequences are real.</h2></div><div class="fx-r"><div class="fx-cases"><article class="fx-case"><span class="ms" aria-hidden="true">directions_boat</span><h3>HMNZS Manawanui (2024–25)</h3><p>Autopilot status was hard to see.</p><p class="fx-lesson"><b>Lesson · </b>Make system state obvious and keep human control visible.</p></article><article class="fx-case"><span class="ms" aria-hidden="true">crisis_alert</span><h3>Hawaii false missile alert (2018)</h3><p>A critical action ran without confirmation.</p><p class="fx-lesson"><b>Lesson · </b>Make actions clear and confirm risky ones.</p></article><article class="fx-case"><span class="ms" aria-hidden="true">ambulance</span><h3>London Ambulance CAD (1992)</h3><p>No way to mark resolved cases.</p><p class="fx-lesson"><b>Lesson · </b>Track status clearly and prioritise alerts.</p></article><article class="fx-case"><span class="ms" aria-hidden="true">error</span><h3>Therac-25 (1980s)</h3><p>Vague errors like &ldquo;Malfunction 54&rdquo;.</p><p class="fx-lesson"><b>Lesson · </b>Match system language to real-world meaning.</p></article></div></div></section></div>
+<div class="fx-step" id="audit"><section class="fx-sec"><div class="fx-l"><span class="fx-num">05 — Audit</span><h2>FlytBase audit</h2><p class="fx-key"><span class="fx-k">Key insight</span>The dashboard was giving operators information, but not always helping them decide.</p></div><div class="fx-r"><div class="fx-ph" role="img" aria-label="Screenshot placeholder: existing FlytBase interface with six numbered findings"><span class="ms" aria-hidden="true">image</span><span>[Screenshot placeholder — existing FlytBase interface]</span><span class="fx-ph-hint">Move the numbered markers onto the matching areas</span><span class="fx-pin" style="left: 9%; top: 14%">1</span><span class="fx-pin" style="left: 84%; top: 16%">2</span><span class="fx-pin" style="left: 14%; top: 70%">3</span><span class="fx-pin" style="left: 40%; top: 84%">4</span><span class="fx-pin" style="left: 68%; top: 80%">5</span><span class="fx-pin" style="left: 90%; top: 58%">6</span></div><ol class="fx-find"><li><span>1</span><div><b>Poor information hierarchy</b>Too much information competes for attention.</div></li><li><span>2</span><div><b>Ineffective alert sorting</b>Critical and less-important alerts are not clearly prioritised.</div></li><li><span>3</span><div><b>Interaction friction</b>Operators spend time finding and clicking controls.</div></li><li><span>4</span><div><b>Stress-insensitive design</b>The interface assumes calm users during emergencies.</div></li><li><span>5</span><div><b>Cognitive / motor interference</b>Operators spend effort navigating instead of deciding.</div></li><li><span>6</span><div><b>Low target tolerance</b>Small targets are harder to use under pressure.</div></li></ol></div></section></div>
+<div class="fx-step" id="users"><section class="fx-sec"><div class="fx-l"><span class="fx-num">06 — Users</span><h2>Who uses the system?</h2><p class="fx-quote">Rahul decides. Priya coordinates. Aniket acts.</p><p class="fx-key"><span class="fx-k">One system, three experiences</span>The same underlying data, with strategic, coordination and tactical views.</p></div><div class="fx-r"><div class="fx-people"><article class="fx-p" style="--pc1: #6C3CF5; --pc2: #9B6BFF"><span class="fx-av" aria-hidden="true">RS</span><h3>Rahul Sharma</h3><p class="fx-role">Single-incident EOC Director</p><p class="fx-verb"><small>Job</small>Decide</p><p class="fx-needs">Needs severity, AI confidence, evidence, a clear recommendation and override, within ~90 seconds.</p><span class="fx-tier">Primary</span></article><article class="fx-p" style="--pc1: #C2307E; --pc2: #F06AAE"><span class="fx-av" aria-hidden="true">PD</span><h3>Priya Deshpande</h3><p class="fx-role">Multi-incident coordinator</p><p class="fx-verb"><small>Job</small>Coordinate</p><p class="fx-needs">Needs priority, resources, crews, drone allocation and status across 7–10 incidents.</p><span class="fx-tier">Secondary</span></article><article class="fx-p" style="--pc1: #2B47B0; --pc2: #5C7CF0"><span class="fx-av" aria-hidden="true">AS</span><h3>Aniket Sharma</h3><p class="fx-role">Field incident commander</p><p class="fx-verb"><small>Job</small>Act</p><p class="fx-needs">Needs tactical drone intelligence, crew position, fire and wind data, and quick field actions.</p><span class="fx-tier">Tertiary</span></article></div></div></section></div>
+<div class="fx-step" id="moments"><section class="fx-sec"><div class="fx-l"><span class="fx-num">07 — Ideation</span><h2>Designing for each moment</h2><p class="fx-d">Instead of asking how the dashboard should look, we asked what the operator needs at each moment.</p><p class="fx-key"><span class="fx-k">Key message</span>Design for the decision, not the dashboard.</p></div><div class="fx-r"><ol class="fx-journey"><li><span class="fx-node"><span class="ms" aria-hidden="true">timer</span></span><span class="fx-k">A</span><h3>First 5 seconds</h3><p>Severity, confidence, location, live data and a recommendation are visible immediately.</p></li><li><span class="fx-node"><span class="ms" aria-hidden="true">help</span></span><span class="fx-k">B</span><h3>When AI is unsure</h3><p>Show evidence, request more data, recommend instead of auto-executing, pause risky actions.</p></li><li><span class="fx-node"><span class="ms" aria-hidden="true">stacks</span></span><span class="fx-k">C</span><h3>A second emergency</h3><p>Prioritise by severity, collapse secondary information, protect attention.</p></li><li><span class="fx-node"><span class="ms" aria-hidden="true">notifications_active</span></span><span class="fx-k">D</span><h3>Act now</h3><p>A strong alert, a dominant call to action, and countdown, audio or haptics when appropriate.</p></li></ol><div class="fx-prin"><span class="fx-k">Design principles</span><ul><li>Show what matters first</li><li>Make severity obvious</li><li>Explain why AI recommends</li><li>Keep human override visible</li><li>Design for stressed users</li><li>Large targets</li><li>High contrast</li><li>Hide secondary info until needed</li></ul></div></div></section></div>
+<div class="fx-step" id="final-1"><section class="fx-sec"><div class="fx-l"><span class="fx-num">08 — Final design · 01 / 05</span><h2>Final design</h2><span class="fx-prog" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><h3 class="fx-story">The command centre</h3><div class="fx-pdw"><p class="p"><span class="fx-k">Problem</span>Operators lose seconds scanning cluttered screens.</p><p class="d"><span class="fx-k">Decision</span>Show severity, location, live feed access and one clear recommendation first.</p><p class="w"><span class="fx-k">Why it helps</span>The operator understands the situation in the first 5 seconds.</p></div></div><div class="fx-r"><figure class="fx-shot"><img src="assets/v2/flytbase_main-dashboard.jpg" alt="FlytBase command centre overview"></figure></div></section></div>
+<div class="fx-step" id="final-2"><section class="fx-sec"><div class="fx-l"><span class="fx-num">08 — Final design · 02 / 05</span><span class="fx-prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><h3 class="fx-story">Prioritising critical alerts</h3><div class="fx-pdw"><p class="p"><span class="fx-k">Problem</span>All alerts felt the same in the old dashboard.</p><p class="d"><span class="fx-k">Decision</span>Colour-coded severity and urgent alert states at the top.</p><p class="w"><span class="fx-k">Why it helps</span>Serious emergencies stand out immediately.</p></div></div><div class="fx-r"><figure class="fx-shot"><img src="assets/v2/flytbase_thermal-signature-detected.jpg" alt="Critical thermal alert at the top of the screen"></figure></div></section></div>
+<div class="fx-step" id="final-3"><section class="fx-sec"><div class="fx-l"><span class="fx-num">08 — Final design · 03 / 05</span><span class="fx-prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><h3 class="fx-story">Explainable AI recommendations</h3><div class="fx-pdw"><p class="p"><span class="fx-k">Problem</span>Operators did not know why AI flagged an alert.</p><p class="d"><span class="fx-k">Decision</span>Show what AI thinks, why it thinks it, and how confident it is.</p><p class="w"><span class="fx-k">Why it helps</span>Builds trust without blind faith in automation.</p></div></div><div class="fx-r"><figure class="fx-shot"><img src="assets/v2/flytbase_ai-suggests-next-steps.jpg" alt="AI recommendation with reasoning and confidence"></figure></div></section></div>
+<div class="fx-step" id="final-4"><section class="fx-sec"><div class="fx-l"><span class="fx-num">08 — Final design · 04 / 05</span><span class="fx-prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><h3 class="fx-story">Live drone intelligence</h3><div class="fx-pdw"><p class="p"><span class="fx-k">Problem</span>Sensor data alone is not enough to confirm a real fire.</p><p class="d"><span class="fx-k">Decision</span>Live visual and thermal feed within reach of the alert.</p><p class="w"><span class="fx-k">Why it helps</span>Visual confirmation reduces false alarms and hesitation.</p></div></div><div class="fx-r"><figure class="fx-shot"><img src="assets/v2/flytbase_drone-airborne.jpg" alt="Live drone visual and thermal feed"></figure></div></section></div>
+<div class="fx-step" id="final-5"><section class="fx-sec"><div class="fx-l"><span class="fx-num">08 — Final design · 05 / 05</span><span class="fx-prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><h3 class="fx-story">Unified situational awareness</h3><div class="fx-pdw"><p class="p"><span class="fx-k">Problem</span>Location, teams and risks were spread across panels.</p><p class="d"><span class="fx-k">Decision</span>One map showing fire, drones, teams, risks and routes.</p><p class="w"><span class="fx-k">Why it helps</span>Spatial awareness without jumping between screens.</p></div></div><div class="fx-r"><figure class="fx-shot"><img src="assets/v2/flytbase_coordinates-received.jpg" alt="Map with fire, drones, teams, risks and routes"></figure></div></section></div>
+<div class="fx-step" id="metrics"><section class="fx-sec"><div class="fx-l"><span class="fx-num">09 — Measuring</span><h2>Success metrics</h2><p class="fx-d">The metrics we would use to measure success.</p><p class="fx-note"><span class="ms" aria-hidden="true">info</span>Testing results are not yet available, and we do not claim the design improved these numbers.</p></div><div class="fx-r"><div class="fx-metrics"><div class="fx-mg"><div class="fx-mg-h"><span class="ms" aria-hidden="true">speed</span><b>Operational</b></div><ul><li><span class="ms" aria-hidden="true">timer</span>Time to detection</li><li><span class="ms" aria-hidden="true">timer</span>Time to decision</li><li><span class="ms" aria-hidden="true">timer</span>Time to dispatch</li><li><span class="ms" aria-hidden="true">timer</span>Time to arrival / intervention</li><li><span class="ms" aria-hidden="true">timer</span>Critical-task error rate</li></ul></div><div class="fx-mg"><div class="fx-mg-h"><span class="ms" aria-hidden="true">psychology</span><b>Human factors</b></div><ul><li><span class="ms" aria-hidden="true">person_check</span>Time spent on task</li><li><span class="ms" aria-hidden="true">person_check</span>System Usability Scale (SUS)</li><li><span class="ms" aria-hidden="true">person_check</span>User error rate</li><li><span class="ms" aria-hidden="true">person_check</span>Task completion rate</li></ul></div></div></div></section></div>
+<div class="fx-step" id="learned"><section class="fx-sec"><div class="fx-l"><span class="fx-num">10 — Learnings</span><h2>What I learned</h2><p class="fx-close"><span>Show less.</span><span>Explain better.</span><span>Act faster.</span><span>Keep humans in control.</span></p></div><div class="fx-r"><ol class="fx-learn"><li>AI makes UX more important, not less.</li><li>More information is not always better.</li><li>Stress changes how people use interfaces.</li><li>Different operators need different information.</li><li>Automation needs clear boundaries, and human control must remain visible.</li></ol></div></section></div>
+<div class="fx-tail"><section class="fx-next"><div class="fx-l"><span class="fx-num">Next project</span><h2>Chomp</h2><p class="fx-d">Making home cooking simpler with an AI food buddy.</p><a href="chomp.html" class="fx-cta m3-btn">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></a></div><a href="chomp.html" class="fx-next-img" aria-label="Chomp case study"><img src="assets/v2/real-chomp.jpg" alt="Chomp cooking app screens"></a></section></div>
+</div>
+<div hidden>
 <section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">01 — Problem</span>
@@ -296,6 +468,7 @@ html.wallet-open{overflow:hidden}
 </div>
 </a>
 </section>
+</div>
 <!-- Contact -->
 <section aria-labelledby="contact-title" style="margin: 16px 0 32px; background: var(--md-inverse-surface); color: var(--md-inverse-on-surface); border-radius: 32px; padding: 56px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">

@@ -63,6 +63,266 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .glow-key{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(27,27,33,.06),0 14px 34px -14px color-mix(in srgb,var(--md-primary) 40%,transparent)}
 .glow-key::before{background:conic-gradient(from var(--glow-a),color-mix(in srgb,var(--md-primary) 16%,transparent) 0deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 240deg,var(--glow-light,#B9A2FF) 290deg,var(--md-primary) 325deg,#FFFFFF 342deg,color-mix(in srgb,var(--md-primary) 16%,transparent) 360deg);animation:glow-spin 5s linear infinite}
 @media (prefers-reduced-motion: reduce){.glow::before,.glow-key::before{animation:none}.purse-btn::after{animation:none}}
+/* fx-v2 */
+/* FlytBase v3 — two-column story, pinned scroll (sections fade in, hold, fall back) */
+.fx-sec{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;padding:96px 0;border-top:1px solid #E3E1EC}
+.fx-l{display:flex;flex-direction:column;gap:18px;align-self:center}
+.fx-r{min-width:0}
+.fx-num{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--md-primary)}
+.fx-l h2{margin:0;font-size:46px;line-height:1.06;font-weight:600;letter-spacing:-.03em;text-wrap:balance}
+.fx-d{margin:0;font-size:18px;line-height:1.6;color:var(--md-on-surface-variant)}
+.fx-k{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--md-on-surface-variant)}
+.fx-key{margin:6px 0 0;padding:2px 0 2px 18px;border-left:3px solid var(--md-primary);font-size:20px;line-height:1.45;font-weight:600;letter-spacing:-.01em;color:var(--md-on-surface)}
+.fx-key .fx-k{color:var(--md-primary);margin-bottom:6px}
+.fx-note{margin:0;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-note .ms{font-size:18px;color:var(--md-outline);margin-top:1px}
+.fx-quote{margin:0;font-size:24px;line-height:1.45;font-weight:500;letter-spacing:-.015em;color:var(--md-on-surface)}
+.fx-quote strong{color:var(--md-primary);font-weight:700}
+.fx-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fx-checks li{display:flex;gap:10px;align-items:center;font-size:16px;font-weight:500}
+.fx-checks .ms{color:var(--md-primary);font-size:20px}
+/* 02 problem: timelines */
+.fx-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:32px;align-items:center;padding:28px 0;border-top:1px solid #E3E1EC}
+.fx-row:first-child{border-top:0;padding-top:0}
+.fx-big{display:block;font-size:84px;line-height:.9;font-weight:700;letter-spacing:-.05em;margin-top:10px}
+.fx-big small{display:block;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-top:12px}
+.fx-old .fx-big{color:#A8A6B4}
+.fx-new .fx-big{background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-new .fx-big small{color:var(--md-primary)}
+.fx-steps{list-style:none;margin:0;padding:0;display:flex;position:relative}
+.fx-steps::before{content:"";position:absolute;left:7px;right:7px;top:6px;height:2px;background:#DAD7E5}
+.fx-new .fx-steps::before{background:linear-gradient(90deg,#6C3CF5,#D9328A)}
+.fx-steps li{flex:1 1 0;position:relative;padding:26px 10px 0 0;font-size:13px;line-height:1.35;font-weight:600;color:var(--md-on-surface-variant)}
+.fx-steps li::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:#FFFFFF;border:2px solid #B9B6C6;box-sizing:border-box}
+.fx-new .fx-steps li{color:var(--md-on-surface)}
+.fx-new .fx-steps li::before{background:var(--md-primary);border-color:#FFFFFF;box-shadow:0 0 0 2px var(--md-primary)}
+.fx-hmw{margin:8px 0 0;padding:22px 26px;border-radius:16px;background:#F4F0FF;font-size:19px;line-height:1.45;font-weight:600;letter-spacing:-.01em}
+.fx-hmw .fx-k{color:var(--md-primary);margin-bottom:6px}
+/* 03 research: double diamond */
+.fx-dd svg{display:block;width:100%;height:auto}
+.fx-dd-cap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.fx-dd-cap p{margin:0;text-align:center;font-size:14px;line-height:1.45;color:var(--md-on-surface-variant)}
+.fx-dd + .fx-key{margin-top:36px}
+/* 04 failures */
+.fx-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 48px}
+.fx-case{border-top:2px solid var(--md-on-surface);padding-top:20px;display:flex;flex-direction:column;gap:8px}
+.fx-case>.ms{font-size:32px;color:var(--md-primary);margin-bottom:4px}
+.fx-case h3{margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.01em}
+.fx-case p{margin:0;font-size:15px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-case p.fx-lesson{color:var(--md-on-surface);font-weight:600}
+.fx-lesson b{color:var(--md-primary)}
+/* 05 audit */
+.fx-ph{position:relative;aspect-ratio:2/1;border-radius:18px;border:1.5px dashed #BDB9CC;background:repeating-linear-gradient(135deg,#FAF9FC 0 14px,#F3F1F8 14px 28px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--md-on-surface-variant);font-size:14px;font-weight:600;text-align:center;padding:24px;box-sizing:border-box}
+.fx-ph-hint{font-weight:500;font-size:12px;color:var(--md-outline)}
+.fx-ph>.ms{font-size:34px;color:var(--md-outline)}
+.fx-pin{position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;background:var(--md-primary);color:#FFFFFF;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(108,60,245,.18),0 6px 14px -4px rgba(108,60,245,.6)}
+.fx-find{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 28px}
+.fx-find li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;font-size:13px;line-height:1.45;color:var(--md-on-surface-variant)}
+.fx-find li>span{width:26px;height:26px;border-radius:50%;background:var(--md-primary-container);color:var(--md-primary);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.fx-find b{display:block;font-size:15px;line-height:1.3;color:var(--md-on-surface);margin-bottom:2px}
+/* 06 personas */
+.fx-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.fx-p{border-top:2px solid var(--md-on-surface);padding-top:22px;display:flex;flex-direction:column;gap:6px}
+.fx-av{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:19px;font-weight:700;margin-bottom:10px;background:linear-gradient(135deg,var(--pc1),var(--pc2))}
+.fx-p h3{margin:0;font-size:19px;line-height:1.3;font-weight:600}
+.fx-role{margin:0;font-size:14px;color:var(--md-on-surface-variant)}
+.fx-verb{margin:14px 0 6px;font-size:44px;line-height:1;font-weight:700;letter-spacing:-.04em;color:var(--pc1)}
+.fx-verb small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--md-on-surface-variant);margin-bottom:8px;font-weight:700}
+.fx-needs{margin:0;font-size:14px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-tier{align-self:flex-start;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pc1);padding:5px 10px;border-radius:6px;background:color-mix(in srgb,var(--pc1) 12%,transparent)}
+/* 07 moments */
+.fx-journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+.fx-journey::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:2px;background:linear-gradient(90deg,#CDBEFF,#6C3CF5 60%,#D9328A)}
+.fx-journey li{position:relative;display:flex;flex-direction:column;gap:8px}
+.fx-node{width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:2px solid var(--md-primary);color:var(--md-primary);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;margin-bottom:10px}
+.fx-node .ms{font-size:26px}
+.fx-journey li:last-child .fx-node{background:linear-gradient(135deg,#6C3CF5,#D9328A);border-color:transparent;color:#FFFFFF}
+.fx-journey .fx-k{color:var(--md-primary)}
+.fx-journey h3{margin:0;font-size:18px;line-height:1.3;font-weight:600}
+.fx-journey p{margin:0;font-size:14px;line-height:1.5;color:var(--md-on-surface-variant)}
+.fx-prin{margin-top:40px;padding-top:22px;border-top:1px solid #E3E1EC}
+.fx-prin ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.fx-prin li{font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;background:var(--md-surface-container);color:var(--md-on-surface)}
+/* 08 final design */
+.fx-prog{display:flex;gap:6px}
+.fx-prog i{flex:0 0 28px;height:4px;border-radius:2px;background:#E3E1EC}
+.fx-prog i.on{background:var(--md-primary)}
+.fx-story{margin:0;font-size:34px;line-height:1.12;font-weight:600;letter-spacing:-.025em}
+.fx-pdw{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.fx-pdw p{margin:0;font-size:16px;line-height:1.5;color:var(--md-on-surface)}
+.fx-pdw .fx-k{margin-bottom:3px}
+.fx-pdw .p .fx-k{color:var(--md-error)}
+.fx-pdw .d .fx-k{color:var(--md-primary)}
+.fx-pdw .w .fx-k{color:var(--md-success)}
+.fx-shot{margin:0;border-radius:20px;overflow:hidden;background:var(--md-surface-container);box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.45)}
+.fx-shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+/* 09 metrics */
+.fx-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.fx-mg-h{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--md-on-surface)}
+.fx-mg-h .ms{width:44px;height:44px;border-radius:12px;background:var(--md-primary-container);color:var(--md-primary);display:flex;align-items:center;justify-content:center;font-size:24px}
+.fx-mg-h b{font-size:15px;letter-spacing:.1em;text-transform:uppercase}
+.fx-mg ul{list-style:none;margin:0;padding:0}
+.fx-mg li{display:flex;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #E3E1EC;font-size:17px;font-weight:500}
+.fx-mg li .ms{font-size:20px;color:var(--md-primary)}
+/* 10 learned */
+.fx-learn{list-style:none;margin:0;padding:0;counter-reset:fxl}
+.fx-learn li{counter-increment:fxl;display:grid;grid-template-columns:56px minmax(0,1fr);align-items:baseline;padding:20px 0;border-bottom:1px solid #E3E1EC;font-size:24px;line-height:1.3;font-weight:600;letter-spacing:-.015em}
+.fx-learn li:first-child{padding-top:0}
+.fx-learn li::before{content:counter(fxl,decimal-leading-zero);font-size:14px;font-weight:700;color:var(--md-primary);letter-spacing:.06em}
+.fx-close{margin:8px 0 0;font-size:36px;line-height:1.12;font-weight:700;letter-spacing:-.035em}
+.fx-close span{display:block;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-close span:first-child{color:var(--md-on-surface);background:none}
+/* 11 next */
+.fx-next{border-top:1px solid #E3E1EC;padding:96px 0 48px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;background:var(--md-surface)}
+.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 26px;border-radius:26px;background:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%);color:#FFFFFF !important;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+.fx-next-img{display:block;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.4);transition:transform .3s ease}
+.fx-next-img:hover{transform:translateY(-4px)}
+.fx-next-img img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+/* Pinned scroll motion (large screens, modern browsers). Elsewhere: stacked sections. */
+@supports (animation-timeline: view()){
+@media (min-width:1024px) and (min-height:700px) and (max-height:1300px) and (prefers-reduced-motion:no-preference){
+.fx-step{height:250vh;view-timeline:--fx block}
+.fx-step+.fx-step{margin-top:-100vh}
+.fx-step>.fx-sec{position:sticky;top:0;height:100vh;box-sizing:border-box;padding:104px 0 32px;border-top:0}
+.fx-step .fx-l{animation:fx-l linear both;animation-timeline:--fx;animation-range:cover 0% cover 100%}
+.fx-step .fx-r{animation:fx-r linear both;animation-timeline:--fx;animation-range:cover 0% cover 100%}
+.fx-tail{margin-top:-100vh;position:relative;z-index:1}
+.fx-tail .fx-next{border-top:0}
+}
+}
+@keyframes fx-l{0%,12%{opacity:0;transform:translateY(70px)}26.5%,43%{opacity:1;transform:none}57%,100%{opacity:0;transform:translateY(-40px) scale(.94)}}
+@keyframes fx-r{0%,14%{opacity:0;transform:translateY(120px) scale(.97)}27.5%,43%{opacity:1;transform:none}56%,100%{opacity:0;transform:translateY(-24px) scale(.9);filter:blur(2px)}}
+@media (max-width:1023px){
+.fx-sec,.fx-next{grid-template-columns:minmax(0,1fr);gap:32px;padding:64px 0}
+.fx-l h2{font-size:36px}
+}
+@media (max-width:700px){
+.fx-sec,.fx-next{padding:48px 0}
+.fx-l h2{font-size:30px}
+.fx-quote{font-size:20px}
+.fx-row{grid-template-columns:minmax(0,1fr);gap:18px}
+.fx-big{font-size:64px}
+.fx-steps{flex-direction:column;gap:14px}
+.fx-steps::before{left:6px;right:auto;top:7px;bottom:7px;width:2px;height:auto}
+.fx-new .fx-steps::before{background:linear-gradient(180deg,#6C3CF5,#D9328A)}
+.fx-steps li{padding:0 0 0 28px}
+.fx-cases,.fx-people,.fx-metrics{grid-template-columns:minmax(0,1fr);gap:32px}
+.fx-find{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fx-journey{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+.fx-journey::before{display:none}
+.fx-dd-cap p{font-size:12px}
+.fx-story{font-size:28px}
+.fx-learn li{font-size:19px;grid-template-columns:44px minmax(0,1fr)}
+.fx-close{font-size:30px}
+.fx-pin{width:26px;height:26px;margin:-13px 0 0 -13px;font-size:12px}
+.fx-ph{aspect-ratio:4/3;padding:24px 56px}
+.fx-ph-hint{display:none}
+}
+/* v3 shared components (Zepto, Chomp, CREDex, BattleXO) */
+.fx-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 44px}
+.fx-items.c3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px}
+.fx-item{border-top:2px solid var(--md-on-surface);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.fx-item>.ms{font-size:30px;color:var(--md-primary);margin-bottom:2px}
+.fx-item .fx-k{color:var(--md-primary)}
+.fx-item h3{margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.01em}
+.fx-item p{margin:0;font-size:15px;line-height:1.55;color:var(--md-on-surface-variant)}
+.fx-items.c3 .fx-item h3{font-size:17px}
+.fx-items.c3 .fx-item p{font-size:14px}
+.fx-hl{margin:0;font-size:30px;line-height:1.25;font-weight:600;letter-spacing:-.02em;color:var(--md-on-surface);text-wrap:balance}
+.fx-hl em{font-style:normal;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 32px}
+.fx-stat{border-top:2px solid var(--md-on-surface);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.fx-stat b{font-size:48px;line-height:1;font-weight:700;letter-spacing:-.04em;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+.fx-stat span{font-size:15px;font-weight:700;color:var(--md-on-surface)}
+.fx-stat p{margin:0;font-size:13px;line-height:1.5;color:var(--md-on-surface-variant)}
+.fx-bars{display:flex;flex-direction:column;gap:26px}
+.fx-bar{display:grid;grid-template-columns:110px minmax(0,1fr);gap:24px;align-items:center}
+.fx-bar>b{font-size:56px;line-height:1;font-weight:700;letter-spacing:-.04em;color:var(--md-primary)}
+.fx-bar i{display:block;height:14px;border-radius:7px;background:linear-gradient(90deg,#6C3CF5,#D9328A);margin-bottom:12px}
+.fx-bar span{display:block;font-size:17px;font-weight:600}
+.fx-bar small{display:block;font-size:13px;color:var(--md-on-surface-variant);margin-top:2px}
+.fx-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.fx-tags li{font-size:14px;font-weight:600;padding:9px 14px;border-radius:10px;background:var(--md-surface-container);color:var(--md-on-surface-variant)}
+.fx-tags li.on{background:var(--md-primary);color:#FFFFFF}
+.fx-tags li.dash{background:none;border:1.5px dashed #BDB9CC;color:var(--md-on-surface)}
+.fx-loop{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px}
+.fx-loop li{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--md-on-surface)}
+.fx-loop li span{padding:9px 14px;border-radius:999px;background:#F4F0FF;border:1px solid #E2D7FF}
+.fx-loop li:not(:last-child)::after{content:"";width:16px;height:2px;background:linear-gradient(90deg,#6C3CF5,#D9328A)}
+.fx-loop li:last-child span{background:linear-gradient(120deg,#6C3CF5,#D9328A);color:#FFFFFF;border-color:transparent}
+.fx-vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.fx-vs>div{padding:20px 22px;border-radius:14px;background:var(--md-surface-container);display:flex;flex-direction:column;gap:6px}
+.fx-vs>div:last-child{background:#F4F0FF}
+.fx-vs>div:last-child .fx-k{color:var(--md-primary)}
+.fx-vs p{margin:0;font-size:16px;line-height:1.5;font-weight:500}
+.fx-vs ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.fx-vs li{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:500}
+.fx-vs li .ms{font-size:18px;color:var(--md-primary)}
+.fx-stack{display:flex;flex-direction:column;gap:22px}
+.fx-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fx-pair .fx-shot img{aspect-ratio:auto}
+.fx-shot.nat img{aspect-ratio:auto}
+.fx-cap{margin:10px 0 0;font-size:13px;font-weight:600;color:var(--md-on-surface-variant);text-align:center}
+.fx-phones{display:flex;gap:18px;justify-content:center;align-items:flex-start}
+.fx-phones figure{margin:0;flex:1 1 0;min-width:0;max-width:200px;display:flex;flex-direction:column;align-items:center}
+.fx-phones img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 0 0 1px rgba(27,27,33,.08),0 24px 40px -24px rgba(48,20,120,.5)}
+.fx-phones figcaption{margin-top:12px;font-size:13px;line-height:1.4;font-weight:600;text-align:center;color:var(--md-on-surface-variant)}
+.fx-phones figcaption b{display:block;color:var(--md-primary);font-size:12px;letter-spacing:.08em;margin-bottom:2px}
+.fx-tall{display:flex;justify-content:center}
+.fx-tall img{display:block;height:620px;width:auto;max-width:100%;border-radius:18px;box-shadow:0 0 0 1px rgba(27,27,33,.08),0 30px 60px -30px rgba(48,20,120,.45)}
+.fx-scroll{margin:0 auto;width:290px;height:600px;border-radius:40px;padding:10px;background:#1B1B21;box-shadow:0 40px 70px -30px rgba(48,20,120,.55);box-sizing:border-box}
+.fx-scroll div{width:100%;height:100%;border-radius:31px;overflow:hidden;background:#FFFFFF}
+.fx-scroll img{display:block;width:100%;height:auto;animation:fx-pan 16s ease-in-out infinite alternate}
+@keyframes fx-pan{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + 580px))}}
+.fx-dec{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 18px}
+.fx-dec li{display:flex;flex-direction:column;gap:8px}
+.fx-dec img{display:block;width:100%;height:150px;object-fit:cover;object-position:top;border-radius:12px;box-shadow:0 0 0 1px rgba(27,27,33,.08)}
+.fx-dec b{font-size:12px;color:var(--md-primary);letter-spacing:.08em}
+.fx-dec span{font-size:14px;line-height:1.35;font-weight:600}
+.fx-notifs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.fx-notif{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;padding:14px 16px;border-radius:16px;background:var(--md-surface-container)}
+.fx-notif>i{width:32px;height:32px;border-radius:8px;background:#1B1B21;color:#FFFFFF;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;justify-content:center}
+.fx-notif b{display:block;font-size:14px}
+.fx-notif span{font-size:13px;line-height:1.45;color:var(--md-on-surface-variant)}
+.fx-matrix{width:100%;border-collapse:collapse}
+.fx-matrix th,.fx-matrix td{text-align:left;vertical-align:top;padding:18px 16px 18px 0;border-bottom:1px solid #E3E1EC;font-size:15px;line-height:1.5}
+.fx-matrix thead th{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--md-on-surface-variant);border-bottom:2px solid var(--md-on-surface);padding-top:0}
+.fx-matrix tbody th{font-size:17px;font-weight:600;width:30%}
+.fx-matrix td{color:var(--md-on-surface-variant)}
+.fx-matrix td.b{color:var(--md-on-surface);font-weight:500}
+.fx-swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}
+.fx-swot h3{margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.02em;padding-bottom:12px;border-bottom:2px solid var(--md-on-surface)}
+.fx-swot dl{margin:0}
+.fx-swot dt{margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.fx-swot dt.s{color:var(--md-success)}.fx-swot dt.w{color:var(--md-error)}.fx-swot dt.o{color:var(--md-primary)}
+.fx-swot dd{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--md-on-surface-variant);padding-left:14px;position:relative}
+.fx-swot dd::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+.fx-ring{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.fx-ring span{flex:1 1 0;min-width:72px;text-align:center;padding:18px 10px;border-radius:14px;background:#F4F0FF;font-size:18px;font-weight:700;color:var(--md-primary);position:relative}
+.fx-ring span:nth-child(even){background:linear-gradient(120deg,#6C3CF5,#D9328A);color:#FFFFFF}
+@supports (animation-timeline: view()){
+@media (min-width:1024px) and (min-height:700px) and (max-height:1300px) and (prefers-reduced-motion:no-preference){
+.fx-step .fx-tall img{height:calc(100vh - 200px)}
+.fx-step .fx-scroll{height:calc(100vh - 190px);width:calc((100vh - 190px) * .48)}
+.fx-step .fx-shot.nat img,.fx-step .fx-fit img{max-height:calc(100vh - 220px);object-fit:contain;width:auto;max-width:100%;margin:0 auto}
+}
+}
+@media (max-width:700px){
+.fx-items,.fx-items.c3,.fx-swot,.fx-vs,.fx-notifs,.fx-pair{grid-template-columns:minmax(0,1fr);gap:24px}
+.fx-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.fx-stat b{font-size:36px}
+.fx-hl{font-size:23px}
+.fx-bar{grid-template-columns:72px minmax(0,1fr);gap:16px}
+.fx-bar>b{font-size:36px}
+.fx-bar[style]{grid-template-columns:minmax(0,1fr) !important;gap:10px}
+.fx-phones{flex-wrap:wrap;gap:20px 14px}
+.fx-phones figure{flex:0 0 calc(50% - 7px)}
+.fx-dec{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fx-tall img{height:auto;width:100%;max-width:320px}
+.fx-notifs[style]{grid-template-columns:minmax(0,1fr) !important}
+.fx-matrix tbody th{font-size:15px}
+.fx-matrix th,.fx-matrix td{font-size:13px;padding-right:10px}
+}
 
 /* ---------- Responsive layer (tablet + mobile) ---------- */
 img{max-width:100%}
@@ -197,7 +457,7 @@ html.wallet-open{overflow:hidden}
 <a href="about.html" class="m3-btn" aria-label="About" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">person</span><span class="nav-tx">About</span></a>
 <a href="experiments.html" class="m3-btn" aria-label="Experiments with AI" style="height: 40px; padding: 0 16px; border-radius: 20px; color: var(--md-on-surface-variant); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center"><span class="ms nav-ic" aria-hidden="true">auto_awesome</span><span class="nav-tx">Experiments with AI</span></a>
 <span aria-hidden="true" style="width: 1px; height: 24px; background: var(--md-outline-variant); margin: 0 8px"></span>
-<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="rs-tx">Download résumé</span></a>
+<a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 22px 0 18px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><span class="ms" aria-hidden="true">download</span><span class="rs-tx">Resume</span></a>
 </nav>
 </div>
 <a href="wallet/" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
@@ -214,6 +474,21 @@ html.wallet-open{overflow:hidden}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px"><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Role</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">UI/UX Designer · Participant</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Timeline</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Case study exploration</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Type</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Concept · Search + AI</span></div><div class="glow" style="background: var(--md-surface-low); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-on-surface-variant)">Tools</span><span style="font-size: 15px; font-weight: 600; line-height: 1.4">Wireframes · Hi-fi UI</span></div></div>
 <img src="assets/v2/real-zepto.jpg" alt="Zepto mobile app with AI-assisted grocery search" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 32px; background: var(--md-surface-container)">
 </section>
+<!-- CaseZepto v3: two-column pinned story (old sections kept hidden below) -->
+<div class="fx">
+<div class="fx-step" id="objective"><section class="fx-sec"><div class="fx-l"><span class="fx-num">01 — Objective</span><h2>The objective</h2></div><div class="fx-r"><div class="fx-items"><article class="fx-item"><span class="ms" aria-hidden="true">search</span><span class="fx-k">01</span><h3>Improve search experience</h3><p>Help users find relevant products faster and more accurately while reducing friction during discovery.</p></article><article class="fx-item"><span class="ms" aria-hidden="true">trending_up</span><span class="fx-k">02</span><h3>Drive business growth</h3><p>Use better recommendations and contextual discovery to increase engagement, repeat purchases and AOV.</p></article></div></div></section></div>
+<div class="fx-step" id="challenge"><section class="fx-sec"><div class="fx-l"><span class="fx-num">02 — Challenge</span><h2>The challenge</h2><p class="fx-d">Zepto users often rely heavily on search, but traditional search can struggle when users have broad or unclear intent.</p></div><div class="fx-r"><div class="fx-bars" style="margin-bottom: 34px"><div class="fx-bar" style="grid-template-columns: 220px minmax(0, 1fr)"><b>60–70%</b><div><i style="width: 65%"></i><span>of grocery app sessions begin with search</span><small>rather than navigation</small></div></div></div><div class="fx-items c3"><article class="fx-item"><span class="fx-k">01</span><h3>Search accuracy &amp; personalisation</h3><p>Users frequently complain about it.</p></article><article class="fx-item"><span class="fx-k">03</span><h3>Broad searches create decision fatigue</h3><p>Which variant, size, or brand to choose?</p></article><article class="fx-item"><span class="fx-k">04</span><h3>Limited contextual recommendations</h3><p>No upsell, cross-sell, or contextual nudges.</p></article></div></div></section></div>
+<div class="fx-step" id="data"><section class="fx-sec"><div class="fx-l"><span class="fx-num">03 — Data</span><h2>What the data told us</h2><p class="fx-d">Search directly affects discovery, engagement and purchase behaviour.</p></div><div class="fx-r"><div class="fx-bars"><div class="fx-bar"><b>52%</b><div><i style="width: 52%"></i><span>Very broad searches</span><small>e.g. Aashirwad atta, Govardhan rice</small></div></div><div class="fx-bar"><b>34%</b><div><i style="width: 34%"></i><span>Narrow searches</span><small>e.g. Amul 500ml milk, Modern sandwich bread</small></div></div><div class="fx-bar"><b>14%</b><div><i style="width: 14%"></i><span>Broad searches</span><small>e.g. rice, ice cream</small></div></div></div></div></section></div>
+<div class="fx-step" id="opportunity"><section class="fx-sec"><div class="fx-l"><span class="fx-num">04 — Opportunity</span><h2>Design opportunity</h2><p class="fx-quote">How might we make Zepto search feel effortlessly smart, personalised, and context-aware?</p></div><div class="fx-r"><span class="fx-k" style="margin-bottom: 14px">Concepts explored</span><ul class="fx-tags"><li class="on">AI Predictive Reorder</li><li class="on">AI Predictive Bulk Order</li><li>AI Search Intent Expander</li><li>AI Visual Search</li><li>AI Voice Search</li><li>AI Recipe-first Search</li><li class="on">AI Mood / Situation-based Suggestions</li></ul><p class="fx-hl" style="margin-top: 36px">Move beyond helping users find what they searched for, toward helping them understand <em>what they may need next.</em></p></div></section></div>
+<div class="fx-step" id="idea-1"><section class="fx-sec"><div class="fx-l"><span class="fx-num">Idea 01</span><h2>Predictive reorder</h2><p class="fx-d">Zepto predicts when frequently purchased essentials may run out and surfaces a timely reorder prompt.</p><ul class="fx-checks"><li><span class="ms" aria-hidden="true">check_circle</span>One-tap reorder</li><li><span class="ms" aria-hidden="true">check_circle</span>Less need to remember what is running low</li><li><span class="ms" aria-hidden="true">check_circle</span>Reduced friction</li><li><span class="ms" aria-hidden="true">check_circle</span>Stronger repeat-purchase habit</li></ul></div><div class="fx-r"><div class="fx-stack"><figure class="fx-shot nat"><img src="assets/v2/zepto_ui-reorder.jpg" alt="Zepto predictive reorder screens"></figure><div><span class="fx-k" style="margin-bottom: 10px">Edge cases</span><ul class="fx-tags"><li class="dash">One-time purchase</li><li class="dash">Different variant</li><li class="dash">Already in cart</li></ul></div></div></div></section></div>
+<div class="fx-step" id="idea-2"><section class="fx-sec"><div class="fx-l"><span class="fx-num">Idea 02</span><h2>Smart Packs</h2><p class="fx-d">Ready-to-add bundles based on purchase habits, seasons and household needs.</p><ul class="fx-checks"><li><span class="ms" aria-hidden="true">check_circle</span>Faster repeat purchases</li><li><span class="ms" aria-hidden="true">check_circle</span>Larger, more relevant carts</li><li><span class="ms" aria-hidden="true">check_circle</span>Customisable packs</li><li><span class="ms" aria-hidden="true">check_circle</span>Smart substitutions when items are unavailable</li></ul></div><div class="fx-r"><div class="fx-stack"><figure class="fx-shot nat"><img src="assets/v2/zepto_ui-bulk.jpg" alt="Zepto Smart Packs screens"></figure><div><span class="fx-k" style="margin-bottom: 10px">Edge cases</span><ul class="fx-tags"><li class="dash">Irrelevant predicted items</li><li class="dash">Item unavailable</li><li class="dash">Outside the suggested list</li><li class="dash">Prediction drift</li></ul></div></div></div></section></div>
+<div class="fx-step" id="idea-3"><section class="fx-sec"><div class="fx-l"><span class="fx-num">Idea 03</span><h2>Mood and time-based suggestions</h2><p class="fx-d">Use time, behaviour and inferred mood to make discovery more personal and timely.</p><span class="fx-k">Edge cases</span><ul class="fx-tags"><li class="dash">Wrong mood prediction</li><li class="dash">Repetitive suggestions</li><li class="dash">Shared household accounts</li></ul></div><div class="fx-r"><div class="fx-stack"><figure class="fx-shot nat"><img src="assets/v2/zepto_ui-mood.jpg" alt="Zepto mood-based suggestion screens and notifications"></figure><div class="fx-notifs" style="grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0"><div class="fx-notif"><i>zepto</i><div><b>Craving-based tease</b><span>“Your fridge called… it’s empty and judging you”</span></div></div><div class="fx-notif"><i>zepto</i><div><b>Essentials drama</b><span>“Your coffee powder is screaming ‘Refill me before Monday!’”</span></div></div><div class="fx-notif"><i>zepto</i><div><b>Today's mood = today's food</b><span>“The last pack is staring at you. Blink and it’s gone.”</span></div></div></div></div></div></section></div>
+<div class="fx-step" id="impact"><section class="fx-sec"><div class="fx-l"><span class="fx-num">05 — Impact</span><h2>Business impact</h2><p class="fx-key"><span class="fx-k">Secondary objective</span>Increase Zepto's average order value through smarter, more contextual discovery.</p></div><div class="fx-r"><table class="fx-matrix"><thead><tr><th>Concept</th><th>User</th><th>Business</th></tr></thead><tbody><tr><th>Predictive reorder</th><td>Convenient, timely reorders.</td><td class="b">More frequent repeat purchases and contextual cross-sells.</td></tr><tr><th>Smart Packs</th><td>Convenient bundles and less item-by-item searching.</td><td class="b">Larger baskets, bulk purchases and increased order volume.</td></tr><tr><th>Mood-based suggestions</th><td>More personalised discovery.</td><td class="b">Impulse purchases, add-ons and cross-sells.</td></tr></tbody></table></div></section></div>
+<div class="fx-step" id="next"><section class="fx-sec"><div class="fx-l"><span class="fx-num">06 — Next</span><h2>Quick suggestions</h2><p class="fx-d">Future opportunities beyond the three selected directions.</p></div><div class="fx-r"><div class="fx-items"><article class="fx-item"><span class="ms" aria-hidden="true">group</span><h3>Multiple profiles</h3><p>Let households create profiles so AI learns individual preferences.</p></article><article class="fx-item"><span class="ms" aria-hidden="true">sell</span><h3>Helpful product tags</h3><p>“Previously bought”, “Top rated” and “Frequently purchased” reduce effort and build trust.</p></article><article class="fx-item"><span class="ms" aria-hidden="true">inventory_2</span><h3>Customisable bulk packs</h3><p>Let users build packs like Breakfast or Weekly Essentials.</p></article><article class="fx-item"><span class="ms" aria-hidden="true">image_search</span><h3>Image search</h3><p>Upload a photo when you don't know the product name.</p></article></div></div></section></div>
+<div class="fx-step" id="reflection"><section class="fx-sec"><div class="fx-l"><span class="fx-num">07 — Reflection</span><h2>Reflection</h2><p class="fx-note"><span class="ms" aria-hidden="true">info</span>Without live metrics, the outcome is a clearer framework for smarter search, not a claim of measured lift.</p></div><div class="fx-r"><ol class="fx-learn"><li>Search isn't a single query, it's a habit loop shaped by household context, timing, and intent breadth.</li><li>Mapping edge cases early made the UI more honest about what AI can suggest and when to stay quiet.</li><li>The balance is user value and business value.</li></ol></div></section></div>
+<div class="fx-tail"><section class="fx-next"><div class="fx-l"><span class="fx-num">Next project</span><h2>Sending help to a disaster zone in seconds: FlytBase</h2><a href="flytbase.html" class="fx-cta m3-btn">Read case study<span class="ms" aria-hidden="true">arrow_forward</span></a></div><a href="flytbase.html" class="fx-next-img" aria-label="FlytBase emergency response dashboard"><img src="assets/v2/real-flytbase.jpg" alt="FlytBase emergency response dashboard"></a></section></div>
+</div>
+<div hidden>
 <section style="padding: 48px 0; border-top: 1px solid #E3E1EC; display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--md-primary)">01 — Objective</span>
@@ -304,6 +579,7 @@ html.wallet-open{overflow:hidden}
 </div>
 </a>
 </section>
+</div>
 <!-- Contact -->
 <section aria-labelledby="contact-title" style="margin: 16px 0 32px; background: var(--md-inverse-surface); color: var(--md-inverse-on-surface); border-radius: 32px; padding: 56px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
