@@ -16,25 +16,21 @@
 <link rel="icon" href="assets/v2/abhi-photo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&amp;icon_names=account_balance_wallet,add_circle,ambulance,arrow_back,arrow_forward,arrow_outward,arrow_upward,article,auto_awesome,autorenew,balance,bolt,calendar_month,check,check_circle,close,code,coffee,crisis_alert,design_services,devices,directions_boat,download,edit,emergency,emoji_events,error,explore,fact_check,flag,format_quote,forum,group,help,hourglass_bottom,hourglass_top,image,image_search,info,insights,inventory_2,kitchen,layers,leaderboard,local_fire_department,location_on,lock_clock,mail,mood,my_location,new_releases,notifications,notifications_active,palette,payments,percent,person,person_check,person_off,person_search,phonelink_erase,photo_camera,psychology,remove_circle,restaurant,rocket_launch,rule,savings,school,science,search,sell,shopping_cart,smart_display,smartphone,speed,sports_esports,stacks,star,target,task_alt,timer,toll,travel_explore,trending_up,tune,warning,widgets,work,workspace_premium&amp;display=block">
+<link rel="stylesheet" href="assets/css/tokens.css">
 <style>
 body{margin:0;background:#FFFFFF}
 a{color:#6C3CF5}a:hover{color:#5223D6}
-.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
-.cn-row{display:flex;align-items:center;gap:14px;min-height:68px;padding:10px 18px 10px 12px;border-radius:20px;background:#FFFFFF;border:1px solid #E7E4F0;text-decoration:none;color:#1B1B21;box-shadow:0 1px 2px rgba(27,27,33,.04),0 10px 24px -18px rgba(48,20,120,.35);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.ms{display:inline-block;flex:none;width:1em;height:1em;font-size:var(--fs-title-sm);vertical-align:-0.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.cn-row{display:flex;align-items:center;gap:12px;min-height:68px;padding:12px 20px 12px 12px;border-radius:20px;background:#FFFFFF;border:1px solid #E7E4F0;text-decoration:none;color:#1B1B21;box-shadow:0 1px 2px rgba(27,27,33,.04),0 10px 24px -18px rgba(48,20,120,.35);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
 .cn-row:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 40%,#E7E4F0);box-shadow:0 16px 30px -18px color-mix(in srgb,var(--c) 70%,transparent);color:#1B1B21}
 .cn-row:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
 .cn-ic{flex:none;width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--c);background:color-mix(in srgb,var(--c) 11%,#FFFFFF)}
 .cn-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
-.cn-t b{font-size:16px;font-weight:700}
-.cn-t span{font-size:13px;color:#5D5E68;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cn-t b{font-size:var(--fs-body);font-weight:700}
+.cn-t span{font-size:var(--fs-label);color:#5D5E68;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cn-row>.ms{color:#8F909A}
-
 /* ---------- Responsive layer (tablet + mobile) ---------- */
 img{max-width:100%}
-.hide-sm{display:inline}
-.show-sm{display:none}
-.nav-ic{display:none}
 /* 3D wallet overlay */
 html.wallet-open{overflow:hidden}
 .wallet-dialog{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#E4DFD7;overflow:hidden}
@@ -42,7 +38,7 @@ html.wallet-open{overflow:hidden}
 .wallet-dialog::backdrop{background:rgba(20,14,40,.5)}
 @keyframes wallet-in{from{opacity:0}}
 .wallet-dialog iframe{display:block;width:100%;height:100%;border:0}
-.wallet-close{position:absolute;top:18px;left:24px;z-index:2;height:44px;padding:0 16px 0 12px;border-radius:999px;border:1px solid rgba(29,26,22,.22);background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#1D1A16;font:600 14px/1 'Plus Jakarta Sans',system-ui,sans-serif;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.wallet-close{position:absolute;top:18px;left:24px;z-index:2;height:44px;padding:0 16px 0 12px;border-radius:999px;border:1px solid rgba(29,26,22,.22);background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#1D1A16;font:600 14px/1 'Plus Jakarta Sans',system-ui,sans-serif;display:inline-flex;align-items:center;gap:4px;cursor:pointer}
 .wallet-close:hover{background:rgba(255,255,255,.9)}
 .wallet-close:focus-visible{outline:3px solid #6C3CF5;outline-offset:2px}
 @media (prefers-reduced-motion: reduce){.wallet-dialog[open]{animation:none}}
@@ -74,91 +70,57 @@ html.wallet-open{overflow:hidden}
 }
 /* Phone */
 @media (max-width: 760px){
-  header{padding:10px 12px 0 !important}
+  header{padding:12px 12px 0 !important}
   /* Header: photo, icon-only links, résumé, all on one row */
-  header .glass-bar[style*="justify-content: space-between"]{flex-wrap:nowrap !important;padding:6px !important;gap:6px !important}
+  header .glass-bar[style*="justify-content: space-between"]{flex-wrap:nowrap !important;padding:8px !important;gap:4px !important}
   header .glass-bar>a:first-child>span{display:none !important}
   header .glass-bar>a:first-child img{width:40px !important;height:40px !important}
   header nav{flex:1 1 auto;min-width:0;flex-wrap:nowrap !important;justify-content:flex-end;gap:4px !important}
   header nav a{white-space:nowrap}
-  header nav a.m3-btn:not(.m3-filled){width:44px;height:44px !important;padding:0 !important;border-radius:50% !important;justify-content:center}
-  header nav .nav-ic{display:inline-block;font-size:22px}
-  header nav .nav-tx{display:none}
-  header nav a.m3-filled{height:44px !important;padding:0 16px 0 12px !important;font-size:14px !important;margin-left:4px}
-  .show-sm{display:inline !important}
-  /* Hero buttons side by side */
-  .hero-actions{flex-wrap:nowrap !important;gap:8px !important;width:100%}
-  .hero-actions .hero-btn{flex:1 1 0;min-width:0;justify-content:center;height:50px !important;padding:0 10px !important;font-size:15px !important;gap:6px !important;white-space:nowrap}
-  .hero-actions .hero-btn .ms{font-size:20px}
-  .intro-box{padding:10px;border-radius:18px}
-  .intro-head h2{font-size:16px !important;line-height:1.3}
-  .hide-sm{display:none}
   .purse-btn{width:52px !important;height:52px !important}
   .purse-btn svg{width:32px;height:32px}
   header>div{gap:8px !important}
   .wallet-close{top:14px;left:14px}
-  main{padding:0 18px !important}
+  main{padding:0 20px !important}
   h1{font-size:clamp(32px,9vw,40px) !important;line-height:1.1 !important}
-  h2{font-size:clamp(26px,7.4vw,30px) !important}
+  h2{font-size:clamp(24px,7.4vw,32px) !important}
   p{overflow-wrap:break-word}
-  #contact{padding:36px 22px !important;border-radius:24px !important}
-  #contact h2{font-size:30px !important}
-  #work a.m3-card>div{padding:22px !important}
-  #work a.m3-card h3{font-size:22px !important}
+  #work a.m3-card>div{padding:24px !important}
+  #work a.m3-card h3{font-size:var(--fs-title) !important}
   #highlights-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
-  #highlights-grid>div{padding:18px !important;border-radius:20px !important}
-  #highlights-grid span[style*="font-size: 56px"]{font-size:40px !important}
-  #highlights-grid span[style*="font-size: 40px"]{font-size:28px !important}
-  #highlights-grid h3{font-size:15px !important;width:auto !important}
-  div:has(>.glow[style*="padding: 18px 20px"]){grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:10px !important}
-  .glow[style*="padding: 18px 20px"]{padding:14px !important}
-  /* Testimonials become a swipeable row */
-  .testi-marquee{overflow-x:auto !important;scroll-snap-type:x mandatory;-webkit-mask-image:none !important;mask-image:none !important;margin:0 -18px;padding:6px 18px 14px !important;scrollbar-width:none}
-  .testi-marquee::-webkit-scrollbar{display:none}
-  .testi-track{animation:none !important;width:auto !important}
-  .testi-set[aria-hidden]{display:none !important}
-  .testi-set{gap:14px !important}
-  .testi-card{width:82vw !important;scroll-snap-align:center;padding:22px !important}
-  .testi-card figcaption{flex-wrap:wrap}
-  .testi-card figcaption>.ms{display:none}
-  .testi-card blockquote{font-size:15px !important}
-  .hub2{height:38px;font-size:14px;padding:0 14px 0 10px}
-  .hub2 .ms{font-size:18px}
-  .node-icon{width:40px;height:40px}
-  .node-icon img{width:22px;height:22px}
-  .node-icon .ms{font-size:22px}
+  #highlights-grid>div{padding:20px !important;border-radius:20px !important}
+  #highlights-grid span[style*="font-size: var(--fs-display)"]{font-size:var(--fs-headline-lg) !important}
+  #highlights-grid span[style*="font-size: var(--fs-headline-lg)"]{font-size:var(--fs-headline) !important}
+  #highlights-grid h3{font-size:var(--fs-label) !important;width:auto !important}
+  div:has(>.glow[style*="padding: 20px 20px"]){grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px !important}
+  .glow[style*="padding: 20px 20px"]{padding:16px !important}
   footer{flex-direction:column;align-items:flex-start !important}
 }
 @media (max-width: 440px){
-  header .rs-tx{display:none}
-  header nav a.m3-filled{width:44px;padding:0 !important;justify-content:center;border-radius:50% !important;gap:0 !important}
   .wallet-close-tx{display:none}
   .wallet-close{width:44px;padding:0;justify-content:center}
 }
 @media (max-width: 360px){
-  header nav a.m3-btn:not(.m3-filled){width:40px;height:40px !important}
-  header nav a.m3-filled{padding:0 12px 0 10px !important;font-size:13px !important}
-  .hero-actions .hero-btn{font-size:14px !important;padding:0 8px !important}
-  .hub2{height:32px;font-size:12px;padding:0 10px 0 8px;gap:6px}
-  #highlights-grid h3{font-size:14px !important}
+  #highlights-grid h3{font-size:var(--fs-label) !important}
 }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div style="min-height: 100vh; box-sizing: border-box; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #1B1B21; background: radial-gradient(120% 60% at 50% 0%, #EEE6FF 0%, #FFFFFF 62%); padding: 56px 20px 40px; display: flex; justify-content: center">
-<main style="width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 28px">
+<main id="main" style="width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 28px">
 <a href="/" aria-label="Abhimanyu Tiwari, portfolio home" style="display: block; border-radius: 50%"><img src="assets/v2/abhi-photo.png" alt="Abhimanyu Tiwari" style="width: 104px; height: 104px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 7px #CDBEFF, 0 18px 40px -16px rgba(108,60,245,.6)"></a>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
-<h1 style="margin: 0; font-size: 28px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">Abhimanyu Tiwari</h1>
-<p style="margin: 0; font-size: 15px; color: #5D5E68">Product designer · Bangalore</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center">
+<h1 style="margin: 0; font-size: var(--fs-headline); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em">Abhimanyu Tiwari</h1>
+<p style="margin: 0; font-size: var(--fs-label); color: #5D5E68">Product designer · Bangalore</p>
 </div>
 <div style="width: 100%; display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0 0 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6C3CF5; text-align: center">Connect with me</h2>
-<a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" class="cn-row" style="--c: #0A66C2"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.75v5.7h-4v-5.05c0-1.2-.02-2.75-1.75-2.75-1.75 0-2.02 1.3-2.02 2.66v5.14h-4v-11z"/></svg></span><span class="cn-t"><b>LinkedIn</b><span>abhimanyu-tiwari</span></span><span class="ms" aria-hidden="true">arrow_outward</span></a>
-<a href="https://www.instagram.com/abhimanyu.ux/" class="cn-row" style="--c: #D62976"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></span><span class="cn-t"><b>Instagram</b><span>@abhimanyu.ux</span></span><span class="ms" aria-hidden="true">arrow_outward</span></a>
-<a href="https://medium.com/@bangaloredesigner2020" class="cn-row" style="--c: #1B1B21"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><ellipse cx="7.2" cy="12" rx="5.2" ry="5.4" fill="currentColor"/><ellipse cx="16.4" cy="12" rx="2.6" ry="5.1" fill="currentColor"/><ellipse cx="21.1" cy="12" rx="0.95" ry="4.6" fill="currentColor"/></svg></span><span class="cn-t"><b>Medium</b><span>@bangaloredesigner2020</span></span><span class="ms" aria-hidden="true">arrow_outward</span></a>
-<a href="https://designsystem-rho.vercel.app/" class="cn-row" style="--c: #6C3CF5"><span class="cn-ic"><span class="ms" aria-hidden="true" style="font-size: 24px">palette</span></span><span class="cn-t"><b>My design system</b><span>designsystem-rho.vercel.app</span></span><span class="ms" aria-hidden="true">arrow_outward</span></a>
-<a href="mailto:bangaloredesigner2020@gmail.com" class="cn-row" style="--c: #2E7D4F"><span class="cn-ic"><span class="ms" aria-hidden="true" style="font-size: 24px">mail</span></span><span class="cn-t"><b>Email</b><span>bangaloredesigner2020@gmail.com</span></span><span class="ms" aria-hidden="true">arrow_outward</span></a>
+<h2 style="margin: 0 0 4px; font-size: var(--fs-label-sm); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6C3CF5; text-align: center">Connect with me</h2>
+<a href="https://www.linkedin.com/in/abhimanyu-tiwari-a745b4139/" class="cn-row" style="--c: #0A66C2"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.75v5.7h-4v-5.05c0-1.2-.02-2.75-1.75-2.75-1.75 0-2.02 1.3-2.02 2.66v5.14h-4v-11z"/></svg></span><span class="cn-t"><b>LinkedIn</b><span>abhimanyu-tiwari</span></span><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#arrow-up-right"></use></svg></a>
+<a href="https://www.instagram.com/abhimanyu.ux/" class="cn-row" style="--c: #D62976"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></span><span class="cn-t"><b>Instagram</b><span>@abhimanyu.ux</span></span><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#arrow-up-right"></use></svg></a>
+<a href="https://medium.com/@bangaloredesigner2020" class="cn-row" style="--c: #1B1B21"><span class="cn-ic"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><ellipse cx="7.2" cy="12" rx="5.2" ry="5.4" fill="currentColor"/><ellipse cx="16.4" cy="12" rx="2.6" ry="5.1" fill="currentColor"/><ellipse cx="21.1" cy="12" rx="0.95" ry="4.6" fill="currentColor"/></svg></span><span class="cn-t"><b>Medium</b><span>@bangaloredesigner2020</span></span><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#arrow-up-right"></use></svg></a>
+<a href="https://designsystem-rho.vercel.app/" class="cn-row" style="--c: #6C3CF5"><span class="cn-ic"><svg class="ms" aria-hidden="true" style="font-size: var(--fs-title)"><use href="assets/icons/lucide.svg#palette"></use></svg></span><span class="cn-t"><b>My design system</b><span>designsystem-rho.vercel.app</span></span><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#arrow-up-right"></use></svg></a>
+<a href="mailto:bangaloredesigner2020@gmail.com" class="cn-row" style="--c: #2E7D4F"><span class="cn-ic"><svg class="ms" aria-hidden="true" style="font-size: var(--fs-title)"><use href="assets/icons/lucide.svg#mail"></use></svg></span><span class="cn-t"><b>Email</b><span>bangaloredesigner2020@gmail.com</span></span><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#arrow-up-right"></use></svg></a>
 </div>
 </main>
 </div>

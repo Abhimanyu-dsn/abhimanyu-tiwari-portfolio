@@ -8,7 +8,7 @@
 
 import { SwarmCursor } from './swarm-cursor.js';
 
-// One global pace knob: the whole CREDex case study (15 sections) builds in about 30 s.
+// Pace knob. Each project sets its own `speed` so its whole case study builds in about 30 s.
 export const SPEED = 1.3;
 
 const PALETTE = {
@@ -22,7 +22,7 @@ const PALETTE = {
  * Builds one section. `onBuilt` fires as soon as every piece is in place (the next section
  * can start then); `onDone` fires once the last cursor has left.
  */
-export function buildSection(gsap, canvas, S, { onBuilt, onDone } = {}) {
+export function buildSection(gsap, canvas, S, { onBuilt, onDone, speed = SPEED } = {}) {
   const { w: SW, h: SH } = canvas.sectionSize(S);
   const box = (n) => canvas.box(S, n);
   const show = (n) => n.classList.remove('sw-u');
@@ -181,16 +181,22 @@ export function buildSection(gsap, canvas, S, { onBuilt, onDone } = {}) {
   })));
   S.figures.forEach((f) => job('Visuals', f.el, next(), (c) => buildFigure(c, f)));
   S.lists.forEach((l) => job('UI', l.el, next(), (c) => typeText(c, l, { cps: 0.01, max: 0.45 })));
+  // Anything else (diagrams, rows, icons): a Layout cursor draws its box
+  S.blocks.forEach((n) => {
+    const b = box(n);
+    if (b.w * b.h < 64) { master.call(() => show(n), null, 0.3); return; } // too small to draw
+    job('Layout', n, next(), (c) => drawBox(c, n, { move: 0.3, drag: 0.3 }));
+  });
 
   master.call(() => { canvas.finish(S, { keepCrew: true }); onBuilt && onBuilt(); }, null, builtAt);
   master.eventCallback('onComplete', () => onDone && onDone());
-  master.timeScale(SPEED);
+  master.timeScale(speed);
 
   const tick = () => cursors.forEach((c) => c.tick());
   let stopped = false;
   return {
     master,
-    builtIn: builtAt / SPEED, // seconds until the section is fully built
+    builtIn: builtAt / speed, // seconds until the section is fully built
     start() { gsap.ticker.add(tick); master.play(0); },
     stop() {
       if (stopped) return;

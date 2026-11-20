@@ -6,7 +6,7 @@
 const W = { wide: 1120, tall: 420 };
 
 // What the swarm treats as one thing to build
-const TEXT = '.fx-num, h1, h2, .fx-d, .fx-quote, .fx-key, .fx-note';
+const TEXT = '.fx-num, h1, h2, h3, .fx-d, .fx-quote, .fx-key, .fx-note, .fx-hmw, .fx-big, .fx-cap';
 const GROUPS = [
   ['.sw-facts', ':scope > div'],
   ['.fx-stats', ':scope > .fx-stat'],
@@ -15,6 +15,9 @@ const GROUPS = [
   ['.fx-dec', ':scope > li'],
 ];
 const LISTS = '.fx-learn > li, .fx-tags > li';
+// Containers the recipes above already know; anything else with a row of like children
+// (cases, steps, people, bars, checks…) becomes a generic group, one cursor per child.
+const KNOWN = '.sw-facts, .sw-tags, .fx-stats, .fx-items, .fx-notifs, .fx-dec, .fx-phones, .fx-pair, .fx-learn, .fx-tags, figure, svg';
 const NO_TYPE = '.ms, .fx-notif > i'; // icon glyphs and logo tiles appear with their card
 
 const el = (tag, cls, parent) => {
@@ -64,7 +67,7 @@ export class ConstructionCanvas {
   constructor(host, project) {
     this.host = host;
     this.project = project;
-    this.page = el('div', 'sw-page', host);
+    this.page = el('div', 'sw-page sw-p-' + project.id, host);
     this.zoom = 1;
     this.mode = null;
     this.sections = project.sections.map((s, i) => this.mount(s, i));
@@ -85,33 +88,58 @@ export class ConstructionCanvas {
   /** Finds every piece the swarm will build in a section and hides it. */
   prepare(S) {
     const b = S.body, hide = (n) => n.classList.add('sw-u');
-    const inGroup = (n) => GROUPS.some(([g]) => n.closest(g));
+    const reg = new Set(); // every node a recipe builds
+    const take = (n) => { hide(n); reg.add(n); return n; };
     hide(S.bg);
 
-    S.texts = [...b.querySelectorAll(TEXT)].filter((n) => !inGroup(n)).map((n) => { hide(n); return { el: n, typer: makeTyper(n) }; });
-    S.tags = [...b.querySelectorAll('.sw-tags > span')];
-    S.tags.forEach(hide);
+    // Group boxes: the known ones, then any other row of like children
+    const boxes = [];
+    GROUPS.forEach(([g, c]) => b.querySelectorAll(g).forEach((box) => boxes.push({ box, sel: c })));
+    [...b.querySelectorAll('[class*="fx-"]')].forEach((n) => {
+      const kids = [...n.children];
+      if (kids.length < 2 || n.matches(KNOWN) || n.closest('figure, svg, .fx-sec > .fx-l > h2')) return;
+      if (boxes.some((x) => x.box.contains(n) || n.contains(x.box))) return;
+      if (!kids.every((k) => k.tagName === kids[0].tagName && k.tagName !== 'SPAN' && k.tagName !== 'B')) return;
+      if (n.closest(TEXT) || n.matches('.fx-l, .fx-r, .fx-sec')) return;
+      boxes.push({ box: n, sel: ':scope > *' });
+    });
+    const inGroup = (n) => boxes.some((x) => x.box.contains(n));
 
-    S.groups = [];
-    GROUPS.forEach(([g, c]) => b.querySelectorAll(g).forEach((box) => {
-      const cards = [...box.querySelectorAll(c)].map((n) => {
-        hide(n);
+    const texts = [...b.querySelectorAll(TEXT)].filter((n) => !inGroup(n));
+    S.texts = texts.filter((n) => !texts.some((o) => o !== n && o.contains(n)) && !n.closest('figure'))
+      .map((n) => { take(n); return { el: n, typer: makeTyper(n) }; });
+    S.tags = [...b.querySelectorAll('.sw-tags > span')];
+    S.tags.forEach(take);
+
+    S.groups = boxes.map(({ box, sel }) => {
+      const cards = [...box.querySelectorAll(sel)].map((n) => {
+        take(n);
         const imgs = [...n.querySelectorAll('img')];
         imgs.forEach(hide);
         return { el: n, imgs, typer: makeTyper(n) };
       });
-      S.groups.push({ box, cards });
-    }));
+      return { box, cards };
+    });
 
     S.figures = [...b.querySelectorAll('figure')].filter((f) => !inGroup(f)).map((f) => {
-      hide(f);
+      take(f);
       const img = f.querySelector('img'), cap = f.querySelector('figcaption');
       if (img) hide(img);
       f.classList.add('sw-ph');
       return { el: f, img, cap: cap ? { el: cap, typer: makeTyper(cap) } : null, row: f.parentElement };
     });
 
-    S.lists = [...b.querySelectorAll(LISTS)].map((n) => { hide(n); return { el: n, typer: makeTyper(n) }; });
+    S.lists = [...b.querySelectorAll(LISTS)].filter((n) => !inGroup(n)).map((n) => { take(n); return { el: n, typer: makeTyper(n) }; });
+
+    // Anything left (diagrams, rows, icons…) is drawn as one block, so nothing shows early
+    S.blocks = [];
+    const holds = (n) => [...reg].some((r) => n.contains(r));
+    const sweep = (n) => [...n.children].forEach((c) => {
+      if (reg.has(c)) return;
+      if (holds(c)) sweep(c);
+      else { take(c); S.blocks.push(c); }
+    });
+    sweep(b);
     S.images = [...b.querySelectorAll('img')];
   }
 

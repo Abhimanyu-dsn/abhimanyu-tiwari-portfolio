@@ -1,18 +1,34 @@
 // ProjectModal: turns a project ID card into a large presentation canvas holding the whole
-// case study, which the swarm builds section by section: the intro as soon as the popup
-// opens, every later section as it scrolls into view. Driven by the `pb:open` event that
-// badge3d.js fires when a card is clicked; cards without an entry in PROJECTS keep opening
-// their case study page.
+// case study, which the swarm builds section by section while the reader stays where they
+// are. Driven by the `pb:open` event that badge3d.js fires when a card is clicked; cards
+// whose link isn't in PROJECTS (Figma, experiments) keep opening their own link.
 //
 // Motion (motion.dev, vanilla) handles the card ↔ popup morphs; GSAP runs the construction.
 
-import { credProject } from './cred-content.js';
 import { ConstructionCanvas } from './construction-canvas.js';
 import { buildSection } from './construction-timeline.js';
 import { ModalControls } from './modal-controls.js';
 
-// Card index in the Selected work grid → case study. CREDex (first card) for now.
-const PROJECTS = { 0: credProject };
+// Case-study page → its swarm project (generated from that page, loaded on open)
+const PROJECTS = {
+  'cred.html': 'credex',
+  'zepto.html': 'zepto',
+  'flytbase.html': 'flytbase',
+  'chomp.html': 'chomp',
+  'battlexo.html': 'battlexo',
+};
+const projectOf = (link) => (link && link.origin === location.origin ? PROJECTS[link.pathname.split('/').pop()] : null);
+const modules = {};
+const loadProject = (id) => (modules[id] ||= import(`./projects/${id}.js`).then((m) => m.default));
+const projectCss = (p) => {
+  if (!p.css || document.querySelector(`link[data-sw-p="${p.id}"]`)) return Promise.resolve();
+  const l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.dataset.swP = p.id;
+  l.href = new URL(`./projects/${p.css}`, import.meta.url).href;
+  document.head.appendChild(l);
+  return new Promise((res) => { l.onload = l.onerror = res; });
+};
 
 const MOTION_URL = 'https://cdn.jsdelivr.net/npm/motion@11.18.2/+esm';
 const GSAP_URL = 'https://cdn.jsdelivr.net/npm/gsap@3.12.7/+esm';
@@ -70,10 +86,11 @@ function cardImage(face) {
 let active = null;
 
 class ProjectModal {
-  constructor(grid, detail, project) {
+  constructor(grid, detail, id) {
     this.grid = grid;
     this.detail = detail; // { index, el, face?, link? }
-    this.project = project;
+    this.id = id;
+    this.project = { id, label: '', page: detail.link ? detail.link.href : '/' };
     this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.queue = [];
     this.running = null;
@@ -85,7 +102,10 @@ class ProjectModal {
     loadCss();
     let L;
     try {
-      [L] = await Promise.all([loadLibs(), cssReady()]);
+      let project;
+      [L, project] = await Promise.all([loadLibs(), loadProject(this.id), cssReady()]);
+      this.project = project;
+      await projectCss(project);
     } catch (err) {
       console.warn('Project popup unavailable, opening the case study page instead:', err);
       active = null;
@@ -204,6 +224,7 @@ class ProjectModal {
     await this.canvas.ready(S);
     if (this.closing || S.built) { this.running = null; return this.next(); }
     const crew = buildSection(this.gsap, this.canvas, S, {
+      speed: this.project.speed,
       // As soon as this section's pieces are in place the next one starts;
       // its cursors finish walking off in the meantime.
       onBuilt: () => {
@@ -341,12 +362,14 @@ class ProjectModal {
 
 // ---- wiring ----------------------------------------------------------------------------
 
+const cardsOf = (grid) => [...grid.querySelectorAll('.pb-card')];
+const linkOf = (card) => (card && card.nextElementSibling && card.nextElementSibling.matches('a.pb-link') ? card.nextElementSibling : null);
+
 function openProject(grid, index, detail) {
-  const project = PROJECTS[index];
-  if (!project || active) return false;
-  const card = grid.querySelectorAll('.pb-card')[index];
-  const link = card && card.nextElementSibling && card.nextElementSibling.matches('a.pb-link') ? card.nextElementSibling : null;
-  new ProjectModal(grid, detail || { index, el: card, link }, project).open();
+  const card = cardsOf(grid)[index], link = (detail && detail.link) || linkOf(card);
+  const id = projectOf(link);
+  if (!id || active) return false;
+  new ProjectModal(grid, detail || { index, el: card, link }, id).open();
   return true;
 }
 
@@ -355,15 +378,15 @@ function attach(grid) {
   grid.dataset.swarm = '1';
   // Card click (from badge3d.js)
   grid.addEventListener('pb:open', (e) => {
-    if (!PROJECTS[e.detail.index]) return; // other cards open their case-study page
+    if (!projectOf(e.detail.link)) return; // Figma and experiment cards open their own link
     e.preventDefault(); // this one is the popup's, even if a popup is already opening
     openProject(grid, e.detail.index, e.detail);
   });
-  // The "Read case study" pill under a card opens the same popup (keyboard path too);
+  // The "Read case study" button under a card opens the same popup (keyboard path too);
   // Ctrl/⌘/Shift-click still opens the page in a new tab.
-  grid.querySelectorAll('.pb-card').forEach((card, index) => {
-    const link = card.nextElementSibling;
-    if (!PROJECTS[index] || !link || !link.matches('a.pb-link')) return;
+  cardsOf(grid).forEach((card, index) => {
+    const link = linkOf(card);
+    if (!projectOf(link)) return;
     link.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
@@ -378,19 +401,20 @@ function attach(grid) {
 const grids = [...document.querySelectorAll('.pb-grid')];
 grids.forEach(attach);
 
-// Deep link: index.html#credex opens that case study straight away
-const linked = Object.entries(PROJECTS).find(([, p]) => location.hash === '#' + p.id);
-if (linked && grids[0]) {
+// Deep link: index.html#zepto (or #credex, #flytbase, …) opens that case study straight away
+const wanted = Object.entries(PROJECTS).find(([, id]) => location.hash === '#' + id);
+const target = wanted && grids.map((g) => ({ g, i: cardsOf(g).findIndex((c) => projectOf(linkOf(c)) === wanted[1]) })).find((x) => x.i >= 0);
+if (target) {
+  const { g, i } = target;
   const go = () => {
-    const i = +linked[0];
-    const card = grids[0].querySelectorAll('.pb-card')[i];
+    const card = cardsOf(g)[i];
     if (card) card.scrollIntoView({ block: 'center' });
-    setTimeout(() => (grids[0].pbOpenIndex ? grids[0].pbOpenIndex(i) : openProject(grids[0], i)), 80);
+    setTimeout(() => (g.pbOpenIndex ? g.pbOpenIndex(i) : openProject(g, i)), 80);
   };
   // Give the 3D cards a moment to come up so the card can fly; open plainly if they don't
   const t0 = performance.now();
   (function wait() {
-    if (grids[0].classList.contains('pb-3d') || performance.now() - t0 > 2500) go();
+    if (g.classList.contains('pb-3d') || performance.now() - t0 > 2500) go();
     else setTimeout(wait, 100);
   })();
 }

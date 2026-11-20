@@ -1,4 +1,4 @@
-/* Home page behaviour: count-up highlights, project filters. */
+/* Home page behaviour: intro video dialog and count-up highlights. */
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -21,32 +21,6 @@
     io.observe(grid);
   }
 
-  /* Project filter chips */
-  function filters() {
-    var group = document.querySelector('[aria-label="Filter projects"]');
-    if (!group) return;
-    var chips = group.querySelectorAll('button');
-    var cards = document.querySelectorAll('#work a.m3-card[data-tags]');
-    var on = chips[0].getAttribute('style'), off = chips[1].getAttribute('style');
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var tag = chip.textContent.replace('check', '').trim();
-        chips.forEach(function (c) {
-          var active = c === chip;
-          c.setAttribute('aria-pressed', active);
-          c.setAttribute('style', active ? on : off);
-          var icon = c.querySelector('.ms');
-          if (active && !icon) c.insertAdjacentHTML('afterbegin', '<span class="ms" aria-hidden="true" style="font-size: 18px">check</span>');
-          if (!active && icon) icon.remove();
-        });
-        cards.forEach(function (card) {
-          var show = tag === 'All' || (' ' + card.dataset.tags + ' ').indexOf(' ' + tag + ' ') > -1 || card.dataset.tags === tag;
-          card.style.display = show ? '' : 'none';
-        });
-      });
-    });
-  }
-
   /* Intro video dialog */
   function introVideo() {
     var dlg = document.getElementById('intro-dialog');
@@ -65,5 +39,4 @@
 
   introVideo();
   countUp();
-  filters();
 })();
