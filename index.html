@@ -355,6 +355,12 @@ html.wallet-open{overflow:hidden}
 @media (max-width: 640px){.pb-grid{grid-template-columns:minmax(0,1fr)}.pb-cell{padding-top:190px}}
 /* Old cards hidden while trying the ID cards: delete this rule to bring them back */
 #work>a.m3-card,#work>div[style*="grid-template-columns"],#work [aria-label="Filter projects"]{display:none !important}
+/* ID card still: a picture of the 3D card and strap shows until WebGL starts (the old CSS badge stays in the file, hidden). */
+.badge-swing{visibility:hidden !important}
+.badge-shot{position:absolute;z-index:25;left:-4.5px;top:-124.5px;width:449px;height:auto;pointer-events:none;-webkit-user-select:none;user-select:none;filter:drop-shadow(0 36px 40px rgba(80,30,180,.28))}
+.has-3d .badge-shot{visibility:hidden}
+@media (min-width: 1024px){header nav>span[aria-hidden]{margin:0 40px !important}}
+@media (max-width: 1023px){.badge-shot{left:50%;top:-40px;width:min(72vw,300px);transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -397,7 +403,7 @@ html.wallet-open{overflow:hidden}
 <li class="fact fact-pink"><span class="ms" aria-hidden="true">calendar_month</span>5+ Years Experience</li>
 <li class="fact fact-violet"><span class="ms" aria-hidden="true">location_on</span>Bangalore, India</li>
 </ul>
-<ul class="hero2-skills" aria-label="Skills">
+<ul class="hero2-skills" aria-label="Skills" style="display: none">
 <li><span class="ms" aria-hidden="true">layers</span>Product Design</li>
 <li><span class="ms" aria-hidden="true">smartphone</span>UI/UX</li>
 <li><span class="ms" aria-hidden="true">code</span>HTML &amp; CSS</li>
@@ -410,6 +416,7 @@ html.wallet-open{overflow:hidden}
 </div>
 <figure class="badge-scene" aria-label="ID badge: Abhimanyu Tiwari, Product Designer, 5+ years experience, Bangalore, India">
 <canvas class="badge3d" aria-hidden="true"></canvas>
+<img class="badge-shot" src="assets/v2/badge-shot.webp" alt="" aria-hidden="true" width="449" height="972" decoding="async" fetchpriority="high">
 <div class="badge-swing">
 <div class="lanyard" aria-hidden="true">
 <svg class="strap" viewBox="0 0 80 400" preserveAspectRatio="none"><defs><linearGradient id="strap-g" x1="0" x2="1"><stop offset="0" stop-color="#5A22D6"/><stop offset=".5" stop-color="#7B3CF0"/><stop offset="1" stop-color="#5420C8"/></linearGradient><pattern id="weave" width="6" height="4" patternUnits="userSpaceOnUse"><rect width="6" height="2" fill="#FFFFFF" opacity=".07"/></pattern></defs><rect width="80" height="400" fill="url(#strap-g)"/><rect width="80" height="400" fill="url(#weave)"/><rect x="3" width="2" height="400" fill="#FFFFFF" opacity=".18"/><rect x="75" width="2" height="400" fill="#000000" opacity=".12"/><text x="40" y="330" fill="#FFFFFF" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-style="italic" font-size="30" text-anchor="middle" letter-spacing="-1">AT</text></svg>
