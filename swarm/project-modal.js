@@ -1,15 +1,17 @@
-// ProjectModal: turns a project ID card into a large presentation canvas, then lets the
-// swarm build the presentation on it. Driven by the `pb:open` event that badge3d.js fires
-// when a card is clicked; cards without an entry in PROJECTS keep opening their case study.
+// ProjectModal: turns a project ID card into a large presentation canvas holding the whole
+// case study, which the swarm builds section by section: the intro as soon as the popup
+// opens, every later section as it scrolls into view. Driven by the `pb:open` event that
+// badge3d.js fires when a card is clicked; cards without an entry in PROJECTS keep opening
+// their case study page.
 //
 // Motion (motion.dev, vanilla) handles the card ↔ popup morphs; GSAP runs the construction.
 
 import { credProject } from './cred-content.js';
 import { ConstructionCanvas } from './construction-canvas.js';
-import { buildConstruction } from './construction-timeline.js';
+import { buildSection } from './construction-timeline.js';
 import { ModalControls } from './modal-controls.js';
 
-// Card index in the Selected work grid → presentation. Experiment: CREDex (first card) only.
+// Card index in the Selected work grid → case study. CREDex (first card) for now.
 const PROJECTS = { 0: credProject };
 
 const MOTION_URL = 'https://cdn.jsdelivr.net/npm/motion@11.18.2/+esm';
@@ -19,6 +21,8 @@ const EASE_OUT = [0.23, 1, 0.32, 1];
 const EASE_IN_OUT = [0.77, 0, 0.175, 1];
 // Motion can't tween a transform to 'none', so the resting popup uses an explicit identity.
 const ID = 'translate(0px, 0px) scale(1, 1)';
+const FLY_REST = 'perspective(1000px) translate3d(0px, 0px, 0px) scale(1) rotateX(0deg)';
+const FLY_LIFT = 'perspective(1000px) translate3d(0px, -14px, 0px) scale(1.06) rotateX(7deg)';
 
 let libs = null;
 const loadLibs = () =>
@@ -33,10 +37,19 @@ const loadCss = () => {
   l.href = new URL('./swarm.css', import.meta.url).href;
   document.head.appendChild(l);
 };
+function cssReady() {
+  if ([...document.styleSheets].some((s) => s.href && s.href.includes('swarm/swarm.css'))) return Promise.resolve();
+  const link = document.querySelector('link[href*="swarm/swarm.css"]');
+  return new Promise((res) => {
+    link.addEventListener('load', res, { once: true });
+    link.addEventListener('error', res, { once: true });
+  });
+}
 // Resolves when the animation ends, or after its duration if the page is in the background
 // (rAF and the animation timeline pause there, and the popup must never get stuck half-open).
 const finished = (a, seconds) =>
   Promise.race([a && a.finished ? a.finished : Promise.resolve(a), new Promise((r) => setTimeout(r, seconds * 1000 + 120))]);
+
 const faces = new WeakMap();
 function cardImage(face) {
   // A half-size copy of the card's own front texture, so the flying card is pixel-identical.
@@ -59,9 +72,11 @@ let active = null;
 class ProjectModal {
   constructor(grid, detail, project) {
     this.grid = grid;
-    this.detail = detail;
+    this.detail = detail; // { index, el, face?, link? }
     this.project = project;
     this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.queue = [];
+    this.running = null;
   }
 
   async open() {
@@ -71,9 +86,9 @@ class ProjectModal {
     try {
       [L] = await Promise.all([loadLibs(), cssReady()]);
     } catch (err) {
-      console.warn('Project popup unavailable, opening the case study instead:', err);
+      console.warn('Project popup unavailable, opening the case study page instead:', err);
       active = null;
-      location.assign(this.project.href);
+      location.assign(this.project.page);
       return;
     }
     const { animate, gsap } = L;
@@ -91,7 +106,7 @@ class ProjectModal {
     shell.setAttribute('role', 'dialog');
     shell.setAttribute('aria-modal', 'true');
     shell.setAttribute('aria-label', this.project.label);
-    shell.innerHTML = '<div class="sw-canvas"></div>';
+    shell.innerHTML = '<div class="sw-canvas" tabindex="-1"></div><div class="sw-progress" aria-hidden="true"></div>';
     this.host = shell.firstChild;
     root.appendChild(shell);
     this.controls = new ModalControls(shell, {
@@ -99,25 +114,30 @@ class ProjectModal {
       onFullscreen: () => this.toggleFullscreen(),
       onSkip: () => this.skip(),
     });
-    const fly = (this.fly = cardImage(this.detail.face));
-    fly.className = 'sw-fly';
-    fly.setAttribute('aria-hidden', 'true');
-    root.appendChild(fly);
+    if (this.detail.face) {
+      this.fly = cardImage(this.detail.face);
+      this.fly.className = 'sw-fly';
+      this.fly.setAttribute('aria-hidden', 'true');
+      root.appendChild(this.fly);
+    }
     document.body.appendChild(root);
     document.documentElement.classList.add('sw-open');
+    if (location.hash !== '#' + this.project.id) history.replaceState(null, '', '#' + this.project.id);
 
-    // Swap the 3D card for its DOM twin in the same spot
     const r = this.detail.el.getBoundingClientRect();
-    this.placeFly(r);
-    this.grid.pbSetHidden && this.grid.pbSetHidden(this.detail.index, true);
+    if (this.fly) {
+      this.placeFly(r);
+      this.grid.pbSetHidden && this.grid.pbSetHidden(this.detail.index, true);
+    }
 
     this.canvas = new ConstructionCanvas(this.host, this.project);
     this.canvas.layout();
+    this.canvas.onFit = (z) => this.running && this.running.crew.setScale(z);
     this.wire();
 
     if (this.reduced) {
-      fly.style.opacity = '0';
-      this.canvas.showFinal();
+      if (this.fly) this.fly.style.opacity = '0';
+      this.canvas.finishAll();
       this.controls.doneBuilding();
       await Promise.all([
         finished(animate(this.backdrop, { opacity: [0, 1] }, { duration: 0.2 }), 0.2),
@@ -129,53 +149,90 @@ class ProjectModal {
 
     // ---- open: lift the card toward the viewer, then morph it into the popup ----
     const fin = shell.getBoundingClientRect();
-    const lift = 'perspective(1000px) translate3d(0px, -14px, 0px) scale(1.06) rotateX(7deg)';
-    this.centerT = this.flyToCenter(r, fin);
     shell.style.opacity = '0';
     animate(this.backdrop, { opacity: [0, 1] }, { duration: 0.45, ease: EASE_OUT });
-    await finished(animate(fly, { transform: ['perspective(1000px) translate3d(0px, 0px, 0px) scale(1) rotateX(0deg)', lift] }, { duration: 0.24, ease: EASE_OUT }), 0.24);
-    animate(fly, { transform: [lift, this.centerT], opacity: [1, 0] }, { duration: 0.62, ease: EASE_MORPH, opacity: { duration: 0.32, delay: 0.16, ease: 'linear' } });
-    await finished(
-      animate(shell, { transform: [this.cardT(r, fin), ID], opacity: [0, 1] }, { duration: 0.62, ease: EASE_MORPH, opacity: { duration: 0.22, ease: 'linear' } }),
-    0.62,
-    );
+    if (this.fly) {
+      await finished(animate(this.fly, { transform: [FLY_REST, FLY_LIFT] }, { duration: 0.24, ease: EASE_OUT }), 0.24);
+      animate(this.fly, { transform: [FLY_LIFT, this.flyToCenter(r, fin)], opacity: [1, 0] }, { duration: 0.62, ease: EASE_MORPH, opacity: { duration: 0.32, delay: 0.16, ease: 'linear' } });
+      await finished(
+        animate(shell, { transform: [this.cardT(r, fin), ID], opacity: [0, 1] }, { duration: 0.62, ease: EASE_MORPH, opacity: { duration: 0.22, ease: 'linear' } }),
+        0.62,
+      );
+    } else {
+      // Opened from a link (no card on screen): rise and fade in
+      await finished(animate(shell, { transform: ['translate(0px, 24px) scale(0.96, 0.96)', ID], opacity: [0, 1] }, { duration: 0.45, ease: EASE_OUT }), 0.45);
+    }
     shell.style.transform = '';
     shell.style.opacity = '';
     if (this.closing) return;
     this.controls.close.focus({ preventScroll: true });
 
-    // ---- the crew builds the presentation ----
-    this.startBuild();
+    // ---- the crew builds: intro now, the rest as each section scrolls into view ----
+    this.enqueue(this.canvas.sections[0]);
+    this.watch();
   }
 
-  startBuild() {
-    this.crew = buildConstruction(this.gsap, this.canvas, { onComplete: () => this.built() });
-    this.canvas.onFit = (s) => this.crew && this.crew.setScale(s);
-    this.crew.setScale(this.canvas.scale);
-    this.gsap.delayedCall(0.18, () => !this.closing && this.crew.start());
+  watch() {
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const S = this.canvas.sections.find((s) => s.el === e.target);
+        if (S) this.enqueue(S);
+      });
+    }, { root: this.host, threshold: [0.3], rootMargin: '0px 0px -10% 0px' });
+    this.canvas.sections.slice(1).forEach((S) => this.io.observe(S.el));
   }
 
-  built() {
-    if (this.crew) this.crew.stop();
+  enqueue(S) {
+    if (S.built || S.queued || this.closing) return;
+    S.queued = true;
+    this.queue.push(S);
+    this.queue.sort((a, b) => a.index - b.index); // always build top to bottom
+    this.next();
+  }
+
+  async next() {
+    if (this.running || !this.queue.length || this.closing) return;
+    const S = this.queue.shift();
+    this.running = { S, crew: null };
+    await this.canvas.ready(S);
+    if (this.closing || S.built) { this.running = null; return this.next(); }
+    const crew = buildSection(this.gsap, this.canvas, S, {
+      intro: S.index === 0,
+      onComplete: () => {
+        crew.stop();
+        this.running = null;
+        if (this.canvas.allBuilt) this.allDone();
+        else this.next();
+      },
+    });
+    this.running.crew = crew;
+    crew.setScale(this.canvas.zoom);
+    crew.start();
+  }
+
+  allDone() {
+    if (this.io) this.io.disconnect();
     this.controls.doneBuilding();
   }
 
+  /** Finish everything now: the running section and every section not built yet. */
   skip() {
-    if (!this.crew || this.canvas.done) return;
-    this.crew.stop();
-    this.crew.hideCrew();
-    this.canvas.showFinal();
-    this.controls.doneBuilding();
+    if (this.canvas.allBuilt) return;
+    if (this.running && this.running.crew) this.running.crew.stop();
+    this.running = null;
+    this.queue = [];
+    this.canvas.finishAll();
+    this.allDone();
   }
 
   wire() {
     this.onKey = (e) => {
       if (e.key === 'Escape') { e.preventDefault(); this.close(); }
-      else if (e.key === ' ' && !this.canvas.done && !(e.target.closest && e.target.closest('button,a'))) { e.preventDefault(); this.skip(); }
+      else if (e.key === ' ' && !this.canvas.allBuilt && !(e.target.closest && e.target.closest('button,a'))) { e.preventDefault(); this.skip(); }
       else if (e.key === 'Tab') this.trapFocus(e);
     };
     document.addEventListener('keydown', this.onKey);
-    this.host.addEventListener('click', (e) => { if (!e.target.closest('a')) this.skip(); });
     this.backdrop.addEventListener('click', () => this.close());
     this.onResize = () => this.relayout();
     addEventListener('resize', this.onResize);
@@ -190,18 +247,9 @@ class ProjectModal {
     else if (!this.shell.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
   }
 
-  /** Re-fits the stage; if the canvas changes shape mid-build, the finished layout is shown. */
+  /** Re-fits the page; if it flips between phone and desktop mid-build, everything is finished. */
   relayout() {
-    const before = this.canvas.mode;
-    const building = this.crew && !this.canvas.done;
-    this.canvas.layout();
-    if (this.canvas.mode !== before) {
-      if (this.crew) { this.crew.stop(); this.crew = null; }
-      this.canvas.showFinal();
-      this.controls.doneBuilding();
-    } else if (building) {
-      this.crew.setScale(this.canvas.scale);
-    }
+    if (this.canvas.layout() && !this.canvas.allBuilt) this.skip();
   }
 
   async toggleFullscreen() {
@@ -218,7 +266,7 @@ class ProjectModal {
         { transform: [`translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})`, ID] },
         { duration: 0.45, ease: EASE_IN_OUT },
       ),
-    0.45,
+      0.45,
     );
     this.shell.style.transform = '';
   }
@@ -228,22 +276,24 @@ class ProjectModal {
     this.closing = true;
     document.removeEventListener('keydown', this.onKey);
     removeEventListener('resize', this.onResize);
-    if (this.crew) { this.crew.stop(); this.crew.hideCrew(); }
+    if (this.io) this.io.disconnect();
+    if (this.running && this.running.crew) this.running.crew.stop();
+    this.queue = [];
+    if (location.hash === '#' + this.project.id) history.replaceState(null, '', location.pathname + location.search);
     const animate = this.animate;
     const r = this.detail.el.getBoundingClientRect();
-    if (!this.reduced && animate) {
+    if (!this.reduced && animate && this.fly) {
       const fin = this.shell.getBoundingClientRect();
       this.placeFly(r);
-      const centerT = this.flyToCenter(r, fin);
       animate(this.backdrop, { opacity: [1, 0] }, { duration: 0.42, ease: EASE_OUT });
       animate(this.host, { opacity: [1, 0] }, { duration: 0.16, ease: 'linear' });
-      animate(this.fly, { transform: [centerT, 'perspective(1000px) translate3d(0px, 0px, 0px) scale(1) rotateX(0deg)'], opacity: [0, 1] }, { duration: 0.5, ease: EASE_MORPH, opacity: { duration: 0.24, delay: 0.06, ease: 'linear' } });
+      animate(this.fly, { transform: [this.flyToCenter(r, fin), FLY_REST], opacity: [0, 1] }, { duration: 0.5, ease: EASE_MORPH, opacity: { duration: 0.24, delay: 0.06, ease: 'linear' } });
       await finished(
         animate(this.shell, { transform: [ID, this.cardT(r, fin)], opacity: [1, 0] }, { duration: 0.5, ease: EASE_MORPH, opacity: { duration: 0.28, delay: 0.16, ease: 'linear' } }),
-      0.5,
+        0.5,
       );
     } else if (animate) {
-      await finished(animate(this.root, { opacity: [1, 0] }, { duration: 0.18 }), 0.18);
+      await finished(animate(this.root, { opacity: [1, 0] }, { duration: 0.2 }), 0.2);
     }
     this.grid.pbSetHidden && this.grid.pbSetHidden(this.detail.index, false);
     // Let the 3D card draw before the DOM twin goes, so nothing blinks
@@ -276,26 +326,58 @@ class ProjectModal {
   }
 }
 
-function cssReady() {
-  const l = [...document.styleSheets].find((s) => s.href && s.href.includes('swarm/swarm.css'));
-  if (l) return Promise.resolve();
-  const link = document.querySelector('link[href*="swarm/swarm.css"]');
-  return new Promise((res) => {
-    link.addEventListener('load', res, { once: true });
-    link.addEventListener('error', res, { once: true });
-  });
+// ---- wiring ----------------------------------------------------------------------------
+
+function openProject(grid, index, detail) {
+  const project = PROJECTS[index];
+  if (!project || active) return false;
+  const card = grid.querySelectorAll('.pb-card')[index];
+  const link = card && card.nextElementSibling && card.nextElementSibling.matches('a.pb-link') ? card.nextElementSibling : null;
+  new ProjectModal(grid, detail || { index, el: card, link }, project).open();
+  return true;
 }
 
 function attach(grid) {
   if (grid.dataset.swarm) return;
   grid.dataset.swarm = '1';
+  // Card click (from badge3d.js)
   grid.addEventListener('pb:open', (e) => {
-    const project = PROJECTS[e.detail.index];
-    if (!project || active) return;
-    e.preventDefault();
-    new ProjectModal(grid, e.detail, project).open();
+    if (!PROJECTS[e.detail.index]) return; // other cards open their case-study page
+    e.preventDefault(); // this one is the popup's, even if a popup is already opening
+    openProject(grid, e.detail.index, e.detail);
+  });
+  // The "Read case study" pill under a card opens the same popup (keyboard path too);
+  // Ctrl/⌘/Shift-click still opens the page in a new tab.
+  grid.querySelectorAll('.pb-card').forEach((card, index) => {
+    const link = card.nextElementSibling;
+    if (!PROJECTS[index] || !link || !link.matches('a.pb-link')) return;
+    link.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      if (grid.pbOpenIndex) grid.pbOpenIndex(index); // goes through pb:open with the card's face
+      else openProject(grid, index);
+    });
   });
   // Warm the libraries and styles as soon as someone heads for the cards
   grid.addEventListener('pointerenter', () => { loadCss(); loadLibs().catch(() => {}); }, { once: true });
 }
-document.querySelectorAll('.pb-grid').forEach(attach);
+
+const grids = [...document.querySelectorAll('.pb-grid')];
+grids.forEach(attach);
+
+// Deep link: index.html#credex opens that case study straight away
+const linked = Object.entries(PROJECTS).find(([, p]) => location.hash === '#' + p.id);
+if (linked && grids[0]) {
+  const go = () => {
+    const i = +linked[0];
+    const card = grids[0].querySelectorAll('.pb-card')[i];
+    if (card) card.scrollIntoView({ block: 'center' });
+    setTimeout(() => (grids[0].pbOpenIndex ? grids[0].pbOpenIndex(i) : openProject(grids[0], i)), 80);
+  };
+  // Give the 3D cards a moment to come up so the card can fly; open plainly if they don't
+  const t0 = performance.now();
+  (function wait() {
+    if (grids[0].classList.contains('pb-3d') || performance.now() - t0 > 2500) go();
+    else setTimeout(wait, 100);
+  })();
+}

@@ -1,39 +1,21 @@
-// ConstructionCanvas: the grey canvas and the project presentation laid out on it.
-// Everything is positioned in a fixed design space (a "stage") that is scaled to fit the
-// canvas, so cursor coordinates and element boxes share one coordinate system.
-// Elements start unbuilt (hidden); ConstructionTimeline builds them one by one.
+// ConstructionCanvas: the grey canvas inside the popup, now a scrolling page of section cards.
+// Each section's markup (from the project's content module) is laid out by CSS straight away
+// but kept invisible; the swarm then builds it piece by piece. Nothing is hand-positioned:
+// the swarm measures the real elements, so any section markup can be built.
 
-const LAYOUTS = {
-  // Desktop / landscape canvas
-  wide: {
-    w: 1200, h: 750,
-    container: [40, 40, 1120, 670],
-    image: [620, 88, 492, 316],
-    eyebrow: [88, 92, 480, 22],
-    title: [88, 122, 500, 116, 44],
-    summary: [88, 252, 480, 84, 17],
-    divider: [88, 356, 480, 2],
-    facts: [[88, 378], [338, 378], [88, 490], [338, 490]], factSize: [230, 92],
-    stats: [[620, 424], [791, 424], [962, 424]], statSize: [150, 112],
-    tags: [620, 560],
-    cta: [88, 614, 240, 54],
-  },
-  // Phone / portrait canvas
-  // (narrow stage so text stays readable once scaled to a phone)
-  tall: {
-    w: 420, h: 900,
-    container: [16, 16, 388, 868],
-    image: [36, 36, 348, 200],
-    eyebrow: [36, 256, 348, 20],
-    title: [36, 280, 348, 80, 30],
-    summary: [36, 370, 348, 104, 15],
-    divider: [36, 486, 348, 2],
-    facts: [[36, 502], [216, 502], [36, 612], [216, 612]], factSize: [168, 100],
-    stats: [[36, 726], [156, 726], [276, 726]], statSize: [108, 84],
-    tags: null,
-    cta: [36, 824, 348, 48],
-  },
-};
+const W = { wide: 1120, tall: 420 };
+
+// What the swarm treats as one thing to build
+const TEXT = '.fx-num, h1, h2, .fx-d, .fx-quote, .fx-key, .fx-note';
+const GROUPS = [
+  ['.sw-facts', ':scope > div'],
+  ['.fx-stats', ':scope > .fx-stat'],
+  ['.fx-items', ':scope > .fx-item'],
+  ['.fx-notifs', ':scope > .fx-notif'],
+  ['.fx-dec', ':scope > li'],
+];
+const LISTS = '.fx-learn > li, .fx-tags > li';
+const NO_TYPE = '.ms, .fx-notif > i'; // icon glyphs and logo tiles appear with their card
 
 const el = (tag, cls, parent) => {
   const n = document.createElement(tag);
@@ -41,145 +23,156 @@ const el = (tag, cls, parent) => {
   if (parent) parent.appendChild(n);
   return n;
 };
-const place = (n, [x, y, w, h]) => {
-  n.style.left = x + 'px';
-  n.style.top = y + 'px';
-  if (w != null) n.style.width = w + 'px';
-  if (h != null) n.style.height = h + 'px';
-};
+
+/** Splits an element's text into typed + not-yet-typed spans, so layout never shifts while typing. */
+function makeTyper(root) {
+  const parts = [];
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => (n.nodeValue.trim() && !n.parentElement.closest(NO_TYPE) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((n) => {
+    // Custom tags, so no case-study CSS rule (e.g. `.fx-stat span`) can restyle the pieces
+    const w = document.createElement('sw-w'), t = document.createElement('sw-t'), r = document.createElement('sw-r');
+    w.append(t, r);
+    r.textContent = n.nodeValue;
+    n.replaceWith(w);
+    parts.push({ t, r, v: n.nodeValue });
+  });
+  const caret = document.createElement('sw-caret');
+  const total = parts.reduce((a, p) => a + p.v.length, 0);
+  return {
+    total,
+    set(n) {
+      let k = Math.round(n), placed = false;
+      for (const p of parts) {
+        const c = Math.max(0, Math.min(p.v.length, k));
+        p.t.textContent = p.v.slice(0, c);
+        p.r.textContent = p.v.slice(c);
+        if (!placed && c < p.v.length) { p.t.after(caret); placed = true; }
+        k -= p.v.length;
+      }
+      if (!placed && parts.length) parts[parts.length - 1].t.after(caret);
+    },
+    caret(on) { root.classList.toggle('is-typing', on); if (!on) caret.remove(); },
+    done() { parts.forEach((p) => { p.t.textContent = p.v; p.r.textContent = ''; }); caret.remove(); root.classList.remove('is-typing'); },
+  };
+}
 
 export class ConstructionCanvas {
   constructor(host, project) {
     this.host = host;
     this.project = project;
-    this.stage = el('div', 'sw-stage', host);
-    this.stage.setAttribute('aria-busy', 'true');
-    this.scale = 1;
+    this.page = el('div', 'sw-page', host);
+    this.zoom = 1;
     this.mode = null;
+    this.sections = project.sections.map((s, i) => this.mount(s, i));
   }
 
-  /** Picks the layout for the canvas shape and (re)creates every element, unbuilt. */
-  layout() {
-    const r = this.host.getBoundingClientRect();
-    const mode = r.width / Math.max(r.height, 1) < 0.95 ? 'tall' : 'wide';
-    if (mode !== this.mode) this.build(mode);
-    this.fit(r);
-    return this.mode;
+  mount(spec, index) {
+    const sec = el('section', 'sw-sec', this.page);
+    sec.dataset.id = spec.id;
+    const bg = el('div', 'sw-sec-bg', sec);
+    const body = el('div', 'sw-sec-body', sec);
+    body.innerHTML = spec.html;
+    const layer = el('div', 'sw-cursors', sec);
+    const S = { id: spec.id, index, el: sec, bg, body, layer, built: false };
+    this.prepare(S);
+    return S;
   }
 
-  fit(r = this.host.getBoundingClientRect()) {
-    const L = LAYOUTS[this.mode];
-    const top = this.mode === 'tall' ? 64 : 0; // keep the portrait stage clear of the top-right buttons
-    const s = Math.min(r.width / L.w, (r.height - top) / L.h);
-    this.scale = s;
-    this.stage.style.transform = `translate(${(r.width - L.w * s) / 2}px, ${top + (r.height - top - L.h * s) / 2}px) scale(${s})`;
-    this.onFit && this.onFit(s);
-  }
+  /** Finds every piece the swarm will build in a section and hides it. */
+  prepare(S) {
+    const b = S.body, hide = (n) => n.classList.add('sw-u');
+    const inGroup = (n) => GROUPS.some(([g]) => n.closest(g));
+    hide(S.bg);
 
-  build(mode) {
-    const p = this.project, L = LAYOUTS[mode];
-    this.mode = mode;
-    this.L = L;
-    this.stage.replaceChildren();
-    this.stage.classList.toggle('is-tall', mode === 'tall');
-    this.stage.style.width = L.w + 'px';
-    this.stage.style.height = L.h + 'px';
-    const S = this.stage, e = (this.els = {});
+    S.texts = [...b.querySelectorAll(TEXT)].filter((n) => !inGroup(n)).map((n) => { hide(n); return { el: n, typer: makeTyper(n) }; });
+    S.tags = [...b.querySelectorAll('.sw-tags > span')];
+    S.tags.forEach(hide);
 
-    e.container = el('div', 'sw-el sw-container', S); place(e.container, L.container);
-    e.containerShadow = el('div', 'sw-container-shadow', e.container);
-
-    e.image = el('div', 'sw-el sw-image', S); place(e.image, L.image);
-    e.placeholder = el('div', 'sw-placeholder', e.image);
-    e.placeholder.innerHTML = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="17" cy="19" r="4" fill="currentColor"/><path d="M8 36l11-11 8 8 6-6 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>';
-    e.img = el('img', 'sw-img', e.image);
-    e.img.src = p.image.src;
-    e.img.alt = p.image.alt;
-    e.img.decoding = 'async';
-
-    e.eyebrow = this.text('sw-eyebrow', L.eyebrow, p.eyebrow);
-    e.title = this.text('sw-title', L.title, p.title, 'h2');
-    e.title.style.fontSize = L.title[4] + 'px';
-    e.summary = this.text('sw-summary', L.summary, p.summary, 'p');
-    e.summary.style.fontSize = L.summary[4] + 'px';
-
-    e.divider = el('div', 'sw-el sw-divider', S); place(e.divider, L.divider);
-
-    e.facts = L.facts.map(([x, y], i) => {
-      const c = el('div', 'sw-el sw-card', S); place(c, [x, y, ...L.factSize]);
-      const k = el('span', 'sw-card-k', c), v = el('span', 'sw-card-v', c);
-      c._parts = [[k, p.facts[i][0]], [v, p.facts[i][1]]];
-      return c;
-    });
-    e.stats = L.stats.map(([x, y], i) => {
-      const c = el('div', 'sw-el sw-card sw-stat', S); place(c, [x, y, ...L.statSize]);
-      const v = el('span', 'sw-stat-v', c), k = el('span', 'sw-stat-k', c);
-      c._parts = [[v, p.stats[i][0]], [k, p.stats[i][1]]];
-      return c;
-    });
-    e.tags = [];
-    if (L.tags) {
-      let x = L.tags[0];
-      p.tags.forEach((t) => {
-        const w = 22 + t.length * 8.6;
-        const g = el('span', 'sw-el sw-tag', S); place(g, [x, L.tags[1], w, 32]);
-        g.textContent = t;
-        e.tags.push(g);
-        x += w + 10;
+    S.groups = [];
+    GROUPS.forEach(([g, c]) => b.querySelectorAll(g).forEach((box) => {
+      const cards = [...box.querySelectorAll(c)].map((n) => {
+        hide(n);
+        const imgs = [...n.querySelectorAll('img')];
+        imgs.forEach(hide);
+        return { el: n, imgs, typer: makeTyper(n) };
       });
-    }
+      S.groups.push({ box, cards });
+    }));
 
-    e.cta = el('a', 'sw-el sw-cta', S); place(e.cta, L.cta);
-    e.cta.href = p.href;
-    e.cta.tabIndex = -1;
-    e.ctaLabel = el('span', 'sw-cta-label', e.cta);
-    e.cta._text = p.cta + '  →';
-
-    // Alignment guides flashed while building (each cursor brings its own selection box)
-    e.guideH = el('div', 'sw-guide sw-guide-h', S);
-    e.guideV = el('div', 'sw-guide sw-guide-v', S);
-    this.cursorLayer = el('div', 'sw-cursors', S);
-  }
-
-  text(cls, box, value, tag = 'div') {
-    const n = el(tag, 'sw-el sw-text ' + cls, this.stage);
-    place(n, box);
-    n._value = value;
-    n._span = el('span', 'sw-typed', n);
-    n._caret = el('span', 'sw-caret', n);
-    return n;
-  }
-
-  /** Box of an element in stage coordinates. */
-  box(n) {
-    return { x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight };
-  }
-
-  /** Shows the finished presentation with no construction (skip, reduced motion, re-layout). */
-  showFinal() {
-    const e = this.els;
-    this.stage.querySelectorAll('.sw-el').forEach((n) => {
-      n.style.visibility = 'visible';
-      n.style.opacity = '1';
-      n.style.clipPath = 'none';
-      n.style.transform = 'none';
+    S.figures = [...b.querySelectorAll('figure')].filter((f) => !inGroup(f)).map((f) => {
+      hide(f);
+      const img = f.querySelector('img'), cap = f.querySelector('figcaption');
+      if (img) hide(img);
+      f.classList.add('sw-ph');
+      return { el: f, img, cap: cap ? { el: cap, typer: makeTyper(cap) } : null, row: f.parentElement };
     });
-    [e.eyebrow, e.title, e.summary].forEach((t) => { t._span.textContent = t._value; t.classList.remove('is-typing'); });
-    [...e.facts, ...e.stats].forEach((c) => c._parts.forEach(([n, v]) => (n.textContent = v)));
-    e.ctaLabel.textContent = e.cta._text;
-    e.placeholder.style.opacity = '0';
-    e.img.style.visibility = 'visible';
-    e.img.style.clipPath = 'none';
-    e.img.style.transform = 'none';
-    e.containerShadow.style.opacity = '1';
-    [e.guideH, e.guideV].forEach((n) => (n.style.opacity = '0'));
-    this.stage.querySelectorAll('.sw-ghost').forEach((n) => n.remove());
-    this.finish();
+
+    S.lists = [...b.querySelectorAll(LISTS)].map((n) => { hide(n); return { el: n, typer: makeTyper(n) }; });
+    S.images = [...b.querySelectorAll('img')];
   }
 
-  finish() {
-    this.stage.setAttribute('aria-busy', 'false');
-    this.els.cta.tabIndex = 0;
-    this.done = true;
+  /** Width-fits the page; returns true if the layout switched between phone and desktop. */
+  layout() {
+    const w = this.host.clientWidth;
+    const mode = w < 700 ? 'tall' : 'wide';
+    const changed = this.mode && mode !== this.mode;
+    this.mode = mode;
+    this.page.classList.toggle('is-tall', mode === 'tall');
+    const gutter = mode === 'wide' ? 64 : 20;
+    this.zoom = Math.min(mode === 'wide' ? 1 : 1.2, (w - gutter) / W[mode]);
+    this.page.style.zoom = String(this.zoom);
+    this.onFit && this.onFit(this.zoom);
+    return changed;
+  }
+
+  /** An element's box in its section's own (unzoomed) coordinates. */
+  box(S, n) {
+    const a = n.getBoundingClientRect(), s = S.el.getBoundingClientRect(), z = this.zoomFactor(S);
+    return { x: (a.left - s.left) / z, y: (a.top - s.top) / z, w: a.width / z, h: a.height / z };
+  }
+
+  /** Ratio between screen pixels and the section's CSS pixels (CSS zoom). */
+  zoomFactor(S) {
+    return S.el.getBoundingClientRect().width / S.el.offsetWidth || 1;
+  }
+
+  sectionSize(S) {
+    return { w: S.el.offsetWidth, h: S.el.offsetHeight };
+  }
+
+  /** Images of a section decoded, so measured boxes are final (gives up after 1.5 s). */
+  ready(S) {
+    const all = Promise.all(S.images.map((i) => (i.complete ? Promise.resolve() : i.decode().catch(() => {}))));
+    return Promise.race([all, new Promise((r) => setTimeout(r, 1500))]);
+  }
+
+  /** Shows a section finished, with no construction. */
+  finish(S) {
+    S.el.querySelectorAll('.sw-u').forEach((n) => n.classList.remove('sw-u'));
+    S.el.querySelectorAll('.sw-ph').forEach((n) => n.classList.remove('sw-ph'));
+    S.el.querySelectorAll('.sw-ghost').forEach((n) => n.remove());
+    [S.bg, ...S.el.querySelectorAll('.sw-sec-body *')].forEach((n) => {
+      if (n.style.clipPath) n.style.clipPath = '';
+      if (n.style.opacity) n.style.opacity = '';
+      if (n.style.transform && !n.closest('.sw-cursors')) n.style.transform = '';
+    });
+    S.texts.forEach((t) => t.typer.done());
+    S.groups.forEach((g) => g.cards.forEach((c) => c.typer.done()));
+    S.figures.forEach((f) => f.cap && f.cap.typer.done());
+    S.lists.forEach((l) => l.typer.done());
+    S.layer.replaceChildren();
+    S.built = true;
+  }
+
+  finishAll() {
+    this.sections.forEach((S) => !S.built && this.finish(S));
+  }
+
+  get allBuilt() {
+    return this.sections.every((S) => S.built);
   }
 }
