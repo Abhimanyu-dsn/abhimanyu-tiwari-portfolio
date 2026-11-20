@@ -177,17 +177,22 @@ class ProjectModal {
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
         const S = this.canvas.sections.find((s) => s.el === e.target);
-        if (S) this.enqueue(S);
+        if (S) this.enqueue(S, true);
       });
     }, { root: this.host, threshold: [0.3], rootMargin: '0px 0px -10% 0px' });
     this.canvas.sections.slice(1).forEach((S) => this.io.observe(S.el));
   }
 
-  enqueue(S) {
-    if (S.built || S.queued || this.closing) return;
-    S.queued = true;
-    this.queue.push(S);
-    this.queue.sort((a, b) => a.index - b.index); // always build top to bottom
+  /**
+   * Sections build one after another, top to bottom, while the reader stays where they are.
+   * A section the reader has scrolled to (`seen`) jumps the queue so they never wait on
+   * sections above it.
+   */
+  enqueue(S, seen = false) {
+    if (S.built || this.closing) return;
+    if (seen) S.seen = true;
+    if (!S.queued) { S.queued = true; this.queue.push(S); }
+    this.queue.sort((a, b) => (b.seen ? 1 : 0) - (a.seen ? 1 : 0) || a.index - b.index);
     this.next();
   }
 
@@ -203,27 +208,18 @@ class ProjectModal {
         crew.stop();
         this.running = null;
         if (this.canvas.allBuilt) return this.allDone();
-        // Keep going: the next section is queued and the page glides down to it
-        const after = this.canvas.sections[S.index + 1];
+        // Keep going: the next section builds while the reader stays where they are (no auto-scroll)
+        const all = this.canvas.sections;
+        const after = all.find((x) => x.index > S.index && !x.built) || all.find((x) => !x.built);
         if (after) this.enqueue(after);
         this.next();
       },
     });
     this.running.crew = crew;
     crew.setScale(this.canvas.zoom);
-    if (S.index > 0) this.follow(S);
     crew.start();
   }
 
-  /** Scrolls the canvas so section S sits near the top, unless the visitor is scrolling themselves. */
-  follow(S) {
-    if (performance.now() - (this.userAt || -1e9) < 2500) return;
-    const host = this.host;
-    const top = S.el.getBoundingClientRect().top - host.getBoundingClientRect().top + host.scrollTop - 28;
-    const max = host.scrollHeight - host.clientHeight;
-    if (this.scrollTween) this.scrollTween.kill();
-    this.scrollTween = this.gsap.to(host, { scrollTop: Math.max(0, Math.min(max, top)), duration: 0.7, ease: 'power2.inOut' });
-  }
 
   allDone() {
     if (this.io) this.io.disconnect();
@@ -234,7 +230,6 @@ class ProjectModal {
   skip() {
     if (this.canvas.allBuilt) return;
     if (this.running && this.running.crew) this.running.crew.stop();
-    if (this.scrollTween) this.scrollTween.kill();
     this.running = null;
     this.queue = [];
     this.canvas.finishAll();
@@ -251,10 +246,6 @@ class ProjectModal {
     this.backdrop.addEventListener('click', () => this.close());
     this.onResize = () => this.relayout();
     addEventListener('resize', this.onResize);
-    // The visitor's own scrolling always wins over the auto-scroll
-    const mine = () => { this.userAt = performance.now(); if (this.scrollTween) this.scrollTween.kill(); };
-    ['wheel', 'touchstart', 'pointerdown'].forEach((t) => this.host.addEventListener(t, mine, { passive: true }));
-    this.host.addEventListener('keydown', (e) => /^(Arrow|Page|Home|End)/.test(e.key) && mine());
   }
 
   trapFocus(e) {
@@ -293,7 +284,6 @@ class ProjectModal {
   async close() {
     if (this.closing || !this.root) return;
     this.closing = true;
-    if (this.scrollTween) this.scrollTween.kill();
     document.removeEventListener('keydown', this.onKey);
     removeEventListener('resize', this.onResize);
     if (this.io) this.io.disconnect();
