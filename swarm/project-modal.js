@@ -77,6 +77,7 @@ class ProjectModal {
     this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.queue = [];
     this.running = null;
+    this.crews = new Set(); // sections being built or whose cursors are still walking off
   }
 
   async open() {
@@ -132,7 +133,7 @@ class ProjectModal {
 
     this.canvas = new ConstructionCanvas(this.host, this.project);
     this.canvas.layout();
-    this.canvas.onFit = (z) => this.running && this.running.crew.setScale(z);
+    this.canvas.onFit = (z) => this.crews.forEach((c) => c.setScale(z));
     this.wire();
 
     if (this.reduced) {
@@ -203,23 +204,24 @@ class ProjectModal {
     await this.canvas.ready(S);
     if (this.closing || S.built) { this.running = null; return this.next(); }
     const crew = buildSection(this.gsap, this.canvas, S, {
-      intro: S.index === 0,
-      onComplete: () => {
-        crew.stop();
+      // As soon as this section's pieces are in place the next one starts;
+      // its cursors finish walking off in the meantime.
+      onBuilt: () => {
         this.running = null;
         if (this.canvas.allBuilt) return this.allDone();
-        // Keep going: the next section builds while the reader stays where they are (no auto-scroll)
+        // The next section builds while the reader stays where they are (no auto-scroll)
         const all = this.canvas.sections;
         const after = all.find((x) => x.index > S.index && !x.built) || all.find((x) => !x.built);
         if (after) this.enqueue(after);
         this.next();
       },
+      onDone: () => { crew.stop(); this.crews.delete(crew); },
     });
     this.running.crew = crew;
+    this.crews.add(crew);
     crew.setScale(this.canvas.zoom);
     crew.start();
   }
-
 
   allDone() {
     if (this.io) this.io.disconnect();
@@ -229,7 +231,8 @@ class ProjectModal {
   /** Finish everything now: the running section and every section not built yet. */
   skip() {
     if (this.canvas.allBuilt) return;
-    if (this.running && this.running.crew) this.running.crew.stop();
+    this.crews.forEach((c) => c.stop());
+    this.crews.clear();
     this.running = null;
     this.queue = [];
     this.canvas.finishAll();
@@ -287,7 +290,7 @@ class ProjectModal {
     document.removeEventListener('keydown', this.onKey);
     removeEventListener('resize', this.onResize);
     if (this.io) this.io.disconnect();
-    if (this.running && this.running.crew) this.running.crew.stop();
+    this.crews.forEach((c) => c.stop());
     this.queue = [];
     if (location.hash === '#' + this.project.id) history.replaceState(null, '', location.pathname + location.search);
     const animate = this.animate;

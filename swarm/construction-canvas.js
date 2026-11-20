@@ -151,7 +151,7 @@ export class ConstructionCanvas {
   }
 
   /** Shows a section finished, with no construction. */
-  finish(S) {
+  finish(S, { keepCrew = false } = {}) {
     S.el.querySelectorAll('.sw-u').forEach((n) => n.classList.remove('sw-u'));
     S.el.querySelectorAll('.sw-ph').forEach((n) => n.classList.remove('sw-ph'));
     S.el.querySelectorAll('.sw-ghost').forEach((n) => n.remove());
@@ -164,7 +164,7 @@ export class ConstructionCanvas {
     S.groups.forEach((g) => g.cards.forEach((c) => c.typer.done()));
     S.figures.forEach((f) => f.cap && f.cap.typer.done());
     S.lists.forEach((l) => l.typer.done());
-    S.layer.replaceChildren();
+    if (!keepCrew) S.layer.replaceChildren(); // cursors still walking off are cleared by their crew
     S.built = true;
   }
 

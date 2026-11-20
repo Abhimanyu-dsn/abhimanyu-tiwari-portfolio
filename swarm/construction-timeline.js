@@ -1,40 +1,36 @@
 // ConstructionTimeline: choreographs the swarm for one section of the case study.
-// Each cursor gets its own track (a GSAP timeline) and every move has a job: draw the section
-// card, type a heading, frame and reveal a screen, duplicate a card. Tracks run side by side;
-// when one cursor needs another's work, it waits for that point in the other's track.
+// Every element gets its own cursor: a Layout cursor draws the section card, a Type cursor
+// writes each heading and paragraph, a UI cursor draws and fills each card or list item, a
+// Visuals cursor frames and reveals each screen. Each comes in from the nearest edge, builds
+// its one piece, and leaves, so a section is built by a crowd working at once.
 // Recipes are driven by what ConstructionCanvas found in the section's markup, so any
 // project's case-study markup can be built the same way.
 
 import { SwarmCursor } from './swarm-cursor.js';
 
-export const CREW = [
-  { name: 'Layout', color: '#6C3CF5', side: 1 },
-  { name: 'Type', color: '#E8368F', side: -1 },
-  { name: 'Visuals', color: '#0E9F84', side: 1 },
-  { name: 'UI', color: '#E08600', side: -1 },
-];
+// One global pace knob: the whole CREDex case study (15 sections) builds in about 30 s.
+export const SPEED = 1.3;
+
+const PALETTE = {
+  Layout: ['#6C3CF5', '#5B2BE0'],
+  Type: ['#E8368F', '#C2185B', '#D9328A', '#F06292', '#AD1457'],
+  Visuals: ['#0E9F84', '#00897B', '#26A69A', '#00796B', '#2BB39A'],
+  UI: ['#E08600', '#F4511E', '#FB8C00', '#C77700', '#EF6C00', '#D84315'],
+};
 
 /**
- * Builds one section. `intro` = the first section (crew gathers first, normal pace);
- * later sections run faster so scrolling never waits long.
+ * Builds one section. `onBuilt` fires as soon as every piece is in place (the next section
+ * can start then); `onDone` fires once the last cursor has left.
  */
-export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}) {
+export function buildSection(gsap, canvas, S, { onBuilt, onDone } = {}) {
   const { w: SW, h: SH } = canvas.sectionSize(S);
-  const pace = intro ? 1 : 0.62; // multiplies typing time per character for later sections
   const box = (n) => canvas.box(S, n);
   const show = (n) => n.classList.remove('sw-u');
+  const T = () => gsap.timeline();
 
-  // Where each collaborator comes from / goes back to (section coordinates)
-  const doors = [[-70, SH * 0.25], [SW * 0.45, -70], [SW + 70, SH * 0.35], [SW * 0.3, SH + 70]];
-  const cursors = CREW.map((c, i) => {
-    const cur = new SwarmCursor(S.layer, c, gsap);
-    cur.set(doors[i][0], doors[i][1]);
-    cur.root.style.opacity = '0';
-    cur.door = doors[i];
-    cur.sel = mk('sw-sel', c.color);
-    cur.dim = mk('sw-dim', c.color);
-    return cur;
-  });
+  // ---- crew --------------------------------------------------------------------------------
+  const cursors = [];
+  const hired = {};
   function mk(cls, color) {
     const n = document.createElement('div');
     n.className = cls;
@@ -42,7 +38,26 @@ export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}
     S.layer.appendChild(n);
     return n;
   }
-  const guideH = mk('sw-guide sw-guide-h'), guideV = mk('sw-guide sw-guide-v');
+  /** A door just outside the section edge closest to the element. */
+  function doorFor(b) {
+    const d = [b.x, SW - (b.x + b.w), b.y, SH - (b.y + b.h)], m = Math.min(...d);
+    if (m === d[0]) return [-48, b.y + b.h / 2];
+    if (m === d[1]) return [SW + 48, b.y + b.h / 2];
+    if (m === d[2]) return [b.x + b.w / 2, -48];
+    return [b.x + b.w / 2, SH + 48];
+  }
+  function hire(role, node) {
+    const k = (hired[role] = (hired[role] || 0) + 1) - 1;
+    const color = PALETTE[role][k % PALETTE[role].length];
+    const cur = new SwarmCursor(S.layer, { name: role, color, side: k % 2 ? -1 : 1 }, gsap);
+    cur.door = doorFor(box(node));
+    cur.set(cur.door[0], cur.door[1]);
+    cur.root.style.opacity = '0';
+    cur.sel = mk('sw-sel', color);
+    cur.dim = mk('sw-dim', color);
+    cursors.push(cur);
+    return cur;
+  }
 
   const sel = (cur, x, y, w, h, text) => {
     const s = cur.sel.style;
@@ -54,22 +69,9 @@ export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}
     cur.dim.style.transform = `translate3d(${x + 14 * cur.k}px, ${y + 44 * cur.k}px, 0) scale(${cur.k})`;
     cur.dim.style.opacity = '1';
   };
-  const guides = (b) => {
-    guideH.style.transform = `translateY(${b.y}px)`;
-    guideV.style.transform = `translateX(${b.x}px)`;
-    gsap.fromTo([guideH, guideV], { opacity: 1 }, { opacity: 0, duration: 0.45, delay: 0.25, ease: 'power1.out' });
-  };
 
-  // ---- steps -----------------------------------------------------------------------------
-  const T = () => gsap.timeline();
-
-  function enter(cur) {
-    const tl = T();
-    tl.to(cur.root, { opacity: 1, duration: 0.2 });
-    return tl;
-  }
-
-  function drawBox(cur, node, { move = 0.5, drag = 0.7 } = {}) {
+  // ---- steps -------------------------------------------------------------------------------
+  function drawBox(cur, node, { move = 0.3, drag = 0.32 } = {}) {
     const b = box(node), tl = T(), flat = b.h <= 6;
     tl.call(() => cur.setMode('cross'));
     tl.add(cur.moveTo(b.x, b.y, { duration: move }));
@@ -86,201 +88,117 @@ export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}
     }));
     tl.add(cur.release());
     tl.call(() => { node.style.clipPath = ''; cur.dim.style.opacity = '0'; });
-    tl.to(cur.sel, { opacity: 0, duration: 0.22 }, '+=0.1');
-    tl.call(() => cur.setMode('arrow'));
+    tl.to(cur.sel, { opacity: 0, duration: 0.16 });
     return tl;
   }
 
-  function typeText(cur, item, { cps = 0.03, textBox = true } = {}) {
+  /** Types an element's text. `cps` = seconds per character; long text is capped so it never drags. */
+  function typeText(cur, item, { cps = 0.01, textBox = false, max = 0.7 } = {}) {
     const n = item.el, b = box(n), o = { n: 0 }, tl = T(), len = item.typer.total;
     tl.call(() => cur.setMode('text'));
-    tl.add(cur.moveTo(b.x, b.y + 2, { duration: 0.42 }));
+    tl.add(cur.moveTo(b.x, b.y + 2, { duration: 0.3 }));
     tl.add(cur.press());
     if (textBox) {
       tl.call(() => sel(cur, b.x, b.y, 0, 0, true));
-      tl.add(cur.drag(b.x + b.w, b.y + b.h, { duration: 0.3, onUpdate: (nx, ny) => sel(cur, b.x, b.y, nx - b.x, ny - b.y, true) }));
+      tl.add(cur.drag(b.x + b.w, b.y + b.h, { duration: 0.18, onUpdate: (nx, ny) => sel(cur, b.x, b.y, nx - b.x, ny - b.y, true) }));
     }
     tl.add(cur.release());
     tl.call(() => { item.typer.set(0); item.typer.caret(true); show(n); });
-    tl.addLabel('type');
-    tl.add(cur.moveTo(b.x + Math.min(b.w, 260) * 0.6, b.y + b.h + 26, { duration: 0.4, arc: 0.06 }), 'type+=0.08');
-    tl.to(o, { n: len, duration: Math.max(0.2, len * cps * pace), ease: 'none', onUpdate: () => item.typer.set(o.n) }, 'type');
-    tl.to({}, { duration: 0.22 });
-    tl.call(() => { item.typer.caret(false); cur.sel.style.opacity = '0'; cur.setMode('arrow'); });
-    return tl;
-  }
-
-  function fillCard(cur, card, cps = 0.014) {
-    const b = box(card.el), o = { n: 0 }, tl = T();
-    tl.call(() => cur.setMode('text'));
-    tl.add(cur.moveTo(b.x + 18, b.y + 20, { duration: 0.32 }));
-    tl.add(cur.click());
-    card.imgs.forEach((img) => tl.add(revealImg(img), '<'));
-    tl.call(() => card.typer.set(0));
-    tl.to(o, { n: card.typer.total, duration: Math.max(0.2, card.typer.total * cps * pace), ease: 'none', onUpdate: () => card.typer.set(o.n) });
-    tl.call(() => { card.typer.done(); cur.setMode('arrow'); });
-    return tl;
-  }
-
-  function duplicate(cur, src, dst) {
-    const a = box(src), b = box(dst), tl = T();
-    const ax = a.x + a.w / 2, ay = a.y + a.h / 2;
-    let ghost;
-    tl.add(cur.moveTo(ax, ay, { duration: 0.32 }));
-    tl.call(() => {
-      ghost = src.cloneNode(true);
-      ghost.classList.add('sw-ghost');
-      ghost.classList.remove('sw-u');
-      Object.assign(ghost.style, { position: 'absolute', left: a.x + 'px', top: a.y + 'px', width: a.w + 'px', height: a.h + 'px', margin: '0', clipPath: '' });
-      cur.nameTag.dataset.mod = '⌥';
-      S.layer.prepend(ghost);
-    });
-    tl.add(cur.press());
-    tl.add(cur.drag(b.x + b.w / 2, b.y + b.h / 2, {
-      duration: 0.42,
-      ease: 'power3.inOut',
-      onUpdate: (nx, ny) => { ghost.style.transform = `translate3d(${nx - ax}px, ${ny - ay}px, 0)`; },
-    }));
-    tl.call(() => guides(b));
-    tl.add(cur.release());
-    tl.call(() => { ghost.remove(); show(dst); delete cur.nameTag.dataset.mod; });
-    return tl;
-  }
-
-  /** Quick paste for the rest of a long row: click the spot, the copy pops in. */
-  function paste(cur, dst) {
-    const b = box(dst), tl = T();
-    tl.add(cur.moveTo(b.x + b.w / 2, b.y + b.h / 2, { duration: 0.24 }));
-    tl.add(cur.click());
-    tl.call(() => show(dst));
-    tl.fromTo(dst, { scale: 0.96, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: 'power2.out', clearProps: 'transform,opacity' }, '<');
+    tl.to(o, { n: len, duration: Math.min(max, Math.max(0.15, len * cps)), ease: 'none', onUpdate: () => item.typer.set(o.n) });
+    tl.call(() => { item.typer.caret(false); cur.sel.style.opacity = '0'; });
     return tl;
   }
 
   function revealImg(img) {
     const tl = T();
     tl.call(() => { show(img); const f = img.closest('.sw-ph'); f && f.classList.remove('sw-ph'); });
-    tl.fromTo(img, { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.05 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 0.7, ease: 'power3.out', clearProps: 'clipPath,transform' });
+    tl.fromTo(img, { clipPath: 'inset(0% 0% 100% 0%)', scale: 1.05 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 0.45, ease: 'power3.out', clearProps: 'clipPath,transform' });
     return tl;
   }
 
-  function popTags(cur, tags) {
+  function fillCard(cur, card) {
+    const b = box(card.el), o = { n: 0 }, tl = T(), len = card.typer.total;
+    tl.call(() => cur.setMode('text'));
+    tl.add(cur.moveTo(b.x + 16, b.y + 18, { duration: 0.18 }));
+    card.imgs.forEach((img) => tl.add(revealImg(img), '<'));
+    tl.call(() => card.typer.set(0));
+    tl.to(o, { n: len, duration: Math.min(0.55, Math.max(0.15, len * 0.005)), ease: 'none', onUpdate: () => card.typer.set(o.n) });
+    tl.call(() => card.typer.done());
+    return tl;
+  }
+
+  function popTag(cur, t) {
+    const b = box(t), tl = T();
+    tl.add(cur.moveTo(b.x + b.w / 2, b.y + b.h / 2, { duration: 0.3 }));
+    tl.add(cur.click());
+    tl.call(() => show(t));
+    tl.fromTo(t, { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: 'power2.out', clearProps: 'transform,opacity' }, '<');
+    return tl;
+  }
+
+  function buildFigure(cur, f) {
     const tl = T();
-    tags.forEach((t) => {
-      const b = box(t);
-      tl.add(cur.moveTo(b.x + b.w / 2, b.y + b.h / 2, { duration: 0.26 }));
-      tl.add(cur.click());
-      tl.call(() => show(t));
-      tl.fromTo(t, { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: 'power2.out', clearProps: 'transform,opacity' }, '<');
-    });
+    tl.add(drawBox(cur, f.el, { move: 0.3, drag: 0.3 }));
+    tl.add(cur.click());
+    if (f.img) tl.add(revealImg(f.img), '<');
+    if (f.cap) tl.add(typeText(cur, f.cap, { cps: 0.008, max: 0.35 }));
     return tl;
   }
 
-  function leave(cur) {
-    const tl = T();
-    tl.add(cur.moveTo(cur.door[0], cur.door[1], { duration: 0.6, ease: 'power2.in' }));
-    tl.to(cur.root, { opacity: 0, duration: 0.18 }, '-=0.18');
-    return tl;
+  // ---- jobs: one cursor per element ----------------------------------------------------------
+  const master = gsap.timeline({ paused: true });
+  let builtAt = 0;
+  function job(role, node, at, build) {
+    const cur = hire(role, node), tl = T();
+    tl.to(cur.root, { opacity: 1, duration: 0.12 });
+    tl.add(build(cur));
+    const end = tl.duration();
+    tl.call(() => cur.setMode('arrow'));
+    tl.add(cur.moveTo(cur.door[0], cur.door[1], { duration: 0.32, ease: 'power2.in' }));
+    tl.to(cur.root, { opacity: 0, duration: 0.12 }, '-=0.12');
+    master.add(tl, at);
+    builtAt = Math.max(builtAt, at + end);
   }
 
-  // ---- tracks ----------------------------------------------------------------------------
-  function track(cur) {
-    const tl = gsap.timeline();
-    let t = 0, used = false;
-    const api = {
-      cur, tl,
-      get t() { return t; },
-      get used() { return used; },
-      at(x) { t = Math.max(t, x); return api; },
-      then(step, gap = 0) {
-        if (!used) { used = true; tl.add(enter(cur), t); }
-        tl.add(step, t + gap);
-        t += gap + step.duration();
-        return api;
-      },
-    };
-    return api;
-  }
-  const [tLayout, tType, tVis, tUI] = cursors.map(track);
+  // The section card first
+  job('Layout', S.bg, 0, (c) => drawBox(c, S.bg, { move: 0.28, drag: 0.42 }));
 
-  // Intro only: the crew gathers in the middle first
-  let start = 0.05;
-  if (intro) {
-    const spots = [[0.42, 0.45], [0.5, 0.38], [0.56, 0.48], [0.48, 0.56]];
-    [tLayout, tType, tVis, tUI].forEach((tr, i) =>
-      tr.then(tr.cur.moveTo(SW * spots[i][0], SH * spots[i][1], { duration: 0.8, ease: 'power3.out' }), 0.05 + i * 0.05));
-    start = 1.1;
-  }
-
-  // 1. Layout draws the section card
-  tLayout.at(start).then(drawBox(cursors[0], S.bg, { move: 0.55, drag: intro ? 1 : 0.75 }));
-  const cardDrawn = tLayout.t;
-
-  // 2. Type writes the left column (label, heading, text), starting as the card lands
-  tType.at(cardDrawn - (intro ? 0.15 : 0.55));
+  // Left column: a Type cursor per heading / paragraph, slightly staggered
   S.texts.forEach((t, i) => {
     const big = /^H[12]$/.test(t.el.tagName);
-    tType.then(typeText(cursors[1], t, { cps: big ? 0.04 : t.typer.total > 60 ? 0.012 : 0.026, textBox: big || t.typer.total > 60 }), i ? 0.08 : 0);
+    job('Type', t.el, 0.3 + i * 0.08, (c) => typeText(c, t, { cps: big ? 0.012 : t.typer.total > 60 ? 0.0045 : 0.01, textBox: big, max: big ? 0.6 : 0.8 }));
   });
 
-  // 3. The rest of the crew shares the right column
-  const jobs = [];
-  if (S.tags.length) jobs.push({ kind: 'tags' });
-  S.figures.forEach((f, i, all) => {
-    const first = all.findIndex((x) => x.row === f.row);
-    if (first === i) jobs.push({ kind: 'figures', figs: all.filter((x) => x.row === f.row) });
-  });
-  S.groups.forEach((g) => jobs.push({ kind: 'group', g }));
-  if (S.lists.length) jobs.push({ kind: 'lists' });
+  // Right column: one cursor per tag, card, screen and list item
+  let k = 0;
+  const next = () => 0.4 + k++ * 0.06;
+  S.tags.forEach((t) => job('UI', t, next(), (c) => popTag(c, t)));
+  S.groups.forEach((g) => g.cards.forEach((card) => job('UI', card.el, next(), (c) => {
+    const tl = T();
+    tl.add(drawBox(c, card.el, { move: 0.3, drag: 0.28 }));
+    tl.add(fillCard(c, card));
+    return tl;
+  })));
+  S.figures.forEach((f) => job('Visuals', f.el, next(), (c) => buildFigure(c, f)));
+  S.lists.forEach((l) => job('UI', l.el, next(), (c) => typeText(c, l, { cps: 0.01, max: 0.45 })));
 
-  const workers = [tUI, tVis, tLayout];
-  const fillLater = []; // cards a helper fills once it's free
-  jobs.forEach((job, i) => {
-    const tr = job.kind === 'figures' ? tVis : workers[i % workers.length];
-    const cur = tr.cur;
-    tr.at(cardDrawn + 0.1 + (tr === tLayout ? 0 : i * 0.15));
-    if (job.kind === 'tags') {
-      tr.then(popTags(cur, S.tags));
-    } else if (job.kind === 'figures') {
-      const figs = job.figs;
-      tr.then(drawBox(cur, figs[0].el, { move: 0.45, drag: 0.55 }));
-      figs.slice(1).forEach((f, k) => tr.then(k < 1 ? duplicate(cur, figs[0].el, f.el) : paste(cur, f.el), 0.05));
-      figs.forEach((f) => {
-        const b = box(f.el), step = T();
-        step.add(cur.moveTo(b.x + b.w / 2, b.y + Math.min(b.h, 300) / 2, { duration: 0.3 }));
-        step.add(cur.click());
-        if (f.img) step.add(revealImg(f.img), '<0.05');
-        tr.then(step, 0.02);
-        if (f.cap) tr.then(typeText(cur, f.cap, { cps: 0.016, textBox: false }), 0.02);
-      });
-    } else if (job.kind === 'group') {
-      const cards = job.g.cards;
-      tr.then(drawBox(cur, cards[0].el, { move: 0.42, drag: 0.5 }));
-      cards.slice(1).forEach((c, k) => tr.then(k < 2 ? duplicate(cur, cards[0].el, c.el) : paste(cur, c.el), 0.04));
-      const ready = tr.t;
-      const mine = cards.length > 3 ? cards.slice(0, Math.ceil(cards.length / 2)) : cards;
-      mine.forEach((c) => tr.then(fillCard(cur, c), 0.03));
-      cards.slice(mine.length).forEach((c) => fillLater.push({ c, ready }));
-    } else if (job.kind === 'lists') {
-      S.lists.forEach((l) => tr.then(typeText(cur, l, { cps: 0.018, textBox: false }), 0.03));
-    }
-  });
-
-  // Type helps fill the second half of long card rows once its own text is done
-  fillLater.forEach(({ c, ready }) => { tType.at(ready); tType.then(fillCard(cursors[1], c), 0.03); });
-
-  // 4. Everyone heads off once their own work is done
-  [tLayout, tType, tVis, tUI].forEach((tr) => tr.used && tr.then(leave(tr.cur), 0.2));
-
-  const master = gsap.timeline({ paused: true, onComplete: () => { canvas.finish(S); onComplete && onComplete(); } });
-  [tLayout, tType, tVis, tUI].forEach((tr) => tr.used && master.add(tr.tl, 0));
-  master.timeScale(intro ? 1.5 : 2.5);
+  master.call(() => { canvas.finish(S, { keepCrew: true }); onBuilt && onBuilt(); }, null, builtAt);
+  master.eventCallback('onComplete', () => onDone && onDone());
+  master.timeScale(SPEED);
 
   const tick = () => cursors.forEach((c) => c.tick());
+  let stopped = false;
   return {
     master,
+    builtIn: builtAt / SPEED, // seconds until the section is fully built
     start() { gsap.ticker.add(tick); master.play(0); },
-    stop() { gsap.ticker.remove(tick); master.kill(); },
+    stop() {
+      if (stopped) return;
+      stopped = true;
+      gsap.ticker.remove(tick);
+      master.kill();
+      S.layer.replaceChildren();
+    },
     setScale(z) { cursors.forEach((c) => c.setScale(z)); },
   };
 }
