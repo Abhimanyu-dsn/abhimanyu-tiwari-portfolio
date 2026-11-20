@@ -208,8 +208,8 @@ export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}
   if (intro) {
     const spots = [[0.42, 0.45], [0.5, 0.38], [0.56, 0.48], [0.48, 0.56]];
     [tLayout, tType, tVis, tUI].forEach((tr, i) =>
-      tr.then(tr.cur.moveTo(SW * spots[i][0], SH * spots[i][1], { duration: 1, ease: 'power3.out' }), 0.1 + i * 0.07));
-    start = 1.5;
+      tr.then(tr.cur.moveTo(SW * spots[i][0], SH * spots[i][1], { duration: 0.8, ease: 'power3.out' }), 0.05 + i * 0.05));
+    start = 1.1;
   }
 
   // 1. Layout draws the section card
@@ -274,7 +274,7 @@ export function buildSection(gsap, canvas, S, { intro = false, onComplete } = {}
 
   const master = gsap.timeline({ paused: true, onComplete: () => { canvas.finish(S); onComplete && onComplete(); } });
   [tLayout, tType, tVis, tUI].forEach((tr) => tr.used && master.add(tr.tl, 0));
-  if (!intro) master.timeScale(1.7);
+  master.timeScale(intro ? 1.5 : 2.5);
 
   const tick = () => cursors.forEach((c) => c.tick());
   return {
