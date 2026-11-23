@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FlytBase case study — Abhimanyu Tiwari</title>
 <meta name="description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
@@ -44,7 +46,7 @@ a.glow:hover{transform:translateY(-2px)}
 .glow::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
 .glow:nth-child(2)::before{animation-delay:-1.7s}.glow:nth-child(3)::before{animation-delay:-3.3s}.glow:nth-child(4)::before{animation-delay:-4.4s}.glow:nth-child(5)::before{animation-delay:-2.5s}.glow:nth-child(6)::before{animation-delay:-0.8s}
 /* v2 shared: floating glass bar, vibrant CTA, crisp gloss, tighter rhythm */
-header .m3-filled{background-image:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+header .m3-filled{background-image:linear-gradient(120deg,var(--grad-start) 0%,#9B3CF2 55%,var(--grad-end) 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
 header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .glass-bar{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 32px -12px rgba(108,60,245,.35),0 2px 6px rgba(27,27,33,.06)}
 .purse-btn{position:relative;transition:transform .25s ease}
@@ -83,11 +85,11 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-big{display:block;font-size:var(--fs-display-xl);line-height:1;font-weight:700;letter-spacing:-0.02em;margin-top:8px}
 .fx-big small{display:block;font-size:var(--fs-label-sm);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;margin-top:12px}
 .fx-old .fx-big{color:#A8A6B4}
-.fx-new .fx-big{background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-new .fx-big{background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .fx-new .fx-big small{color:var(--md-primary)}
 .fx-steps{list-style:none;margin:0;padding:0;display:flex;position:relative}
 .fx-steps::before{content:"";position:absolute;left:7px;right:7px;top:6px;height:2px;background:#DAD7E5}
-.fx-new .fx-steps::before{background:linear-gradient(90deg,#6C3CF5,#D9328A)}
+.fx-new .fx-steps::before{background:linear-gradient(90deg,var(--grad-start),var(--grad-end))}
 .fx-steps li{flex:1 1 0;position:relative;padding:28px 12px 0 0;font-size:var(--fs-label);line-height:1.25;font-weight:600;color:var(--md-on-surface-variant)}
 .fx-steps li::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:#FFFFFF;border:2px solid #B9B6C6;box-sizing:border-box}
 .fx-new .fx-steps li{color:var(--md-on-surface)}
@@ -128,11 +130,11 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-tier{align-self:flex-start;margin-top:8px;font-size:var(--fs-label-sm);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--pc1);padding:4px 12px;border-radius:6px;background:color-mix(in srgb,var(--pc1) 12%,transparent)}
 /* 07 moments */
 .fx-journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
-.fx-journey::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:2px;background:linear-gradient(90deg,#CDBEFF,#6C3CF5 60%,#D9328A)}
+.fx-journey::before{content:"";position:absolute;left:28px;right:28px;top:28px;height:2px;background:linear-gradient(90deg,#CDBEFF,var(--grad-start) 60%,var(--grad-end))}
 .fx-journey li{position:relative;display:flex;flex-direction:column;gap:8px}
 .fx-node{width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:2px solid var(--md-primary);color:var(--md-primary);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;margin-bottom:8px}
 .fx-node .ms{font-size:var(--fs-title)}
-.fx-journey li:last-child .fx-node{background:linear-gradient(135deg,#6C3CF5,#D9328A);border-color:transparent;color:#FFFFFF}
+.fx-journey li:last-child .fx-node{background:linear-gradient(135deg,var(--grad-start),var(--grad-end));border-color:transparent;color:#FFFFFF}
 .fx-journey .fx-k{color:var(--md-primary)}
 .fx-journey h3{margin:0;font-size:var(--fs-body-lg);line-height:1.25;font-weight:600}
 .fx-journey p{margin:0;font-size:var(--fs-label);line-height:1.5;color:var(--md-on-surface-variant)}
@@ -166,11 +168,11 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-learn li:first-child{padding-top:0}
 .fx-learn li::before{content:counter(fxl,decimal-leading-zero);font-size:var(--fs-label);font-weight:700;color:var(--md-primary);letter-spacing:0.08em}
 .fx-close{margin:8px 0 0;font-size:var(--fs-headline-lg);line-height:1.1;font-weight:700;letter-spacing:-0.02em}
-.fx-close span{display:block;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-close span{display:block;background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .fx-close span:first-child{color:var(--md-on-surface);background:none}
 /* 11 next */
 .fx-next{border-top:1px solid #E3E1EC;padding:96px 0 48px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;background:var(--md-surface)}
-.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 28px;border-radius:26px;background:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%);color:#FFFFFF !important;font-size:var(--fs-label);font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 28px;border-radius:26px;background:linear-gradient(120deg,var(--grad-start) 0%,#9B3CF2 55%,var(--grad-end) 100%);color:#FFFFFF !important;font-size:var(--fs-label);font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
 .fx-next-img{display:block;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.4);transition:transform .3s ease}
 .fx-next-img:hover{transform:translateY(-4px)}
 .fx-next-img img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
@@ -200,7 +202,7 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-big{font-size:var(--fs-display-lg)}
 .fx-steps{flex-direction:column;gap:12px}
 .fx-steps::before{left:6px;right:auto;top:7px;bottom:7px;width:2px;height:auto}
-.fx-new .fx-steps::before{background:linear-gradient(180deg,#6C3CF5,#D9328A)}
+.fx-new .fx-steps::before{background:linear-gradient(180deg,var(--grad-start),var(--grad-end))}
 .fx-steps li{padding:0 0 0 28px}
 .fx-cases,.fx-people,.fx-metrics{grid-template-columns:minmax(0,1fr);gap:32px}
 .fx-find{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -298,6 +300,7 @@ html.wallet-open{overflow:hidden}
   #highlights-grid h3{font-size:var(--fs-label) !important}
 }
 </style>
+<link rel="stylesheet" href="assets/css/theme-f1.css">
 </head>
 <body>
 <a class="skip-link" href="#top">Skip to content</a>
@@ -322,6 +325,7 @@ html.wallet-open{overflow:hidden}
 <a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 24px 0 20px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: var(--fs-label); font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#download"></use></svg><span class="rs-tx">Resume</span></a>
 </nav>
 </div>
+<button type="button" class="theme-btn glass-bar" aria-pressed="false" aria-label="Switch to dark F1 theme"><svg class="ms ic-moon" aria-hidden="true"><use href="assets/icons/lucide.svg#moon"></use></svg><svg class="ms ic-sun" aria-hidden="true"><use href="assets/icons/lucide.svg#sun"></use></svg></button>
 <a href="wallet/" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
 </div>
 </header>
@@ -378,5 +382,6 @@ html.wallet-open{overflow:hidden}
 </footer>
 </div>
 <script src="wallet.js" defer></script>
+<script src="assets/js/theme.js" defer></script>
 </body>
 </html>

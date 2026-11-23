@@ -25,7 +25,7 @@ html.sw-open { overflow: hidden; }
 .sw-shell.is-full .sw-canvas { border-radius: 12px; }
 .sw-progress {
   position: absolute; left: 32px; right: 32px; top: 14px; height: 3px; border-radius: 2px; z-index: 2; pointer-events: none;
-  background: linear-gradient(90deg, #6C3CF5, #D9328A); transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end)); transform-origin: 0 50%; transform: scaleX(0);
   animation: sw-progress linear both; animation-timeline: --sw-scroll;
 }
 @keyframes sw-progress { to { transform: scaleX(1); } }
@@ -101,7 +101,7 @@ sw-caret { display: none; width: 2px; height: 1em; margin: 0 -1px 0 1px; vertica
 
 .sw-page .fx-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 28px; }
 .sw-page .fx-stat { border-top: 2px solid var(--md-on-surface, #1B1B21); padding-top: 16px; display: flex; flex-direction: column; gap: 4px; }
-.sw-page .fx-stat b { font-size: var(--fs-display-sm); line-height: 1; font-weight: 700; letter-spacing: -0.02em; padding-bottom: 4px; background: linear-gradient(120deg, #6C3CF5 10%, #D9328A 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sw-page .fx-stat b { font-size: var(--fs-display-sm); line-height: 1; font-weight: 700; letter-spacing: -0.02em; padding-bottom: 4px; background: linear-gradient(120deg, var(--grad-start) 10%, var(--grad-end) 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .sw-page .fx-stat span { font-size: var(--fs-label); font-weight: 700; }
 .sw-page .fx-stat p { margin: 0; font-size: var(--fs-label); line-height: 1.5; color: var(--md-on-surface-variant, #45464F); }
 

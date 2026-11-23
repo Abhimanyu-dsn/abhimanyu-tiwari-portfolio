@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BattleXO case study — Abhimanyu Tiwari</title>
 <meta name="description" content="Product designer in Bangalore designing everyday products for India’s next billion users. Case studies for CRED, Zepto, FlytBase, Chomp and BattleXO.">
@@ -44,7 +46,7 @@ a.glow:hover{transform:translateY(-2px)}
 .glow::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 28%,rgba(255,255,255,0) 46%);pointer-events:none;z-index:2}
 .glow:nth-child(2)::before{animation-delay:-1.7s}.glow:nth-child(3)::before{animation-delay:-3.3s}.glow:nth-child(4)::before{animation-delay:-4.4s}.glow:nth-child(5)::before{animation-delay:-2.5s}.glow:nth-child(6)::before{animation-delay:-0.8s}
 /* v2 shared: floating glass bar, vibrant CTA, crisp gloss, tighter rhythm */
-header .m3-filled{background-image:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+header .m3-filled{background-image:linear-gradient(120deg,var(--grad-start) 0%,#9B3CF2 55%,var(--grad-end) 100%) !important;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
 header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .glass-bar{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 12px 32px -12px rgba(108,60,245,.35),0 2px 6px rgba(27,27,33,.06)}
 .purse-btn{position:relative;transition:transform .25s ease}
@@ -84,7 +86,7 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-learn li::before{content:counter(fxl,decimal-leading-zero);font-size:var(--fs-label);font-weight:700;color:var(--md-primary);letter-spacing:0.08em}
 /* 11 next */
 .fx-next{border-top:1px solid #E3E1EC;padding:96px 0 48px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:64px;align-items:center;background:var(--md-surface)}
-.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 28px;border-radius:26px;background:linear-gradient(120deg,#6C3CF5 0%,#9B3CF2 55%,#D9328A 100%);color:#FFFFFF !important;font-size:var(--fs-label);font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
+.fx-cta{align-self:flex-start;height:52px;padding:0 24px 0 28px;border-radius:26px;background:linear-gradient(120deg,var(--grad-start) 0%,#9B3CF2 55%,var(--grad-end) 100%);color:#FFFFFF !important;font-size:var(--fs-label);font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(108,60,245,.6)}
 .fx-next-img{display:block;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(27,27,33,.07),0 40px 70px -36px rgba(48,20,120,.4);transition:transform .3s ease}
 .fx-next-img:hover{transform:translateY(-4px)}
 .fx-next-img img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
@@ -123,10 +125,10 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-items.c3 .fx-item h3{font-size:var(--fs-body)}
 .fx-items.c3 .fx-item p{font-size:var(--fs-label)}
 .fx-hl{margin:0;font-size:var(--fs-headline);line-height:1.25;font-weight:600;letter-spacing:-0.02em;color:var(--md-on-surface);text-wrap:balance}
-.fx-hl em{font-style:normal;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-hl em{font-style:normal;background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .fx-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 32px}
 .fx-stat{border-top:2px solid var(--md-on-surface);padding-top:16px;display:flex;flex-direction:column;gap:4px}
-.fx-stat b{font-size:var(--fs-display-sm);line-height:1;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+.fx-stat b{font-size:var(--fs-display-sm);line-height:1;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
 .fx-stat span{font-size:var(--fs-label);font-weight:700;color:var(--md-on-surface)}
 .fx-stat p{margin:0;font-size:var(--fs-label);line-height:1.5;color:var(--md-on-surface-variant)}
 .fx-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
@@ -136,8 +138,8 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-loop{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 8px}
 .fx-loop li{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-label);font-weight:700;color:var(--md-on-surface)}
 .fx-loop li span{padding:8px 16px;border-radius:999px;background:#F4F0FF;border:1px solid #E2D7FF}
-.fx-loop li:not(:last-child)::after{content:"";width:16px;height:2px;background:linear-gradient(90deg,#6C3CF5,#D9328A)}
-.fx-loop li:last-child span{background:linear-gradient(120deg,#6C3CF5,#D9328A);color:#FFFFFF;border-color:transparent}
+.fx-loop li:not(:last-child)::after{content:"";width:16px;height:2px;background:linear-gradient(90deg,var(--grad-start),var(--grad-end))}
+.fx-loop li:last-child span{background:linear-gradient(120deg,var(--grad-start),var(--grad-end));color:#FFFFFF;border-color:transparent}
 .fx-vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .fx-vs>div{padding:20px 24px;border-radius:14px;background:var(--md-surface-container);display:flex;flex-direction:column;gap:4px}
 .fx-vs>div:last-child{background:#F4F0FF}
@@ -169,7 +171,7 @@ header .m3-filled:hover{box-shadow:0 14px 30px -8px rgba(217,50,138,.6)}
 .fx-notif span{font-size:var(--fs-label);line-height:1.5;color:var(--md-on-surface-variant)}
 .fx-ring{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .fx-ring span{flex:1 1 0;min-width:72px;text-align:center;padding:20px 12px;border-radius:14px;background:#F4F0FF;font-size:var(--fs-body-lg);font-weight:700;color:var(--md-primary);position:relative}
-.fx-ring span:nth-child(even){background:linear-gradient(120deg,#6C3CF5,#D9328A);color:#FFFFFF}
+.fx-ring span:nth-child(even){background:linear-gradient(120deg,var(--grad-start),var(--grad-end));color:#FFFFFF}
 @supports (animation-timeline: view()){
 @media (min-width:1024px) and (min-height:700px) and (max-height:1300px) and (prefers-reduced-motion:no-preference){
 .fx-step .fx-shot.nat img,.fx-step .fx-fit img{max-height:calc(100vh - 220px);object-fit:contain;width:auto;max-width:100%;margin:0 auto}
@@ -270,6 +272,7 @@ html.wallet-open{overflow:hidden}
   #highlights-grid h3{font-size:var(--fs-label) !important}
 }
 </style>
+<link rel="stylesheet" href="assets/css/theme-f1.css">
 </head>
 <body>
 <a class="skip-link" href="#top">Skip to content</a>
@@ -294,6 +297,7 @@ html.wallet-open{overflow:hidden}
 <a href="assets/resume/abhimanyu-tiwari-resume.pdf" download="Abhimanyu-Tiwari-Resume.pdf" class="m3-btn m3-filled" aria-label="Download résumé" style="height: 44px; padding: 0 24px 0 20px; border-radius: 22px; background: var(--md-primary); color: var(--md-on-primary); font-size: var(--fs-label); font-weight: 700; display: inline-flex; align-items: center; gap: 8px"><svg class="ms" aria-hidden="true"><use href="assets/icons/lucide.svg#download"></use></svg><span class="rs-tx">Resume</span></a>
 </nav>
 </div>
+<button type="button" class="theme-btn glass-bar" aria-pressed="false" aria-label="Switch to dark F1 theme"><svg class="ms ic-moon" aria-hidden="true"><use href="assets/icons/lucide.svg#moon"></use></svg><svg class="ms ic-sun" aria-hidden="true"><use href="assets/icons/lucide.svg#sun"></use></svg></button>
 <a href="wallet/" class="glass-bar purse-btn" aria-label="Open my wallet" title="Open my wallet" style="pointer-events: auto; flex: none; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" style="display: block; overflow: visible"><defs><linearGradient id="purse-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A57BFF"></stop><stop offset="1" stop-color="#5420E0"></stop></linearGradient><linearGradient id="purse-flap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8250FA"></stop><stop offset="1" stop-color="#3F12B8"></stop></linearGradient><linearGradient id="purse-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"></stop><stop offset=".5" stop-color="#FFC93C"></stop><stop offset="1" stop-color="#D98E04"></stop></linearGradient><radialGradient id="purse-shadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2A0E66" stop-opacity=".4"></stop><stop offset="1" stop-color="#2A0E66" stop-opacity="0"></stop></radialGradient></defs><ellipse cx="32" cy="58" rx="21" ry="4" fill="url(#purse-shadow)"></ellipse><path d="M21 23c0-8.5 4.9-14 11-14s11 5.5 11 14" fill="none" stroke="url(#purse-gold)" stroke-width="4" stroke-linecap="round"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4l3.2 21.5c.5 3.2-2 6-5.2 6H15c-3.2 0-5.7-2.8-5.2-6z" fill="url(#purse-body)"></path><path d="M13 27c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4v3.5c0 4-3 6.3-6 7.3l-13 4.2-13-4.2c-3-1-6-3.3-6-7.3z" fill="url(#purse-flap)"></path><circle cx="32" cy="40" r="5" fill="url(#purse-gold)" stroke="#B87500" stroke-width="1"></circle><circle cx="30.5" cy="38.5" r="1.6" fill="#FFFFFF" opacity=".8"></circle><path d="M16.5 27.5c5-2 12-2.8 18-2.8" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M46 46c1.2 1.8 1.6 3.4 1.4 5" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2" stroke-linecap="round" fill="none"></path></svg></a>
 </div>
 </header>
@@ -345,5 +349,6 @@ html.wallet-open{overflow:hidden}
 </footer>
 </div>
 <script src="wallet.js" defer></script>
+<script src="assets/js/theme.js" defer></script>
 </body>
 </html>

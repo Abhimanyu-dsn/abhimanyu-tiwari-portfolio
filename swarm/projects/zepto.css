@@ -27,16 +27,16 @@
 .sw-page.sw-p-zepto .fx-items.c3 .fx-item h3 {font-size:var(--fs-body)}
 .sw-page.sw-p-zepto .fx-items.c3 .fx-item p {font-size:var(--fs-label)}
 .sw-page.sw-p-zepto .fx-hl {margin:0;font-size:var(--fs-headline);line-height:1.25;font-weight:600;letter-spacing:-0.02em;color:var(--md-on-surface);text-wrap:balance}
-.sw-page.sw-p-zepto .fx-hl em {font-style:normal;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sw-page.sw-p-zepto .fx-hl em {font-style:normal;background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sw-page.sw-p-zepto .fx-stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 32px}
 .sw-page.sw-p-zepto .fx-stat {border-top:2px solid var(--md-on-surface);padding-top:16px;display:flex;flex-direction:column;gap:4px}
-.sw-page.sw-p-zepto .fx-stat b {font-size:var(--fs-display-sm);line-height:1;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(120deg,#6C3CF5 10%,#D9328A 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+.sw-page.sw-p-zepto .fx-stat b {font-size:var(--fs-display-sm);line-height:1;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(120deg,var(--grad-start) 10%,var(--grad-end) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
 .sw-page.sw-p-zepto .fx-stat span {font-size:var(--fs-label);font-weight:700;color:var(--md-on-surface)}
 .sw-page.sw-p-zepto .fx-stat p {margin:0;font-size:var(--fs-label);line-height:1.5;color:var(--md-on-surface-variant)}
 .sw-page.sw-p-zepto .fx-bars {display:flex;flex-direction:column;gap:24px}
 .sw-page.sw-p-zepto .fx-bar {display:grid;grid-template-columns:110px minmax(0,1fr);gap:24px;align-items:center}
 .sw-page.sw-p-zepto .fx-bar>b {font-size:var(--fs-display);line-height:1;font-weight:700;letter-spacing:-0.02em;color:var(--md-primary)}
-.sw-page.sw-p-zepto .fx-bar i {display:block;height:14px;border-radius:7px;background:linear-gradient(90deg,#6C3CF5,#D9328A);margin-bottom:12px}
+.sw-page.sw-p-zepto .fx-bar i {display:block;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--grad-start),var(--grad-end));margin-bottom:12px}
 .sw-page.sw-p-zepto .fx-bar span {display:block;font-size:var(--fs-body);font-weight:600}
 .sw-page.sw-p-zepto .fx-bar small {display:block;font-size:var(--fs-label);color:var(--md-on-surface-variant);margin-top:2px}
 .sw-page.sw-p-zepto .fx-tags {list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}

@@ -48,6 +48,10 @@
   --sp-16: 64px;
   --sp-18: 72px;
 
+  /* Accent gradient (purple → pink; racing reds in the dark theme) */
+  --grad-start: #6C3CF5;
+  --grad-end: #D9328A;
+
   /* Minimum touch target (WCAG 2.5.5 / HIG) */
   --tap: 44px;
 }
