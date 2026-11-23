@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="dark"){d.dataset.theme="dark";if(sessionStorage.getItem("f1-intro")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("f1-loading");setTimeout(function(){d.classList.remove("f1-loading")},4500)}}}catch(e){}</script>
+<script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="dark")d.dataset.theme="dark";var home=/(^|\/)(index\.html)?$/.test(location.pathname);if((home||sessionStorage.getItem("f1-intro")!=="1")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("f1-loading");setTimeout(function(){d.classList.remove("f1-loading")},4500)}}catch(e){}</script>
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CREDex case study — Abhimanyu Tiwari</title>

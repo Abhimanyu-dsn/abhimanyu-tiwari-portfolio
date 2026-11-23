@@ -2,8 +2,8 @@
    drives in to the centre of the screen and away to the right, two red light trails pouring
    off its tyres, with a synthesised V6 engine pass-by. Then the portfolio fades in.
 
-   - Plays once per visit when a page loads in the dark theme, and every time the visitor
-     switches to the dark theme (the toggle click also lets the browser play sound).
+   - Plays on every load of the home page (both themes), on other pages only on the first
+     visit of the session, and every time the visitor switches to the dark theme.
    - Browsers only allow sound after the visitor has interacted with the site, so on a cold
      load the pass is silent; that's a browser rule, not a bug.
    - Skipped entirely with prefers-reduced-motion. Never blocks clicks (pointer-events: none). */
@@ -155,7 +155,7 @@
   function reveal() { root.classList.remove('f1-loading'); }
 
   function run() {
-    if (running || reduce || root.dataset.theme !== 'dark' || !document.body) { reveal(); return; }
+    if (running || reduce || !document.body) { reveal(); return; }
     running = true;
     var wrap = build(), rig = wrap.querySelector('.f1x-rig'), trails = wrap.querySelectorAll('.f1x-trail'),
       flash = wrap.querySelector('.f1x-flash'), bar = wrap.querySelector('.f1x-bar i');
@@ -214,9 +214,8 @@
 
   // Once per visit on load (dark theme only)
   function onLoad() {
-    var seen = false;
-    try { seen = sessionStorage.getItem('f1-intro') === '1'; sessionStorage.setItem('f1-intro', '1'); } catch (e) {}
-    if (!seen && root.classList.contains('f1-loading')) run();
+    try { sessionStorage.setItem('f1-intro', '1'); } catch (e) {}
+    if (root.classList.contains('f1-loading')) run(); // the <head> script decided to show the loader
     else reveal();
   }
   if (document.readyState !== 'loading') onLoad();
