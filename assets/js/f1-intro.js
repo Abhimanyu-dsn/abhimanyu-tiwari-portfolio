@@ -1,5 +1,6 @@
-/* F1 intro: in the dark F1 theme, a race car streaks across the screen from left to right,
-   two red light trails pouring off its tyres, with a synthesised V6 engine pass-by.
+/* F1 loading screen: in the dark F1 theme the page opens on a carbon-black loader; a race car
+   drives in to the centre of the screen and away to the right, two red light trails pouring
+   off its tyres, with a synthesised V6 engine pass-by. Then the portfolio fades in.
 
    - Plays once per visit when a page loads in the dark theme, and every time the visitor
      switches to the dark theme (the toggle click also lets the browser play sound).
@@ -9,7 +10,7 @@
 (function () {
   var root = document.documentElement;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var DURATION = 1900; // ms for the whole pass
+  var DURATION = 2300; // ms for the whole pass
   var running = false;
 
   // ---- the car (generic open-wheel racer, side view, facing right) ----
@@ -44,19 +45,29 @@
     '<g class="f1x-wheel" style="transform-origin:420px 96px"><circle cx="420" cy="96" r="29" fill="url(#f1x-tyre)"/><path d="M420 72 v48 M396 96 h48 M403 79 l34 34 M437 79 l-34 34" stroke="#2E2E2E" stroke-width="3"/><circle cx="420" cy="96" r="6" fill="#E10600"/></g>' +
     '</svg>';
 
+  // Full-screen loader: carbon black, the car crosses the centre, then the page fades in
   var CSS =
-    '.f1x{position:fixed;inset:0;z-index:2147483000;pointer-events:none;overflow:hidden}' +
-    '.f1x-rig{position:absolute;left:0;top:62%;width:min(46vw,560px);transform:translate3d(-130%,0,0);will-change:transform}' +
+    '.f1x{position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:#080808;' +
+    'background-image:radial-gradient(60% 40% at 50% 50%,rgba(225,6,0,.16),transparent 70%),' +
+    'repeating-linear-gradient(45deg,rgba(255,255,255,.018) 0 2px,transparent 2px 6px),repeating-linear-gradient(-45deg,rgba(0,0,0,.35) 0 2px,transparent 2px 6px)}' +
+    '.f1x-road{position:absolute;left:0;right:0;top:calc(50% + min(4.6vw,56px));height:2px;background:repeating-linear-gradient(90deg,#3A3A3A 0 28px,transparent 28px 44px)}' +
+    '.f1x-rig{position:absolute;left:0;top:50%;width:min(46vw,560px);transform:translate3d(-130%,-50%,0);will-change:transform}' +
     '.f1x-car{position:relative;display:block;width:100%;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.55)) drop-shadow(0 0 22px rgba(225,6,0,.35))}' +
     // the two red straps: light trails pouring off each tyre, stretching back to the left edge
-    '.f1x-trail{position:absolute;right:calc(100% - 20%);height:7%;width:180vw;border-radius:99px;' +
+    '.f1x-trail{position:absolute;height:7%;width:180vw;border-radius:99px;' +
     'background:linear-gradient(90deg,rgba(225,6,0,0) 0%,rgba(225,6,0,.15) 55%,rgba(255,40,20,.85) 92%,#FF6A50 100%);' +
     'box-shadow:0 0 18px 4px rgba(225,6,0,.55);filter:blur(1.2px);transform-origin:100% 50%;will-change:transform,opacity}' +
-    '.f1x-trail.t-rear{top:66%;right:calc(100% - 20%)}' +
-    '.f1x-trail.t-front{top:70%;right:calc(100% - 82%);height:5.5%}' +
+    '.f1x-trail.t-rear{top:63%;right:calc(100% - 20%)}' +
+    '.f1x-trail.t-front{top:84%;right:calc(100% - 82%);height:5.5%}' +
     '.f1x-wheel{animation:f1x-spin .12s linear infinite}' +
     '@keyframes f1x-spin{to{transform:rotate(360deg)}}' +
-    '.f1x-flash{position:absolute;left:0;right:0;top:54%;height:26%;background:radial-gradient(60% 50% at 50% 50%,rgba(225,6,0,.22),transparent 70%);opacity:0}';
+    '.f1x-flash{position:absolute;left:0;right:0;top:38%;height:24%;background:radial-gradient(50% 50% at 50% 50%,rgba(225,6,0,.3),transparent 70%);opacity:0}' +
+    '.f1x-meta{position:absolute;left:50%;top:calc(50% + min(4.6vw,56px) + 40px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;' +
+    'font:italic 800 18px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.02em;color:#FFFFFF;white-space:nowrap}' +
+    '.f1x-meta b{color:#E10600}' +
+    '.f1x-meta small{font:600 11px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#A5A5A5}' +
+    '.f1x-bar{width:180px;height:3px;border-radius:2px;background:#262626;overflow:hidden}' +
+    '.f1x-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#B00500,#E10600,#FF5A36);transform-origin:0 50%;transform:scaleX(0)}';
 
   function build() {
     if (!document.getElementById('f1x-css')) {
@@ -67,8 +78,11 @@
     }
     var wrap = document.createElement('div');
     wrap.className = 'f1x';
-    wrap.setAttribute('aria-hidden', 'true');
-    wrap.innerHTML = '<div class="f1x-flash"></div><div class="f1x-rig"><span class="f1x-trail t-rear"></span><span class="f1x-trail t-front"></span>' + CAR + '</div>';
+    wrap.setAttribute('role', 'status');
+    wrap.setAttribute('aria-label', 'Loading');
+    wrap.innerHTML = '<div class="f1x-flash"></div><div class="f1x-road"></div>' +
+      '<div class="f1x-rig" aria-hidden="true"><span class="f1x-trail t-rear"></span><span class="f1x-trail t-front"></span>' + CAR + '</div>' +
+      '<div class="f1x-meta" aria-hidden="true"><span>Abhimanyu <b>Tiwari</b></span><span class="f1x-bar"><i></i></span><small>Lights out</small></div>';
     document.body.appendChild(wrap);
     return wrap;
   }
@@ -135,41 +149,58 @@
   }
 
   // ---- the pass ----
+  var REVEAL = 500; // ms for the loader to fade away
+  function reveal() { root.classList.remove('f1-loading'); }
+
   function run() {
-    if (running || reduce || root.dataset.theme !== 'dark' || !document.body) return;
+    if (running || reduce || root.dataset.theme !== 'dark' || !document.body) { reveal(); return; }
     running = true;
-    var wrap = build(), rig = wrap.querySelector('.f1x-rig'), trails = wrap.querySelectorAll('.f1x-trail'), flash = wrap.querySelector('.f1x-flash');
+    var wrap = build(), rig = wrap.querySelector('.f1x-rig'), trails = wrap.querySelectorAll('.f1x-trail'),
+      flash = wrap.querySelector('.f1x-flash'), bar = wrap.querySelector('.f1x-bar i');
     var W = innerWidth, w = rig.offsetWidth;
-    var from = -w * 1.3, to = W + w * 0.4;
-    var ease = 'cubic-bezier(.55,.06,.32,1)'; // launches hard, holds speed, exits
+    var from = -w * 1.3, mid = (W - w) / 2, to = W + w * 0.4;
     engine(DURATION / 1000);
+    // in hard, a beat at the centre of the screen, then away to the right
     var a = rig.animate([
-      { transform: 'translate3d(' + from + 'px,0,0) skewX(0deg)' },
-      { transform: 'translate3d(' + (W * 0.35) + 'px,-2px,0) skewX(-4deg)', offset: 0.45 },
-      { transform: 'translate3d(' + to + 'px,0,0) skewX(-7deg)' },
-    ], { duration: DURATION, easing: ease, fill: 'forwards' });
+      { transform: 'translate3d(' + from + 'px,-50%,0) skewX(0deg)', easing: 'cubic-bezier(.2,.7,.3,1)' },
+      { transform: 'translate3d(' + mid + 'px,-50%,0) skewX(-3deg)', offset: 0.42, easing: 'linear' },
+      { transform: 'translate3d(' + (mid + w * 0.06) + 'px,-50%,0) skewX(-2deg)', offset: 0.58, easing: 'cubic-bezier(.6,0,.9,.4)' },
+      { transform: 'translate3d(' + to + 'px,-50%,0) skewX(-8deg)' },
+    ], { duration: DURATION, fill: 'forwards' });
     trails.forEach(function (t, i) {
       t.animate([
         { transform: 'scaleX(.15)', opacity: 0 },
         { transform: 'scaleX(1)', opacity: 1, offset: 0.3 },
-        { transform: 'scaleX(1)', opacity: 1, offset: 0.8 },
+        { transform: 'scaleX(1)', opacity: 1, offset: 0.85 },
         { transform: 'scaleX(.6)', opacity: 0 },
       ], { duration: DURATION, delay: i * 40, easing: 'linear', fill: 'forwards' });
     });
-    flash.animate([{ opacity: 0 }, { opacity: 1, offset: 0.45 }, { opacity: 0 }], { duration: DURATION, fill: 'forwards' });
-    var done = function () { wrap.remove(); running = false; };
+    flash.animate([{ opacity: 0 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: DURATION, fill: 'forwards' });
+    bar.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: DURATION, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+
+    var gone = false;
+    var done = function () {
+      if (gone) return;
+      gone = true;
+      reveal(); // the portfolio appears underneath while the loader fades
+      var f = wrap.animate([{ opacity: 1 }, { opacity: 0 }], { duration: REVEAL, easing: 'ease-out', fill: 'forwards' });
+      var rm = function () { wrap.remove(); running = false; };
+      f.finished.then(rm, rm);
+      setTimeout(function () { if (wrap.isConnected) rm(); }, REVEAL + 300);
+    };
     a.finished.then(done, done);
-    setTimeout(function () { if (wrap.isConnected) done(); }, DURATION + 1500); // background tabs pause animations
+    setTimeout(done, DURATION + 800); // background tabs pause animations
   }
 
   // Once per visit on load (dark theme only)
   function onLoad() {
     var seen = false;
     try { seen = sessionStorage.getItem('f1-intro') === '1'; sessionStorage.setItem('f1-intro', '1'); } catch (e) {}
-    if (!seen) setTimeout(run, 350);
+    if (!seen && root.classList.contains('f1-loading')) run();
+    else reveal();
   }
-  if (document.readyState === 'complete') onLoad();
-  else addEventListener('load', onLoad);
+  if (document.readyState !== 'loading') onLoad();
+  else document.addEventListener('DOMContentLoaded', onLoad);
 
   // Every switch to the dark theme replays it (the click also unlocks the sound)
   document.addEventListener('themechange', function () { if (root.dataset.theme === 'dark') run(); });

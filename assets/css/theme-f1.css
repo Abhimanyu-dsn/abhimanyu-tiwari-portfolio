@@ -306,3 +306,10 @@
 [data-theme="dark"] .fx-dd [stop-color="#6C3CF5" i] { stop-color: #E10600; }
 [data-theme="dark"] .fx-dd [stop-color="#D9328A" i] { stop-color: #FF5A36; }
 @media (max-width: 640px) { [data-theme="dark"] .hero2 h1::after { display: none; } }
+
+/* ---- Loading screen: the page stays hidden until the race car has crossed ---- */
+html.f1-loading body { overflow: hidden; }
+html.f1-loading body > *:not(.f1x) { visibility: hidden; }
+html.f1-loading body::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147482000; background: #080808;
+}
