@@ -62,12 +62,14 @@
     '.f1x-wheel{animation:f1x-spin .12s linear infinite}' +
     '@keyframes f1x-spin{to{transform:rotate(360deg)}}' +
     '.f1x-flash{position:absolute;left:0;right:0;top:38%;height:24%;background:radial-gradient(50% 50% at 50% 50%,rgba(225,6,0,.3),transparent 70%);opacity:0}' +
-    '.f1x-meta{position:absolute;left:50%;top:calc(50% + min(4.6vw,56px) + 40px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;' +
+    '.f1x-meta{position:absolute;left:50%;top:calc(50% + min(4.6vw,56px) + 32px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;' +
     'font:italic 800 18px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.02em;color:#FFFFFF;white-space:nowrap}' +
-    '.f1x-meta b{color:#E10600}' +
+    '.f1x-meta>span:first-child b{color:#E10600}' +
     '.f1x-meta small{font:600 11px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#A5A5A5}' +
+    '.f1x-pct{font:italic 800 clamp(48px,7vw,88px)/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.03em;color:#FFFFFF;font-variant-numeric:tabular-nums}' +
+    '.f1x-pct span{color:#E10600;font-size:.5em;margin-left:.06em}' +
     '.f1x-bar{width:180px;height:3px;border-radius:2px;background:#262626;overflow:hidden}' +
-    '.f1x-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#B00500,#E10600,#FF5A36);transform-origin:0 50%;transform:scaleX(0)}';
+    '.f1x-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#B00500,#E10600,#FF5A36);transform-origin:0 50%;transform:scaleX(0);transition:transform .12s linear}';
 
   function build() {
     if (!document.getElementById('f1x-css')) {
@@ -82,7 +84,7 @@
     wrap.setAttribute('aria-label', 'Loading');
     wrap.innerHTML = '<div class="f1x-flash"></div><div class="f1x-road"></div>' +
       '<div class="f1x-rig" aria-hidden="true"><span class="f1x-trail t-rear"></span><span class="f1x-trail t-front"></span>' + CAR + '</div>' +
-      '<div class="f1x-meta" aria-hidden="true"><span>Abhimanyu <b>Tiwari</b></span><span class="f1x-bar"><i></i></span><small>Lights out</small></div>';
+      '<div class="f1x-meta" aria-hidden="true"><span>Abhimanyu <b>Tiwari</b></span><span class="f1x-pct"><b>0</b><span>%</span></span><span class="f1x-bar"><i></i></span><small>Loading</small></div>';
     document.body.appendChild(wrap);
     return wrap;
   }
@@ -176,20 +178,38 @@
       ], { duration: DURATION, delay: i * 40, easing: 'linear', fill: 'forwards' });
     });
     flash.animate([{ opacity: 0 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: DURATION, fill: 'forwards' });
-    bar.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: DURATION, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+    // Fake loading percentage: eased, with two short stalls so it reads like real loading
+    var num = wrap.querySelector('.f1x-pct b'), small = wrap.querySelector('.f1x-meta small'), t0 = performance.now();
+    var curve = [[0, 0], [0.18, 23], [0.3, 41], [0.38, 44], [0.55, 68], [0.66, 71], [0.84, 93], [1, 100]];
+    var pctAt = function (p) {
+      for (var i = 1; i < curve.length; i++) {
+        if (p <= curve[i][0]) {
+          var a0 = curve[i - 1], a1 = curve[i], k = (p - a0[0]) / (a1[0] - a0[0]);
+          k = 1 - Math.pow(1 - k, 2); // ease out within each step
+          return Math.round(a0[1] + (a1[1] - a0[1]) * k);
+        }
+      }
+      return 100;
+    };
+    var last = -1;
+    var tick = setInterval(function () {
+      var p = Math.min(1, (performance.now() - t0) / DURATION), v = pctAt(p);
+      if (v !== last) { num.textContent = v; bar.style.transform = 'scaleX(' + v / 100 + ')'; last = v; }
+      if (p >= 1) { clearInterval(tick); small.textContent = 'Ready'; }
+    }, 30);
 
     var gone = false;
     var done = function () {
       if (gone) return;
       gone = true;
+      clearInterval(tick); num.textContent = '100'; bar.style.transform = 'scaleX(1)';
       reveal(); // the portfolio appears underneath while the loader fades
       var f = wrap.animate([{ opacity: 1 }, { opacity: 0 }], { duration: REVEAL, easing: 'ease-out', fill: 'forwards' });
       var rm = function () { wrap.remove(); running = false; };
       f.finished.then(rm, rm);
       setTimeout(function () { if (wrap.isConnected) rm(); }, REVEAL + 300);
     };
-    a.finished.then(done, done);
-    setTimeout(done, DURATION + 800); // background tabs pause animations
+    setTimeout(done, DURATION + 250); // 100% holds for a beat, then the portfolio appears
   }
 
   // Once per visit on load (dark theme only)
