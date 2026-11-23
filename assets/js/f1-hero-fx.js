@@ -128,7 +128,7 @@
   }
   function newStreak(any) {
     var h = P(0, HORIZON - rnd(4, 30))[1], car = P(1330, 0)[0];
-    return { x: any ? rnd(0, car) : car + rnd(0, 60), y: h, len: rnd(60, 220) * s * 2, v: rnd(500, 1100) * s * 2, a: rnd(0.15, 0.4) };
+    return { x: any ? rnd(0, car) : car + rnd(0, 60), y: h, len: rnd(60, 220) * s, v: rnd(500, 1100) * s, a: rnd(0.15, 0.4) };
   }
 
   // ---------- frame ----------
@@ -152,10 +152,10 @@
     var sky0 = P(0, -40)[1], sky1 = P(0, 470)[1];
     // storm clouds drifting left
     g.globalCompositeOperation = 'source-over';
-    var cwid = W * 1.6, cx = -((tm * 9 * s * 2) % cwid);
+    var cwid = W * 1.6, cx = -((tm * 9 * s) % cwid);
     g.globalAlpha = 0.16;
     g.drawImage(cloudTex, cx, sky0, cwid, sky1 - sky0); g.drawImage(cloudTex, cx + cwid, sky0, cwid, sky1 - sky0);
-    var cx2 = -((tm * 4 * s * 2) % cwid);
+    var cx2 = -((tm * 4 * s) % cwid);
     g.globalAlpha = 0.1;
     g.drawImage(cloudTex, cx2 + cwid * 0.3, sky0 + 20, cwid, (sky1 - sky0) * 0.8); g.drawImage(cloudTex, cx2 - cwid * 0.7, sky0 + 20, cwid, (sky1 - sky0) * 0.8);
     if (flash > 0.01) {
@@ -175,11 +175,11 @@
       var q = P(FLOODS[f][0], FLOODS[f][1]);
       if (q[0] < -50 || q[0] > W + 50) continue;
       var fl = 0.75 + 0.15 * Math.sin(tm * 13 + f * 2.1) * Math.sin(tm * 7.3 + f) + flash * 0.3;
-      var r = 26 * s * 2;
+      var r = 26 * s;
       g.globalAlpha = 0.55 * fl; g.drawImage(soft, q[0] - r, q[1] - r, r * 2, r * 2);
       g.globalAlpha = 0.9 * fl; g.drawImage(soft, q[0] - r * 0.3, q[1] - r * 0.3, r * 0.6, r * 0.6);
       if (f % 2 === 0) {
-        var bh = P(0, HORIZON)[1] - q[1], bw = 70 * s * 2;
+        var bh = P(0, HORIZON)[1] - q[1], bw = 70 * s;
         var bg = g.createLinearGradient(0, q[1], 0, q[1] + bh);
         bg.addColorStop(0, 'rgba(220,225,235,' + (0.06 * fl) + ')'); bg.addColorStop(1, 'rgba(220,225,235,0)');
         g.globalAlpha = 1; g.fillStyle = bg;
@@ -194,13 +194,13 @@
       if (st.x + st.len < 0) { streaks[si] = newStreak(false); continue; }
       var sg = g.createLinearGradient(st.x, 0, st.x + st.len, 0);
       sg.addColorStop(0, 'rgba(225,6,0,0)'); sg.addColorStop(1, 'rgba(255,60,40,' + st.a + ')');
-      g.globalAlpha = 1; g.fillStyle = sg; g.fillRect(st.x, st.y, st.len, Math.max(1, 1.6 * s * 2));
+      g.globalAlpha = 1; g.fillStyle = sg; g.fillRect(st.x, st.y, st.len, Math.max(1, 1.6 * s));
     }
 
     // ground mist rushing past at track level
     g.globalCompositeOperation = 'source-over';
     var m0 = P(0, 520)[1], m1 = P(0, 690)[1], mw = W * 1.3;
-    var mx = -((tm * 140 * s * 2) % mw), mx2 = -((tm * 60 * s * 2) % mw);
+    var mx = -((tm * 140 * s) % mw), mx2 = -((tm * 60 * s) % mw);
     g.globalAlpha = 0.12; g.drawImage(mistTex, mx, m0, mw, m1 - m0); g.drawImage(mistTex, mx + mw, m0, mw, m1 - m0);
     g.globalAlpha = 0.08; g.drawImage(mistTex, mx2 + mw * 0.5, m0 - 20, mw, m1 - m0); g.drawImage(mistTex, mx2 - mw * 0.5, m0 - 20, mw, m1 - m0);
 
@@ -208,31 +208,33 @@
     var blink = ((tm * 4) % 1) < 0.5 ? 1 : 0.18;
     var L = P(LIGHT[0], LIGHT[1]);
     g.globalCompositeOperation = 'lighter';
-    var lr = 170 * s * 2;
+    var lr = 110 * s;
     g.globalAlpha = 0.35 * blink; g.drawImage(softRed, L[0] - lr, L[1] - lr, lr * 2, lr * 2);
-    g.globalAlpha = 0.9 * blink; g.drawImage(softRed, L[0] - 14 * s * 2, L[1] - 10 * s * 2, 28 * s * 2, 20 * s * 2);
+    g.globalAlpha = 0.95 * blink; g.drawImage(softRed, L[0] - 12 * s, L[1] - 12 * s, 24 * s, 24 * s);
+    g.globalAlpha = 0.7 * blink; g.drawImage(soft, L[0] - 5 * s, L[1] - 5 * s, 10 * s, 10 * s);
     // its reflection streaking down the wet track
     g.save(); g.translate(L[0], P(0, 668)[1]); g.scale(0.6, 2.4);
-    g.globalAlpha = 0.28 * blink; g.drawImage(softRed, -40 * s * 2, -40 * s * 2, 80 * s * 2, 80 * s * 2);
+    g.globalAlpha = 0.28 * blink; g.drawImage(softRed, -40 * s, -40 * s, 80 * s, 80 * s);
     g.restore();
 
     // tyre spray: rolling clouds of water thrown up behind the rear wheels
-    var rate = W < 760 ? 30 : 60;
+    var rate = W < 760 ? 18 : 36;
     for (var e = 0; e < TYRES.length; e++) {
       var acc = rate * dt + Math.random();
       var side = e === 0 ? -1 : 1, ep = P(TYRES[e][0], TYRES[e][1]);
-      while (acc-- >= 1) spray.push({ x: ep[0] + rnd(-12, 12) * s * 2, y: ep[1] + rnd(-6, 4) * s * 2, vx: side * rnd(10, 90) * s * 2 + rnd(-20, 20) * s * 2,
-        vy: rnd(-70, -10) * s * 2, r0: rnd(4, 10) * s * 2, r1: rnd(40, 95) * s * 2, life: rnd(0.8, 1.6), t: 0 });
+      while (acc-- >= 1) spray.push({ x: ep[0] + rnd(-12, 12) * s, y: ep[1] + rnd(-6, 4) * s, vx: side * rnd(10, 90) * s + rnd(-20, 20) * s,
+        vy: rnd(-70, -10) * s, r0: rnd(12, 20) * s, r1: rnd(40, 95) * s, life: rnd(0.8, 1.6), t: 0 });
     }
     for (var pi = spray.length - 1; pi >= 0; pi--) {
       var p = spray[pi];
       p.t += dt;
       if (p.t >= p.life) { spray.splice(pi, 1); continue; }
-      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 26 * s * 2 * dt; p.vx *= 1 - 0.6 * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 26 * s * dt; p.vx *= 1 - 0.6 * dt;
       var u = p.t / p.life, rr = p.r0 + (p.r1 - p.r0) * Math.sqrt(u), al = Math.sin(Math.PI * Math.min(1, u * 1.4)) * (1 - u);
-      var dx = p.x - L[0], dy = p.y - L[1], near = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / (260 * s * 2));
-      g.globalAlpha = al * 0.09; g.drawImage(soft, p.x - rr, p.y - rr, rr * 2, rr * 2);
-      if (near > 0) { g.globalAlpha = al * 0.22 * near * blink; g.drawImage(softRed, p.x - rr, p.y - rr, rr * 2, rr * 2); }
+      var dx = p.x - L[0], dy = p.y - L[1], near = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / (90 * s));
+      g.globalCompositeOperation = 'source-over';
+      g.globalAlpha = al * 0.05; g.drawImage(soft, p.x - rr, p.y - rr, rr * 2, rr * 2);
+      if (near > 0) { g.globalAlpha = al * 0.06 * near * blink; g.drawImage(softRed, p.x - rr, p.y - rr, rr * 2, rr * 2); }
     }
 
     // rain
@@ -246,7 +248,7 @@
         if (zz < zl || zz >= zh) continue;
         dr.y += dr.v * dt; dr.x -= dr.v * wind * dt;
         if (dr.y > H || (dr.z > 0.55 && dr.y > road && Math.random() < 0.04)) {
-          if (dr.y > road && dr.y < H) splashes.push({ x: dr.x, y: dr.y, t: 0, r: (1.5 + 3 * dr.z) * Math.max(1, s * 2) });
+          if (dr.y > road && dr.y < H) splashes.push({ x: dr.x, y: dr.y, t: 0, r: (1.5 + 3 * dr.z) * Math.max(1, s) });
           drops[di] = newDrop(false); continue;
         }
         g.moveTo(dr.x, dr.y); g.lineTo(dr.x + dr.l * wind, dr.y - dr.l);
